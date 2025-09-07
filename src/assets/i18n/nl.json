@@ -1,3 +1,5 @@
 {
-  "SIGNUP_TITLE": "Aanmelden"
+  "auth_body_welcome_title" : "Welkom",
+  "auth_body_welcome_login_message" : "Gebruik deze formulieren om gratis in te loggen op uw bedrijfsportaal.",
+  "auth_body_welcome_signup_message" : "Gebruik deze formulieren om uw bedrijf en uw eerste account gratis aan te maken."
 }

@@ -1,0 +1,52 @@
+<svg width="150" height="80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mainGradientSmall" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="50%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="shadowGradientSmall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1E40AF" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shadow -->
+  <text x="75" y="50" text-anchor="middle" font-family="'Segoe UI', 'Arial', sans-serif" 
+        font-size="42" font-weight="700" fill="url(#shadowGradientSmall)" opacity="0.8">
+    WS
+  </text>
+
+  <!-- Main Abbreviation -->
+  <text x="75" y="47" text-anchor="middle" font-family="'Segoe UI', 'Arial', sans-serif" 
+        font-size="42" font-weight="700" fill="url(#mainGradientSmall)">
+    WS
+  </text>
+
+  <!-- Flying sync icon -->
+  <g>
+    <g transform="scale(1)">
+      <path d="M0,-10 L5,-5 L0,0 M0,-10 L-5,-5 L0,0" stroke="#8B5CF6" stroke-width="2" fill="none">
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M10,0 L5,5 L0,0 M10,0 L5,-5 L0,0" stroke="#0EA5E9" stroke-width="2" fill="none">
+        <animate attributeName="opacity" values="1;0.7;1" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <circle cx="0" cy="0" r="3" fill="#2563EB">
+        <animate attributeName="r" values="3;2.5;3" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    <animateMotion dur="15s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#flyLoopSmall"/>
+    </animateMotion>
+  </g>
+
+  <!-- Flight path -->
+  <path id="flyLoopSmall" 
+        d="M30,40 
+           C100,10 200,40 220,120 
+           C210,150 -60,150 -40,30 
+           C-20,-40 180,-60 190,10 
+           C200,90 100,100 30,40 Z"
+        stroke="transparent" fill="none"/>
+</svg>

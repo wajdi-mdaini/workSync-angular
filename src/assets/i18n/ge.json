@@ -1,3 +1,6 @@
+
 {
-  "SIGNUP_TITLE": "Melden Sie sich an"
+  "auth_body_welcome_title" : "Willkommen",
+  "auth_body_welcome_login_message" : "Nutzen Sie diese Formulare, um sich kostenlos in Ihr Firmenportal einzuloggen.",
+  "auth_body_welcome_signup_message" : "Verwenden Sie diese Formulare, um Ihr Unternehmen und Ihr erstes Konto kostenlos zu erstellen."
 }

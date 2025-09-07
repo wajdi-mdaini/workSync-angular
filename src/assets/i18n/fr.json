@@ -1,3 +1,14 @@
 {
-  "SIGNUP_TITLE": "S'inscrire"
+  "auth_body_welcome_title" : "Bienvenu",
+  "auth_body_welcome_login_message" : "Utilisez ces formulaires pour vous connecter gratuitement au portail de votre entreprise.",
+  "auth_body_welcome_signup_message" : "Utilisez ces formulaires pour créer votre entreprise et votre premier compte gratuitement.",
+  "auth_body_signup_first_title" : "Créez votre entreprise",
+  "auth_body_signup_second_title" : "Créez votre premier compte administrateur",
+
+
+
+
+
+
+  "input_company_name_placeholder" : "Nom de l'entreprise"
 }
