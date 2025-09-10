@@ -12,12 +12,15 @@ import {Router, RouterOutlet} from '@angular/router';
 })
 export class Body {
   currentYear = new Date().getFullYear();
-  currentPath: string = ''
   constructor(public sharedService:Shared,private router: Router) {
-    this.currentPath = this.router.url;
   }
 
   get getWelcomeText(){
-    return this.currentPath.includes('login') ? 'auth_body_welcome_login_message' : 'auth_body_welcome_signup_message'
+    let currentPath = this.router.url;
+    if(currentPath.includes('login')) return  'auth_body_welcome_login_message'
+    else if(currentPath.includes('signup')) return  'auth_body_welcome_signup_message'
+    else if(currentPath.includes('forgetpassword')) return 'auth_body_welcome_forgetpassword_message'
+
+    return 'auth_body_welcome_login_message'
   }
 }

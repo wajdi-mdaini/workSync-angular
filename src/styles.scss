@@ -1,4 +1,18 @@
+a {
+  all: unset;
+  cursor: pointer;
+}
+.card{
+  all: unset;
+}
 .p-select-option.p-select-option-selected {
-  background: #d5c972 !important;
-  color: #000000f0 !important;
+    background: #d5c972 !important;
+    color: #000000f0 !important;
+}
+
+.p-inputtext:focus {
+  border-color: inherit !important;
+}
+.p-select:not(.p-disabled).p-focus {
+  border-color: inherit !important;
 }

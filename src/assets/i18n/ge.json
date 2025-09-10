@@ -1,6 +1,34 @@
-
 {
-  "auth_body_welcome_title" : "Willkommen",
-  "auth_body_welcome_login_message" : "Nutzen Sie diese Formulare, um sich kostenlos in Ihr Firmenportal einzuloggen.",
-  "auth_body_welcome_signup_message" : "Verwenden Sie diese Formulare, um Ihr Unternehmen und Ihr erstes Konto kostenlos zu erstellen."
+  "auth_body_welcome_title": "Willkommen",
+  "auth_body_welcome_login_message": "Verwenden Sie diese Formulare, um sich kostenlos im Unternehmensportal anzumelden.",
+  "auth_body_welcome_signup_message": "Verwenden Sie diese Formulare, um Ihr Unternehmen und Ihr erstes Konto kostenlos zu erstellen.",
+  "auth_body_welcome_forgetpassword_message": "Verwenden Sie diese Formulare, um Ihr Passwort zurückzusetzen.",
+  "auth_signup_first_title": "Erstellen Sie Ihr Unternehmen",
+  "auth_signup_second_title": "Erstellen Sie Ihr erstes Administratorkonto",
+  "auth_signup_already_have_account": "Haben Sie bereits ein Konto?",
+  "auth_signin_title": "Willkommen bei WorkSync",
+  "auth_signin_message": "Geben Sie Ihre Anmeldedaten ein",
+  "auth_signin_remember_me": "Angemeldet bleiben",
+  "auth_signin_signup_message": "Bereit, Ihr eigenes Unternehmen zu gründen?",
+  "auth_forget_password_title": "Passwort vergessen?",
+  "auth_forget_password_message": "Sie erhalten einen Bestätigungscode an diese E-Mail-Adresse.",
+
+  "input_company_name_placeholder": "Firmenname",
+  "input_first_name_placeholder": "Vorname",
+  "input_second_name_placeholder": "Nachname",
+  "input_email_placeholder": "E-Mail",
+  "input_password_placeholder": "Passwort",
+  "input_password_confirm_placeholder": "Passwort bestätigen",
+
+  "error_status_0": "Ihre Anfragen konnten den Server nicht erreichen. Dies kann an Ihrer Internetverbindung oder an einem nicht verfügbaren Server liegen.",
+  "error_status_403": "Sie sind nicht berechtigt, diese Aktion auszuführen.",
+
+  "button_signup": "Registrieren",
+  "button_signin": "Anmelden",
+  "button_get_verification_code": "Bestätigungscode erhalten",
+  "button_get_rest_password": "Passwort zurücksetzen",
+
+  "link_sign_in": "Anmelden",
+  "link_sign_up": "Registrieren",
+  "link_forget_password": "Passwort vergessen?"
 }

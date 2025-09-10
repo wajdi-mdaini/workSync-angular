@@ -1,15 +1,23 @@
 {
   "auth_body_welcome_title" : "Welcome",
-  "auth_body_welcome_login_message" : "Use these forms to login in your company portal for free.",
+  "auth_body_welcome_login_message" : "Use these forms to login to your company portal for free.",
   "auth_body_welcome_signup_message" : "Use these forms to create your company and your first account for free.",
-  "auth_body_signup_first_title" : "Create your company",
-  "auth_body_signup_second_title" : "Create your first admin account",
-  "auth_body_signup_already_have_account" : "Already have an account?",
-
-
-
-
-
+  "auth_body_welcome_forgetpassword_message" : "Use these forms to rest your password.",
+  "auth_signup_first_title" : "Create your company",
+  "auth_signup_second_title" : "Create your first admin account",
+  "auth_signup_already_have_account" : "Already have an account?",
+  "auth_signin_title" : "Welcom to WorkSync",
+  "auth_signin_message" : "Enter your login credentials",
+  "auth_signin_remember_me" : "Remember me",
+  "auth_signin_signup_message" : "Ready to start your own company?",
+  "auth_forget_password_title" : "Forget your password?",
+  "auth_forget_password_message" : "You will receive a verification code on this email address.",
+  "auth_forget_password_server_down_error_message" : "We’re unable to complete this process right now because of a server issue. Please try again later.",
+  "auth_reset_password_required_length_message" : "At least 8 characters",
+  "auth_reset_password_required_upper_message" : "At least one uppercase letter (A–Z)",
+  "auth_reset_password_required_lower_message" : "At least one lowercase letter (a–z)",
+  "auth_reset_password_required_digits_message" : "At least one number (0–9)",
+  "auth_reset_password_required_special_message" : "At least one special character (!@#$%^&*)",
 
 
 
@@ -17,9 +25,20 @@
   "input_first_name_placeholder" : "Name",
   "input_second_name_placeholder" : "Second name",
   "input_email_placeholder" : "Email",
+  "input_password_placeholder" : "Password",
+  "input_password_confirm_placeholder" : "Confirm password",
+  "input_current_password_placeholder" : "Current password",
 
+  "error_status_0": "Your requests could not reach the server. This may be due to your internet connection or the server being unavailable.",
+  "error_status_403": "You are not authorized to perform this action.",
 
   "button_signup": "Sign up",
+  "button_signin": "Sign in",
+  "button_get_verification_code": "Get verification code",
+  "button_get_rest_password": "Reset your password",
 
-  "link_sign_in": "Sign in"
+
+  "link_sign_in": "Sign in",
+  "link_sign_up": "Sign up",
+  "link_forget_password": "Forgot password?"
 }

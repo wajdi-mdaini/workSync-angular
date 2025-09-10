@@ -1,5 +1,34 @@
 {
-  "auth_body_welcome_title" : "Welkom",
-  "auth_body_welcome_login_message" : "Gebruik deze formulieren om gratis in te loggen op uw bedrijfsportaal.",
-  "auth_body_welcome_signup_message" : "Gebruik deze formulieren om uw bedrijf en uw eerste account gratis aan te maken."
+  "auth_body_welcome_title": "Welkom",
+  "auth_body_welcome_login_message": "Gebruik deze formulieren om gratis in te loggen op het bedrijfsportaal.",
+  "auth_body_welcome_signup_message": "Gebruik deze formulieren om uw bedrijf en uw eerste account gratis aan te maken.",
+  "auth_body_welcome_forgetpassword_message": "Gebruik deze formulieren om uw wachtwoord te resetten.",
+  "auth_signup_first_title": "Maak uw bedrijf aan",
+  "auth_signup_second_title": "Maak uw eerste beheerdersaccount aan",
+  "auth_signup_already_have_account": "Heeft u al een account?",
+  "auth_signin_title": "Welkom bij WorkSync",
+  "auth_signin_message": "Voer uw inloggegevens in",
+  "auth_signin_remember_me": "Onthoud mij",
+  "auth_signin_signup_message": "Klaar om uw eigen bedrijf te starten?",
+  "auth_forget_password_title": "Wachtwoord vergeten?",
+  "auth_forget_password_message": "U ontvangt een verificatiecode op dit e-mailadres.",
+
+  "input_company_name_placeholder": "Bedrijfsnaam",
+  "input_first_name_placeholder": "Voornaam",
+  "input_second_name_placeholder": "Achternaam",
+  "input_email_placeholder": "E-mail",
+  "input_password_placeholder": "Wachtwoord",
+  "input_password_confirm_placeholder": "Bevestig wachtwoord",
+
+  "error_status_0": "Uw verzoeken konden de server niet bereiken. Dit kan te wijten zijn aan uw internetverbinding of een niet-beschikbare server.",
+  "error_status_403": "U bent niet gemachtigd om deze actie uit te voeren.",
+
+  "button_signup": "Registreren",
+  "button_signin": "Inloggen",
+  "button_get_verification_code": "Verificatiecode ophalen",
+  "button_get_rest_password": "Reset uw wachtwoord",
+
+  "link_sign_in": "Inloggen",
+  "link_sign_up": "Registreren",
+  "link_forget_password": "Wachtwoord vergeten?"
 }
