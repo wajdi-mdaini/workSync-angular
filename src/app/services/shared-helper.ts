@@ -12,11 +12,20 @@ export class SharedHelper {
   private forceLogout = new Subject<boolean>();
   logout$ = this.forceLogout.asObservable();
 
-  setErrorCode(value: number) {
+  spinner: boolean = false;
+  setErrorCode(value: any) {
     this.errorCode.next(value);
   }
 
   setForceLogout(value: boolean) {
     this.forceLogout.next(value);
+  }
+
+  spinnerShow(){
+    this.spinner = true;
+  }
+
+  spinnerHide(){
+    this.spinner = false;
   }
 }

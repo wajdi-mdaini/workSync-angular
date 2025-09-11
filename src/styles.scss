@@ -16,3 +16,18 @@ a {
 .p-select:not(.p-disabled).p-focus {
   border-color: inherit !important;
 }
+.invalid-form{
+  border-color: rgb(245 75 74) !important;
+}
+.spinner-overlay {
+  background-color: rgb(0 0 0 / 36%);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}

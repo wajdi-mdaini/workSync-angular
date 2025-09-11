@@ -8,6 +8,7 @@
   "auth_signup_already_have_account" : "Already have an account?",
   "auth_signin_title" : "Welcom to WorkSync",
   "auth_signin_message" : "Enter your login credentials",
+  "auth_signin_wrong_credentials_message" : "Wrong login credentials",
   "auth_signin_remember_me" : "Remember me",
   "auth_signin_signup_message" : "Ready to start your own company?",
   "auth_forget_password_title" : "Forget your password?",
@@ -31,6 +32,7 @@
 
   "error_status_0": "Your requests could not reach the server. This may be due to your internet connection or the server being unavailable.",
   "error_status_403": "You are not authorized to perform this action.",
+  "error_status_non_existing_user": "This account does not exist. Please check your credentials.",
 
   "button_signup": "Sign up",
   "button_signin": "Sign in",

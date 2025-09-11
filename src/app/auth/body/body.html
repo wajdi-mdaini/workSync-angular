@@ -1,7 +1,6 @@
 <nav class="absolute top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
   <div class="container flex items-center justify-between py-0 flex-wrap-inherit">
     <div class="card flex justify-center">
-      <img src="assets/img/workSync-logo.svg" alt="My Logo" width="200" height="auto" />
     </div>
     <div navbar-menu class="items-center flex-grow transition-all ease duration-350 lg-max:bg-white lg-max:max-h-0 lg-max:overflow-hidden basis-full rounded-2xl lg:flex lg:basis-auto">
       <ul class="flex flex-col pl-0 mx-auto mb-0 list-none lg-max:py-2 lg:flex-row xl:ml-auto">
@@ -17,13 +16,15 @@
 
 <main class="mt-0 transition-all duration-200 ease-in-out">
   <section class="min-h-screen">
-    <div class="bg-top relative flex items-start pt-12 pb-56 m-4 overflow-hidden bg-cover min-h-50-screen rounded-xl bg-[url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg')]">
-      <span class="absolute top-0 left-0 w-full h-full bg-center bg-cover bg-gradient-to-tl from-zinc-800 to-zinc-700 opacity-60"></span>
+    <div class="bg-top relative flex items-start pt-12 pb-56 m-4 overflow-hidden bg-cover min-h-50-screen rounded-xl" [style]="{
+    'background':'url(assets/img/workSync-logo.svg)',
+    'background-repeat':' no-repeat',
+    'background-size': 'contain'}">
       <div class="container z-10">
         <div class="flex flex-wrap justify-center -mx-3">
           <div class="w-full max-w-full px-3 mx-auto mt-0 text-center lg:flex-0 shrink-0 lg:w-5/12">
-            <h1 class="mt-12 mb-2 text-white">{{ "auth_body_welcome_title" | translate }} !</h1>
-            <p class="text-white">{{ getWelcomeText | translate }}</p>
+            <h1 class="mt-12 mb-2">{{ "auth_body_welcome_title" | translate }} !</h1>
+            <p>{{ getWelcomeText | translate }}</p>
           </div>
         </div>
       </div>

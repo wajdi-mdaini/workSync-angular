@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {HttpClient} from '@angular/common/http';
-import {SharedSettings} from './models';
-import {Observable} from 'rxjs';
-import {environment} from '../config/environment';
+import {SharedSettings, User} from './models';
 import {SharedHelper} from './shared-helper';
 import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
+import {AuthService} from './auth-service';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +12,7 @@ export class Shared {
   sharedSettings: SharedSettings = {
     verificationCodeLength: 0
   };
+  principal!: User;
   selectedLanguage: any;
   translationLanguagesList: any[] = [
     { name: 'English', code: 'en' },
@@ -21,19 +20,25 @@ export class Shared {
     { name: 'Dutch', code: 'nl' },
     { name: 'German', code: 'ge' }
   ];
-  constructor(private router: Router,private translate: TranslateService,private http: HttpClient,sharedHelper: SharedHelper,private messageService: MessageService) {
+  constructor(private router: Router,
+              private translate: TranslateService,
+              private sharedHelper: SharedHelper,
+              private messageService: MessageService,
+              private authService: AuthService) {
     // intercepted error via JWT interceptor
-    sharedHelper.errors$.subscribe((errorCode: number) => {
+    sharedHelper.errors$.subscribe((errorCode: any) => {
       if(errorCode == 0)
         this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant('error_status_0'), life: 3000});
       if(errorCode == 403)
         this.messageService.add({ severity: 'warn', summary: 'Warning !', detail: translate.instant('error_status_403'), life: 3000});
+      if(errorCode == 'non existing user')
+        this.messageService.add({ severity: 'warn', summary: 'Warning !', detail: translate.instant('error_status_non_existing_user'), life: 3000});
     })
-
+    // intercepted logout via JWT interceptor
     sharedHelper.logout$.subscribe( value => {
       this.logout();
     })
-    this.getSharedSettings().subscribe({
+    this.authService.getSharedSettings().subscribe({
       next: (settings: SharedSettings) => {
         this.sharedSettings = settings;
         console.log('Shared settings loaded', settings);
@@ -46,9 +51,7 @@ export class Shared {
     // TODO other logout instructions
     this.router.navigate(['/auth/login']);
   }
-  getSharedSettings(): Observable<SharedSettings> {
-    return this.http.get<SharedSettings>(environment.apiBaseUrl+'/auth/settings')
-  }
+
   applyTranslation(){
     // default + auto-detect browser language (basic example)
     this.translate.setDefaultLang('en');

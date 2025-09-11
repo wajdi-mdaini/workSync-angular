@@ -3,6 +3,7 @@ import {Body} from './auth/body/body';
 import {Signin} from './auth/signin/signin';
 import {Signup} from './auth/signup/signup';
 import {Forgetpassword} from './auth/forgetpassword/forgetpassword';
+import {Layout} from './home/layout/layout';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -11,5 +12,8 @@ export const routes: Routes = [
       {path: 'signup', component: Signup},
       {path: 'forgetpassword', component: Forgetpassword },
     ]},
+  {path: 'dashboard', component: Layout, children: [
+
+    ]}
   // { path: '**', redirectTo: 'auth/login' }
 ];
