@@ -20,7 +20,10 @@ export class AuthService {
   }
 
   login(body: LoginRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/login',body)
+    return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/login',body,{ withCredentials: true })
+  }
+  loginCheck(): Observable<any> {
+    return this.http.get(environment.apiBaseUrl+'/auth/login/check',{ withCredentials: true });
   }
   getSharedSettings(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(environment.apiBaseUrl+'/auth/settings')

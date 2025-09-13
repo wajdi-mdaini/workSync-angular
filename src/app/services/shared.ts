@@ -28,16 +28,16 @@ export class Shared {
               private authService: AuthService) {
     // intercepted error via JWT interceptor
     sharedHelper.httpStatus$.subscribe((httpResponse: ApiResponse) => {
-      if(httpResponse.status == 0)
+      if(httpResponse?.status == 0)
         this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant('error_status_0'), life: 3000});
-      if((httpResponse.status == 'LOCKED' || httpResponse.status == 'INTERNAL_SERVER_ERROR') && httpResponse.showToast)
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant(httpResponse.messageLabel), life: 3000});
-      if((httpResponse.status == 'CONFLICT' || httpResponse.status == 'UNAUTHORIZED') && httpResponse.showToast)
-        this.messageService.add({ severity: 'warn', summary: 'Warning !', detail: translate.instant(httpResponse.messageLabel), life: 3000});
-      if(httpResponse.status == 'OK' && httpResponse.showToast)
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.translate.instant(httpResponse.messageLabel), life: 3000});
+      if((httpResponse?.status == 'LOCKED' || httpResponse?.status == 'INTERNAL_SERVER_ERROR') && httpResponse?.showToast)
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant(httpResponse?.messageLabel), life: 3000});
+      if((httpResponse?.status == 'CONFLICT' || httpResponse?.status == 'UNAUTHORIZED') && httpResponse?.showToast)
+        this.messageService.add({ severity: 'warn', summary: 'Warning !', detail: translate.instant(httpResponse?.messageLabel), life: 3000});
+      if(httpResponse?.status == 'OK' && httpResponse?.showToast)
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.translate.instant(httpResponse?.messageLabel), life: 3000});
 
-      if(httpResponse.doLogout) this.logout()
+      if(httpResponse?.doLogout) this.logout()
     })
     this.authService.getSharedSettings().subscribe({
       next: (apiResponse: ApiResponse) => {
@@ -70,5 +70,6 @@ export class Shared {
   }
   switchLang() {
     this.translate.use(this.selectedLanguage.code);
+    localStorage.setItem('preferredLanguage',this.selectedLanguage.code);
   }
 }
