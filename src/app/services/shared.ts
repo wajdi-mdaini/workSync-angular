@@ -40,11 +40,17 @@ export class Shared {
       if(httpResponse.doLogout) this.logout()
     })
     this.authService.getSharedSettings().subscribe({
-      next: (settings: SharedSettings) => {
-        this.sharedSettings = settings;
-        console.log('Shared settings loaded', settings);
+      next: (apiResponse: ApiResponse) => {
+        if (apiResponse.success){
+          this.sharedSettings = apiResponse.data;
+          console.log('Shared settings loaded', apiResponse.data);
+        }else this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant('error_status_INTERNAL_SERVER_ERROR'), life: 3000});
       },
-      error: (err) => console.error('Error fetching shared settings', err)
+      error: (err) => {
+        console.error('Error fetching shared settings', err)
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant('error_status_INTERNAL_SERVER_ERROR'), life: 3000});
+      }
+
     });
   }
 

@@ -22,8 +22,8 @@ export class AuthService {
   login(body: LoginRequest): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/login',body)
   }
-  getSharedSettings(): Observable<SharedSettings> {
-    return this.http.get<SharedSettings>(environment.apiBaseUrl+'/auth/settings')
+  getSharedSettings(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl+'/auth/settings')
   }
   getVerificationCode(email: string): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/resetpasswordconfirmation?email=' + email,{})
