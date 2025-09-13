@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {LoginRequest, LoginResponse, SharedSettings, User} from './models';
+import {
+  ApiResponse,
+  ChangePasswordRequest,
+  LoginRequest,
+  LoginResponse,
+  SharedSettings,
+  SignUpRequest,
+  User
+} from './models';
 import {environment} from '../config/environment';
 import {HttpClient} from '@angular/common/http';
 @Injectable({
@@ -11,11 +19,23 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  login(body: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(environment.apiBaseUrl+'/auth/login',body)
+  login(body: LoginRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/login',body)
   }
   getSharedSettings(): Observable<SharedSettings> {
     return this.http.get<SharedSettings>(environment.apiBaseUrl+'/auth/settings')
+  }
+  getVerificationCode(email: string): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/resetpasswordconfirmation?email=' + email,{})
+  }
+  checkVerificationCode(code: string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl+'/auth/resetpasswordcodecheck?code=' + code)
+  }
+  changePassword(changePasswordRequest: ChangePasswordRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/changepassword',changePasswordRequest)
+  }
+  signUp(signUpRequest: SignUpRequest): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(environment.apiBaseUrl+'/auth/signup',signUpRequest)
   }
 
 }

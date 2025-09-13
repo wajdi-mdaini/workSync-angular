@@ -1,6 +1,6 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import {HttpEvent, HttpInterceptorFn} from '@angular/common/http';
 import {inject} from '@angular/core';
-import {catchError, finalize, throwError} from 'rxjs';
+import {catchError, finalize, tap, throwError} from 'rxjs';
 import {SharedHelper} from './shared-helper';
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const sharedHelper = inject(SharedHelper);
@@ -20,14 +20,18 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   }
   sharedHelper.spinnerShow()
   return next(req).pipe(
+    tap((event: any) => {
+      if(event.status == 200)
+        sharedHelper.setHttpStatus(event?.body)
+    }),
     catchError((error) => {
-      if(error.url.includes('auth/login') && error.status === 403) {
-        sharedHelper.setErrorCode('non existing user')
-      }else if (error.status === 0 || error.status === 500 || error.status === 403) {
-        sharedHelper.setErrorCode(error.status)
-        sharedHelper.setForceLogout(true)
+      // if((error.url.includes('auth/login') || error.url.includes('/auth/resetpasswordconfirmation?')) &&
+      //   error.status === 403) {
+      //   sharedHelper.setErrorCode('non existing user')
+      if (error.status === 0) {
+        sharedHelper.setHttpStatus(error)
       }
-
+      sharedHelper.setHttpStatus(error?.error)
       return throwError(() => error);
     }),
     finalize(() => {

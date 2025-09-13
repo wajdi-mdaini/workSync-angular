@@ -1,7 +1,13 @@
 import {Component, Input} from '@angular/core';
 import {CommonModule, NgClass} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TranslatePipe} from "@ngx-translate/core";
+import {TranslatePipe, TranslateService} from "@ngx-translate/core";
+import {AuthService} from '../../services/auth-service';
+import {ApiResponse, ChangePasswordRequest} from '../../services/models';
+import {PasswordService} from '../../services/PasswordService';
+import { format } from 'date-fns';
+import {Router} from '@angular/router';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-reset-password',
@@ -17,6 +23,7 @@ import {TranslatePipe} from "@ngx-translate/core";
 })
 export class ResetPassword {
   @Input() useCurrentPassword: boolean = false;
+  @Input() redirectionPath: string = '/auth/login';
   password: string = '';
   confirmPassword: string = '';
   currentPassword: string = '';
@@ -28,7 +35,13 @@ export class ResetPassword {
     number: false,
     specialChar: false
   };
-
+  resetPasswordButtonSubmitted: boolean = false;
+  constructor(private router: Router,
+              private authService: AuthService,
+              private passwordService: PasswordService,
+              private messageService: MessageService,
+              private translate: TranslateService) {
+  }
   validatePassword() {
     const pwd = this.password;
 
@@ -46,5 +59,43 @@ export class ResetPassword {
 
   validateCurrentPassword(){
 
+  }
+
+  resetPassword() {
+    this.resetPasswordButtonSubmitted = true;
+    if (this.passwordsMatch && this.isCorrectPassword) {
+      let today = new Date();
+      let changePasswordRequest: ChangePasswordRequest = {
+        password: this.passwordService.encodePassword(this.password),
+        lastPasswordResetDate: format(today, 'yyyy-MM-dd')
+      }
+      this.authService.changePassword(changePasswordRequest).subscribe({
+        next: (response: ApiResponse) => {
+          if(response){
+            console.log('Password changed successfully');
+            this.router.navigate([this.redirectionPath]);
+          }
+        },
+        error: (error) => {
+          console.error('Error changing password', error);
+        }
+      });
+    }
+  }
+
+  get isCorrectPassword(): boolean {
+    return this.conditions.minLength &&
+      this.conditions.upperCase &&
+      this.conditions.lowerCase &&
+      this.conditions.number &&
+      this.conditions.specialChar;
+  }
+
+  get isWrongPassword(): boolean {
+    return !this.conditions.minLength ||
+      !this.conditions.upperCase ||
+      !this.conditions.lowerCase ||
+      !this.conditions.number ||
+      !this.conditions.specialChar;
   }
 }

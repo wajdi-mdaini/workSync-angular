@@ -19,6 +19,16 @@
   "auth_reset_password_required_lower_message" : "At least one lowercase letter (a–z)",
   "auth_reset_password_required_digits_message" : "At least one number (0–9)",
   "auth_reset_password_required_special_message" : "At least one special character (!@#$%^&*)",
+  "auth_reset_password_first_message" : "Enter your email address below. You will receive a verification code by email.The code will expire in <strong>{{minutes}} minutes</strong>.",
+  "auth_reset_password_enter_verification_code_message" : "Enter the verification code you received by email.",
+  "auth_reset_password_timer_verification_code_message" : "The code will expire in <strong>{{ minutes }} minutes</strong> and <strong>{{ seconds }} seconds</strong>.",
+  "auth_reset_password_expired_verification_code_message" : "Verification code expired !",
+  "auth_forget_password_wrong_code_error_message" : "Wrong verification code !",
+  "auth_forget_password_success_message" : "Your password has been successfully updated.",
+  "auth_signin_blocked_user_error_message" : "Your account is temporarily locked. Try again later or contact your manager",
+  "auth_signup_success_message" : "Your company and account has been successfully created.",
+  "auth_signup_used_email_error_message" : "This email address already used.",
+  "auth_signup_used_company_name_error_message" : "This company already exist.",
 
 
 
@@ -32,7 +42,8 @@
 
   "error_status_0": "Your requests could not reach the server. This may be due to your internet connection or the server being unavailable.",
   "error_status_403": "You are not authorized to perform this action.",
-  "error_status_non_existing_user": "This account does not exist. Please check your credentials.",
+  "error_status_UNAUTHORIZED": "This account does not exist. Please check your credentials.",
+  "error_status_INTERNAL_SERVER_ERROR": "A technical problem occurred. Please try again later.",
 
   "button_signup": "Sign up",
   "button_signin": "Sign in",

@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {TranslatePipe} from '@ngx-translate/core';
 import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../services/auth-service';
-import {LoginRequest, LoginResponse, SharedSettings, User} from '../../services/models';
+import {ApiResponse, LoginRequest, LoginResponse, Role, SharedSettings, User} from '../../services/models';
 import {NgClass, NgIf} from '@angular/common';
 import {Shared} from '../../services/shared';
 
@@ -24,6 +24,7 @@ export class Signin {
   formGroup: FormGroup =  new FormGroup({});
   loginClicked: boolean = false;
   wrongCritical: boolean = false;
+  blockedUser: boolean = false;
   constructor(private authService: AuthService,private formBuilder: FormBuilder,private router: Router,private sharedService: Shared) {
     this.initForm();
   }
@@ -35,6 +36,8 @@ export class Signin {
   }
   doLogin(){
     this.loginClicked = true;
+    this.blockedUser = false;
+    this.wrongCritical = false;
     if(this.formGroup.invalid){
       return;
     }
@@ -43,15 +46,27 @@ export class Signin {
       password: this.formGroup.get('password')!.value
     }
     this.authService.login(loginRequest).subscribe({
-      next: (loginResponse: LoginResponse) => {
-        if(loginResponse.token){
-          this.wrongCritical = false;
-          this.sharedService.principal = loginResponse.user;
-          localStorage.setItem('jwt', loginResponse.token);
-          this.router.navigate(['dashboard']);
-        }else this.wrongCritical = true;
+      next: (apiResponse: ApiResponse) => {
+        if (apiResponse.success){
+          let user: User = apiResponse.data?.user;
+            this.blockedUser = false;
+            this.wrongCritical = false;
+            this.sharedService.principal = user;
+            localStorage.setItem('jwt', apiResponse.data?.token);
+            if(user.role == Role.ADMIN || user.role == Role.MANAGER){
+              this.router.navigate(['dashboard']);
+            }
+            else this.router.navigate(['home']);
+        }
     }
-    ,error: (err) => console.error('Error fetching shared settings', err)
+    ,error: (err) => {
+        console.error('Error fetching user', err)
+          if(err.error?.status == "UNAUTHORIZED"){
+            this.wrongCritical = true;
+          }else if(err.error?.status == "LOCKED"){
+            this.blockedUser = true;
+          }
+        }
   })
   }
 }

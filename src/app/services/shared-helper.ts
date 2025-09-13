@@ -1,24 +1,18 @@
 import {inject, Injectable} from '@angular/core';
 import {Shared} from './shared';
 import {Subject} from 'rxjs';
+import {ApiResponse} from './models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedHelper {
-  private errorCode = new Subject<number>();
-  errors$ = this.errorCode.asObservable();
-
-  private forceLogout = new Subject<boolean>();
-  logout$ = this.forceLogout.asObservable();
+  private httpStatus = new Subject<ApiResponse>();
+  httpStatus$ = this.httpStatus.asObservable();
 
   spinner: boolean = false;
-  setErrorCode(value: any) {
-    this.errorCode.next(value);
-  }
-
-  setForceLogout(value: boolean) {
-    this.forceLogout.next(value);
+  setHttpStatus(value: any) {
+    this.httpStatus.next(value);
   }
 
   spinnerShow(){

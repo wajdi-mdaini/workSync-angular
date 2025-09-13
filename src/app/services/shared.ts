@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {SharedSettings, User} from './models';
+import {ApiResponse, SharedSettings, User} from './models';
 import {SharedHelper} from './shared-helper';
 import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
@@ -10,7 +10,8 @@ import {AuthService} from './auth-service';
 })
 export class Shared {
   sharedSettings: SharedSettings = {
-    verificationCodeLength: 0
+    verificationCodeLength: 0,
+    verificationCodeExpireIn: 0
   };
   principal!: User;
   selectedLanguage: any;
@@ -26,17 +27,17 @@ export class Shared {
               private messageService: MessageService,
               private authService: AuthService) {
     // intercepted error via JWT interceptor
-    sharedHelper.errors$.subscribe((errorCode: any) => {
-      if(errorCode == 0)
+    sharedHelper.httpStatus$.subscribe((httpResponse: ApiResponse) => {
+      if(httpResponse.status == 0)
         this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant('error_status_0'), life: 3000});
-      if(errorCode == 403)
-        this.messageService.add({ severity: 'warn', summary: 'Warning !', detail: translate.instant('error_status_403'), life: 3000});
-      if(errorCode == 'non existing user')
-        this.messageService.add({ severity: 'warn', summary: 'Warning !', detail: translate.instant('error_status_non_existing_user'), life: 3000});
-    })
-    // intercepted logout via JWT interceptor
-    sharedHelper.logout$.subscribe( value => {
-      this.logout();
+      if((httpResponse.status == 'LOCKED' || httpResponse.status == 'INTERNAL_SERVER_ERROR') && httpResponse.showToast)
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant(httpResponse.messageLabel), life: 3000});
+      if((httpResponse.status == 'CONFLICT' || httpResponse.status == 'UNAUTHORIZED') && httpResponse.showToast)
+        this.messageService.add({ severity: 'warn', summary: 'Warning !', detail: translate.instant(httpResponse.messageLabel), life: 3000});
+      if(httpResponse.status == 'OK' && httpResponse.showToast)
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.translate.instant(httpResponse.messageLabel), life: 3000});
+
+      if(httpResponse.doLogout) this.logout()
     })
     this.authService.getSharedSettings().subscribe({
       next: (settings: SharedSettings) => {

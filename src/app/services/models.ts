@@ -1,4 +1,5 @@
 export interface User {
+  email: string;
   password: string;
   firstname: string;
   lastname: string;
@@ -42,6 +43,7 @@ export interface Branding {
 }
 export interface SharedSettings {
   verificationCodeLength: number;
+  verificationCodeExpireIn: number;
 }
 export interface LoginResponse {
   user: User;
@@ -54,4 +56,16 @@ export interface LoginRequest{
 export interface SignUpRequest {
   user: User;
   company: Company;
+}
+export interface ChangePasswordRequest {
+  password: string;
+  lastPasswordResetDate: any;
+}
+export interface ApiResponse {
+  status: any,
+  messageLabel: string;
+  data: any;
+  success: boolean;
+  showToast: boolean;
+  doLogout: boolean;
 }

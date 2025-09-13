@@ -6,14 +6,14 @@
           <h5>{{ "auth_signin_title" | translate}}</h5>
         </div>
         <div class="flex-auto p-6">
-          <span *ngIf="!wrongCritical" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "auth_signin_message" | translate}} :</span></span>
-          <span *ngIf="wrongCritical" style="color: rgb(245 75 74)" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "auth_signin_wrong_credentials_message" | translate}} !</span></span>
+          <span *ngIf="!wrongCritical && !blockedUser" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "auth_signin_message" | translate}} :</span></span>
+          <span *ngIf="wrongCritical && !blockedUser" style="color: rgb(245 75 74)" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "auth_signin_wrong_credentials_message" | translate}} !</span></span>
           <form [formGroup]="formGroup" role="form text-left">
             <div class="mb-4">
-              <input [ngClass]="{'invalid-form': loginClicked && (formGroup.get('email')?.errors?.['required'] || formGroup.get('email')?.errors?.['email'])}" formControlName="email" type="email" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" [placeholder]="'input_email_placeholder' | translate" aria-label="Email"/>
+              <input (keydown.enter)="doLogin()" [ngClass]="{'invalid-form': loginClicked && (formGroup.get('email')?.errors?.['required'] || formGroup.get('email')?.errors?.['email'])}" formControlName="email" type="email" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" [placeholder]="'input_email_placeholder' | translate" aria-label="Email"/>
             </div>
             <div class="mb-4">
-              <input [ngClass]="{'invalid-form': loginClicked && formGroup.get('password')?.errors?.['required']}" formControlName="password" type="password" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" [placeholder]="'input_password_placeholder' | translate" aria-label="Password"/>
+              <input (keydown.enter)="doLogin()" [ngClass]="{'invalid-form': loginClicked && formGroup.get('password')?.errors?.['required']}" formControlName="password" type="password" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" [placeholder]="'input_password_placeholder' | translate" aria-label="Password"/>
             </div>
             <div class="col-md-12">
             <div class="row">

@@ -30,4 +30,20 @@ a {
   justify-content: center;
   align-items: center;
   z-index: 100;
+  backdrop-filter: blur(1px);
 }
+
+.p-button-link {
+  color: #344767 !important;
+}
+.p-button-link:hover {
+  color: #7b7c46 !important;
+}
+.p-button-link:not(:disabled):hover .p-button-label {
+  text-decoration: none !important;
+}
+.resend-code-button{
+  display: flex;
+  justify-content: end;
+}
+
