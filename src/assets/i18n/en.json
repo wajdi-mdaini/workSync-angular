@@ -29,7 +29,9 @@
   "auth_signup_success_message" : "Your company and account has been successfully created.",
   "auth_signup_used_email_error_message" : "This email address already used.",
   "auth_signup_used_company_name_error_message" : "This company already exist.",
-
+  "auth_profile_expired_error_message": "Oops! We couldn’t load your profile. Please sign in again.",
+  "sidebar_manage_employees_section": "Manage employees",
+  "sidebar_manage_company_section": "Manage company",
 
 
   "input_company_name_placeholder" : "Company name",
@@ -49,9 +51,16 @@
   "button_signin": "Sign in",
   "button_get_verification_code": "Get verification code",
   "button_get_rest_password": "Reset your password",
+  "button_need_guide": "Need guide?",
+  "button_documentation": "Documentation",
 
 
   "link_sign_in": "Sign in",
   "link_sign_up": "Sign up",
-  "link_forget_password": "Forgot password?"
+  "link_forget_password": "Forgot password?",
+  "link_logout": "Logout",
+  "link_profile": "Profile",
+  "link_company_details": "Company details",
+  "link_dashboard": "Dashboard",
+  "link_manage_employees": "Manage employees"
 }

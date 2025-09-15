@@ -13,7 +13,7 @@ export class Shared {
     verificationCodeLength: 0,
     verificationCodeExpireIn: 0
   };
-  principal!: User;
+  principal?: User;
   selectedLanguage: any;
   translationLanguagesList: any[] = [
     { name: 'English', code: 'en' },
@@ -55,8 +55,9 @@ export class Shared {
   }
 
   logout(){
-    // TODO other logout instructions
-    this.router.navigate(['/auth/login']);
+    this.authService.logout().subscribe(success => {
+      this.router.navigate(['/auth/login']);
+    })
   }
 
   applyTranslation(){

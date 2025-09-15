@@ -22,8 +22,14 @@ export class AuthService {
   login(body: LoginRequest): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/login',body,{ withCredentials: true })
   }
+  logout(): Observable<any> {
+    return this.http.post(environment.apiBaseUrl+'/auth/logout',{},{ withCredentials: true })
+  }
   loginCheck(): Observable<any> {
     return this.http.get(environment.apiBaseUrl+'/auth/login/check',{ withCredentials: true });
+  }
+  getProfile(): Observable<any> {
+    return this.http.get(environment.apiBaseUrl+'/auth/profile',{ withCredentials: true });
   }
   getSharedSettings(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(environment.apiBaseUrl+'/auth/settings')

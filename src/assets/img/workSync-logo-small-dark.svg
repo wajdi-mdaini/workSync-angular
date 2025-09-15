@@ -1,0 +1,55 @@
+<svg width="150" height="80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Dark gradient -->
+    <linearGradient id="mainGradientSmallDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E3A8A"/>   <!-- dark indigo -->
+      <stop offset="50%" stop-color="#075985"/>  <!-- deep cyan -->
+      <stop offset="100%" stop-color="#5B21B6"/> <!-- dark violet -->
+    </linearGradient>
+
+    <!-- Dark shadow -->
+    <linearGradient id="shadowGradientSmallDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#1F2937" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shadow -->
+  <text x="75" y="50" text-anchor="middle" font-family="'Segoe UI', 'Arial', sans-serif"
+        font-size="42" font-weight="700" fill="url(#shadowGradientSmallDark)" opacity="0.85">
+    WS
+  </text>
+
+  <!-- Main Abbreviation -->
+  <text x="75" y="47" text-anchor="middle" font-family="'Segoe UI', 'Arial', sans-serif"
+        font-size="42" font-weight="700" fill="url(#mainGradientSmallDark)">
+    WS
+  </text>
+
+  <!-- Flying sync icon -->
+  <g>
+    <g transform="scale(1)">
+      <path d="M0,-10 L5,-5 L0,0 M0,-10 L-5,-5 L0,0" stroke="#5B21B6" stroke-width="2" fill="none">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <path d="M10,0 L5,5 L0,0 M10,0 L5,-5 L0,0" stroke="#075985" stroke-width="2" fill="none">
+        <animate attributeName="opacity" values="1;0.6;1" dur="1.5s" repeatCount="indefinite"/>
+      </path>
+      <circle cx="0" cy="0" r="3" fill="#1E3A8A">
+        <animate attributeName="r" values="3;2.5;3" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    <animateMotion dur="15s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#flyLoopSmallDark"/>
+    </animateMotion>
+  </g>
+
+  <!-- Flight path -->
+  <path id="flyLoopSmallDark"
+        d="M30,40
+           C100,10 200,40 220,120
+           C210,150 -60,150 -40,30
+           C-20,-40 180,-60 190,10
+           C200,90 100,100 30,40 Z"
+        stroke="transparent" fill="none"/>
+</svg>

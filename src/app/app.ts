@@ -4,6 +4,8 @@ import {Shared} from './services/shared';
 import {Toast} from 'primeng/toast';
 import {SharedHelper} from './services/shared-helper';
 import {CommonModule} from '@angular/common';
+import {AuthService} from './services/auth-service';
+import {ApiResponse} from './services/models';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ import {CommonModule} from '@angular/common';
 })
 export class App {
   protected readonly title = signal('angular-demo');
-  constructor(private sharedService: Shared,public sharedHelper: SharedHelper) {
+  constructor(private sharedService: Shared,public sharedHelper: SharedHelper,private authService: AuthService) {
     sharedService.applyTranslation();
   }
 

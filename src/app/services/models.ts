@@ -47,7 +47,6 @@ export interface SharedSettings {
 }
 export interface LoginResponse {
   user: User;
-  token: string;
 }
 export interface LoginRequest{
   email: string;

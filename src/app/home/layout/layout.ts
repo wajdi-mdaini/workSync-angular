@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Shared} from '../../services/shared';
 
 @Component({
   selector: 'app-layout',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './layout.scss'
 })
 export class Layout {
-
+  constructor(private sharedService: Shared) {
+  }
+  logout(){
+    this.sharedService.logout();
+  }
 }
