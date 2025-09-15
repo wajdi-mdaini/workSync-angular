@@ -23,7 +23,7 @@ export class AuthService {
     return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/login',body,{ withCredentials: true })
   }
   logout(): Observable<any> {
-    return this.http.post(environment.apiBaseUrl+'/auth/logout',{},{ withCredentials: true })
+    return this.http.post(environment.apiBaseUrl+'/auth/logout',{},{ withCredentials: true,responseType: 'text' })
   }
   loginCheck(): Observable<any> {
     return this.http.get(environment.apiBaseUrl+'/auth/login/check',{ withCredentials: true });

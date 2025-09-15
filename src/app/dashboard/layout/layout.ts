@@ -24,9 +24,9 @@ import {Shared} from '../../services/shared';
 })
 export class Layout {
   constructor(private authService: AuthService,private sharedService: Shared) {
-    authService.getProfile().subscribe({
-      next: (apiResponse: ApiResponse) => this.sharedService.principal = apiResponse.data.user,
-      error: () => console.log('Error getting profile'),
-    });
+    // authService.getProfile().subscribe({
+    //   next: (apiResponse: ApiResponse) => this.sharedService.principal = apiResponse.data.user,
+    //   error: () => console.log('Error getting profile'),
+    // });
   }
 }

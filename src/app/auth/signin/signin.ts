@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {TranslatePipe} from '@ngx-translate/core';
 import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../services/auth-service';
-import {ApiResponse, LoginRequest, LoginResponse, Role, SharedSettings, User} from '../../services/models';
+import {ApiResponse, LoginRequest, Role, User} from '../../services/models';
 import {NgClass, NgIf} from '@angular/common';
 import {Shared} from '../../services/shared';
 
@@ -20,13 +20,24 @@ import {Shared} from '../../services/shared';
   templateUrl: './signin.html',
   styleUrl: './signin.scss'
 })
-export class Signin {
+export class Signin implements OnInit {
   formGroup: FormGroup =  new FormGroup({});
   loginClicked: boolean = false;
   wrongCritical: boolean = false;
   blockedUser: boolean = false;
+  isRememberMe: boolean = false;
   constructor(private authService: AuthService,private formBuilder: FormBuilder,private router: Router,private sharedService: Shared) {
-    this.initForm();
+  }
+
+  ngOnInit(): void {
+      this.initForm();
+      if (typeof window !== 'undefined' && localStorage) {
+        let email = localStorage.getItem('userEmail')
+        if (email) {
+          this.isRememberMe = true;
+          this.formGroup.get('email')?.setValue(email);
+        }
+      }
   }
   initForm(){
     this.formGroup = this.formBuilder.group({
@@ -52,7 +63,7 @@ export class Signin {
             this.blockedUser = false;
             this.wrongCritical = false;
             this.sharedService.principal = user;
-            localStorage.setItem('jwt', apiResponse.data?.token);
+            this.setStoredEmail();
             if(user.role == Role.ADMIN || user.role == Role.MANAGER){
               this.router.navigate(['dashboard']);
             }
@@ -68,5 +79,11 @@ export class Signin {
           }
         }
   })
+  }
+  setStoredEmail(){
+    let emailValue = (this.formGroup.get('email')?.value)?.trim();
+    this.isRememberMe ?
+                        (emailValue!= null && emailValue!=''? localStorage.setItem('userEmail',this.formGroup.get('email')?.value) : null ) :
+                        localStorage.removeItem('userEmail');
   }
 }
