@@ -13,6 +13,9 @@ export const authGuard: CanActivateFn = (route, state) => {
   return authService.loginCheck().pipe(
     map((apiResponse: ApiResponse) => {
       sharedService.principal = apiResponse.data.user;
+      if(sharedService.principal?.firstLogin) {
+        router.navigate(['/auth/firstlogin']);
+      }
       return true;
     }),
     catchError((err) => {

@@ -32,6 +32,11 @@
   "auth_profile_expired_error_message": "Oops! We couldn’t load your profile. Please sign in again.",
   "sidebar_manage_employees_section": "Manage employees",
   "sidebar_manage_company_section": "Manage company",
+  "navbar_screen_title_dashboard": "Dashboard",
+  "navbar_role_admin_title": "Administration",
+  "navbar_role_manager_title": "Management",
+  "upload_profile_picture_success": "Your profile picture uploaded successfully.",
+  "upload_profile_picture_failed": "Failed to upload your profile picture.",
 
 
   "input_company_name_placeholder" : "Company name",
@@ -62,5 +67,8 @@
   "link_profile": "Profile",
   "link_company_details": "Company details",
   "link_dashboard": "Dashboard",
-  "link_manage_employees": "Manage employees"
+  "link_manage_employees": "Manage employees",
+
+  "notification_new_joiner_title": "New Employee Joined",
+  "notification_new_joiner_message": "<strong>{{ name }}</strong> has been added to your WorkSync team and completed their password setup."
 }

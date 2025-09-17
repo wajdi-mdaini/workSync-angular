@@ -3,12 +3,14 @@ import {TranslateService} from '@ngx-translate/core';
 import {ApiResponse, SharedSettings, User} from './models';
 import {SharedHelper} from './shared-helper';
 import {MessageService} from 'primeng/api';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {AuthService} from './auth-service';
+import {filter} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class Shared {
+  navBarScreenTitleLabel: string = '';
   sharedSettings: SharedSettings = {
     verificationCodeLength: 0,
     verificationCodeExpireIn: 0
@@ -52,8 +54,18 @@ export class Shared {
       }
 
     });
+
+    this.initNavBarScreenTitleLabel()
   }
 
+  initNavBarScreenTitleLabel(){
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        let currentUrl = event.urlAfterRedirects;
+        currentUrl.includes('dashboard') ? this.navBarScreenTitleLabel = 'navbar_screen_title_dashboard' : null;
+      });
+  }
   logout(){
     this.authService.logout().subscribe(success => {
       this.router.navigate(['/auth/login']);
@@ -72,5 +84,10 @@ export class Shared {
   switchLang() {
     this.translate.use(this.selectedLanguage.code);
     localStorage.setItem('preferredLanguage',this.selectedLanguage.code);
+  }
+
+  customNavigation(routerLink: string,screenTitle: string) {
+    this.router.navigate([routerLink]);
+    this.navBarScreenTitleLabel = screenTitle;
   }
 }

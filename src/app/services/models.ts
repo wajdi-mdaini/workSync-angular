@@ -5,14 +5,23 @@ export interface User {
   lastname: string;
   dateOfBirth: Date;
   creationDate: Date;
-  isFirstLogin: boolean;
+  lastPasswordResetDate: Date;
+  firstLogin: boolean;
   locked: boolean;
   attempts: number;
+  verificationCode: string;
   role: Role;
-  manager: User;
-  employees: User[];
-  company: Company;
+  team: Team;
+  teams: Team[];
   notifications: CustomNotification[];
+}
+export interface Team{
+  id: number
+  name: string;
+  description: string;
+  members: User[];
+  manager: User;
+  company: Company;
 }
 export enum Role {
   ADMIN = "ADMIN",MANAGER="MANAGER",EMPLOYEE="EMPLOYEE"
@@ -25,7 +34,8 @@ export interface Company {
   email: string;
   phone: number;
   website: string;
-  users: User[];
+  companyCreator: User;
+  teams: Team[];
   branding: Branding[];
 }
 export interface CustomNotification {

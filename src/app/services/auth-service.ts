@@ -4,10 +4,7 @@ import {
   ApiResponse,
   ChangePasswordRequest,
   LoginRequest,
-  LoginResponse,
-  SharedSettings,
-  SignUpRequest,
-  User
+  SignUpRequest
 } from './models';
 import {environment} from '../config/environment';
 import {HttpClient} from '@angular/common/http';
@@ -41,7 +38,7 @@ export class AuthService {
     return this.http.get<ApiResponse>(environment.apiBaseUrl+'/auth/resetpasswordcodecheck?code=' + code)
   }
   changePassword(changePasswordRequest: ChangePasswordRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/changepassword',changePasswordRequest)
+    return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/changepassword',changePasswordRequest,{ withCredentials: true })
   }
   signUp(signUpRequest: SignUpRequest): Observable<ApiResponse> {
     return this.http.put<ApiResponse>(environment.apiBaseUrl+'/auth/signup',signUpRequest)

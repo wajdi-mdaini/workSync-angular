@@ -65,7 +65,8 @@ export class Signin implements OnInit {
             this.sharedService.principal = user;
             this.setStoredEmail();
             if(user.role == Role.ADMIN || user.role == Role.MANAGER){
-              this.router.navigate(['dashboard']);
+              if(user.firstLogin) this.sharedService.customNavigation('/auth/firstlogin','navbar_screen_title_dashboard');
+              else this.sharedService.customNavigation('dashboard','navbar_screen_title_dashboard');
             }
             else this.router.navigate(['home']);
         }
