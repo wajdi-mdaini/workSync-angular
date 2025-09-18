@@ -78,3 +78,14 @@ export interface ApiResponse {
   showToast: boolean;
   doLogout: boolean;
 }
+export interface NotificationDTO {
+  id: number;
+  at: number;
+  titleLabel: string;
+  messageLabel: string;
+  fromName: string;
+  fromId: string;
+  fromProfilePictureUrl: string;
+  read: boolean;
+
+}

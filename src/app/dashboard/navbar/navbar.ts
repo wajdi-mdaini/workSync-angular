@@ -1,19 +1,23 @@
 import {Component, HostListener , NgZone} from '@angular/core';
 import {Shared} from '../../services/shared';
 import {TranslatePipe} from '@ngx-translate/core';
-import {Role} from '../../services/models';
+import {ApiResponse, NotificationDTO, Role} from '../../services/models';
 import SockJS from 'sockjs-client';
 import {Client, Message} from '@stomp/stompjs';
 
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, map} from 'rxjs';
 import {environment} from '../../config/environment';
-import {AsyncPipe, NgFor} from '@angular/common';
+import {AsyncPipe, NgFor, NgIf} from '@angular/common';
+import {EmployeeService} from '../../services/employee-service';
+import {TimeAgoPipe} from '../../pipes/time-ago-pipe';
 @Component({
   selector: 'app-navbar',
   imports: [
     TranslatePipe,
     AsyncPipe,
-    NgFor
+    NgFor,
+    TimeAgoPipe,
+    NgIf
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
@@ -24,7 +28,10 @@ export class Navbar {
   notifications$ = this.notificationsSubject.asObservable();
   dropdownMenu?: any ;
   notificationShown: boolean = false ;
-  constructor(public sharedService: Shared,private ngZone: NgZone) {
+  unreadCount$ = this.notifications$.pipe(
+    map(list => (list ?? []).filter(n => !n.read).length)
+  );
+  constructor(public sharedService: Shared,private ngZone: NgZone,private employeeService: EmployeeService) {
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS(environment.apiBaseUrl + '/ws'),
       reconnectDelay: 5000
@@ -39,7 +46,26 @@ export class Navbar {
 
 
       this.stompClient.activate();
+      this.getAllNotifications();
+  }
 
+  getAllNotifications(){
+    this.employeeService.getNotifications(this.sharedService.principal?.email).subscribe({
+      next: (apiResponse: ApiResponse)  => {
+        if(apiResponse.success){
+          apiResponse.data.forEach((notification: NotificationDTO) => {
+            this.addNotification(notification);
+          })
+        }
+      },
+      error: (e: any) => console.error(e)
+    })
+  }
+
+  getSortedNotifications(notifications: any[]) {
+    return [...notifications].sort(
+      (a, b) => new Date(b.at).getTime() - new Date(a.at).getTime()
+    );
   }
 
   private addNotification(notification: any) {

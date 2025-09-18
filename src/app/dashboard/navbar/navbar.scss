@@ -3,3 +3,8 @@
   pointer-events: auto !important;
   margin-top: 0.5rem; /* so it drops down */
 }
+.notification-text{
+  max-width: 87%;
+  white-space: normal;
+  word-wrap: break-word;
+}

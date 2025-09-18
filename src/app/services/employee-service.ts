@@ -17,4 +17,8 @@ export class EmployeeService {
     formData.append('email', email);
     return this.http.post<ApiResponse>(environment.apiBaseUrl + '/employee/upload-profile', formData,{ withCredentials: true });
   }
+
+  getNotifications(email: string | undefined): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/employee/notifications?email=' + email,{ withCredentials: true });
+  }
 }
