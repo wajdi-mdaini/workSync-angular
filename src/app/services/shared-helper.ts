@@ -22,4 +22,9 @@ export class SharedHelper {
   spinnerHide(){
     this.spinner = false;
   }
+
+  isApisWithNoSpinner(url: string): boolean{
+    return url.includes("setnotificationsstatus") ||
+            url.includes('public/upload-profile')
+  }
 }

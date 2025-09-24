@@ -3,17 +3,26 @@ export interface User {
   password: string;
   firstname: string;
   lastname: string;
-  dateOfBirth: Date;
-  creationDate: Date;
-  lastPasswordResetDate: Date;
+  dateOfBirth: number;
+  creationDate: number;
+  lastPasswordResetDate: number;
   firstLogin: boolean;
   locked: boolean;
+  profilePictureUrl: string;
+  profilePicturePublicId: string;
   attempts: number;
   verificationCode: string;
   role: Role;
   team: Team;
   teams: Team[];
-  notifications: CustomNotification[];
+  notificationsFrom: CustomNotification[];
+  notificationsTo: CustomNotification[];
+  degree: string;
+  address: string;
+  city: string;
+  country: string;
+  postCode: string;
+  title: string;
 }
 export interface Team{
   id: number
@@ -40,10 +49,12 @@ export interface Company {
 }
 export interface CustomNotification {
   id: number;
-  title: string;
-  message: string;
+  titleLabel: string;
+  messageLabel: string;
   read: boolean;
-  user: User;
+  at: number;
+  from: User;
+  to: User;
 }
 export interface Branding {
   id: number;

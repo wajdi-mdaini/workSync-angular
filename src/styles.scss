@@ -1,4 +1,12 @@
 @use 'large' as *;
+.p-fileupload-advanced {
+  border: 0px solid transparent !important;
+}
+
+p-button .p-fileupload-choose-button{
+  background: #2D3887 !important;
+  border: 1px solid #2D3887;
+}
 a {
   all: unset;
   cursor: pointer;
@@ -30,7 +38,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 2000;
   backdrop-filter: blur(1px);
 }
 

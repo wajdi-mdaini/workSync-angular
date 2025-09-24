@@ -44,17 +44,21 @@
             <span
               *ngIf="(unreadCount$ | async) as count"
               class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
-              <div *ngIf="count > 0">{{ count }}</div>
+              <div class="notification-circle" *ngIf="count > 0">{{ count }}</div>
             </span>
           </a>
 
           <ul id="dropdownMenu" dropdown-menu
               class="text-sm transform-dropdown duration-250 min-w-44 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg bg-white px-2 py-4 text-left text-slate-500 opacity-0 transition-all">
-           {{ 'navbar_notification_total_number_title' | translate:{number: (notifications$ | async)?.length } }}
-            <div  style="overflow-y: auto;;overflow-x: hidden;height: 350px;">
-              <ng-container *ngFor="let notification of getSortedNotifications((notifications$ | async) || [])">
-                  <li *ngIf="!notification.read" class="relative mb-2">
-                  <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors" href="javascript:;">
+            <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;">
+              <li class="relative mb-2 items-center" style="text-align: center;">
+                {{ 'navbar_notification_total_number_title' | translate:{number: (unreadCount$ | async) } }} <hr>
+              </li>
+            </div>
+            <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;" *ngIf="(notifications$ | async)?.length || 0 > 0">
+              <ng-container *ngFor="let notification of notifications$ | async">
+                <li [ngClass]="{'unread-notification' : !notification.read}" class="relative mb-2">
+                  <a (click)="showDetailsDialog(notification)" class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors" href="javascript:;">
                     <div class="flex py-1">
                       <div class="my-auto">
                         <img [src]="notification.fromProfilePictureUrl" class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
@@ -74,9 +78,30 @@
                 </li>
               </ng-container>
             </div>
+            <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;" *ngIf="(notifications$ | async)?.length == 0">
+              <li class="relative mb-2 items-center" style="text-align: center;">
+                {{ 'navbar_notification_empty_list' | translate }}
+              </li>
+            </div>
+            <a style="text-align: center;"
+              class="block p-0 text-sm transition-all ease-nav-brand"
+              dropdown-trigger
+              aria-expanded="false"
+              (click)="showAllNotifications($event)">
+              {{ 'link_show_all_notifications_history' | translate }}
+            </a>
           </ul>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+<p-dialog *ngIf="showDetails"
+          [dismissableMask]="true"
+          [header]="'notification_details_title' | translate"
+          [modal]="true"
+          [(visible)]="showDetails"
+          [style]="{ width: '75rem' }"
+          [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true">
+  <app-notification-details [notificationId]="notificationDto?.id"></app-notification-details>
+</p-dialog>

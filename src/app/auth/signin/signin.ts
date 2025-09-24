@@ -68,7 +68,7 @@ export class Signin implements OnInit {
               if(user.firstLogin) this.sharedService.customNavigation('/auth/firstlogin','navbar_screen_title_dashboard');
               else this.sharedService.customNavigation('dashboard','navbar_screen_title_dashboard');
             }
-            else this.router.navigate(['home']);
+            else this.sharedService.customNavigation('home','navbar_screen_title_home');
         }
     }
     ,error: (err) => {

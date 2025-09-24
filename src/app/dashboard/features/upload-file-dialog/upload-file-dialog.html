@@ -1,0 +1,21 @@
+<p-dialog *ngIf="doChangeProfilePicture"
+          [dismissableMask]="true"
+          [header]="'edit_profile_picture_dialog' | translate"
+          [modal]="true"
+          [(visible)]="doChangeProfilePicture"
+          [style]="{ width: '45rem' }">
+  <div class="card">
+    <p-fileupload [withCredentials]="true"
+                  name="file"
+                  [url]="uploadPath"
+                  (onUpload)="onUpload($event)"
+                  [multiple]="false"
+                  accept="image/*"
+                  maxFileSize="1000000"
+                  mode="advanced">
+      <ng-template #empty>
+        <div>Drag and drop files to here to upload.</div>
+      </ng-template>
+    </p-fileupload>
+  </div>
+</p-dialog>

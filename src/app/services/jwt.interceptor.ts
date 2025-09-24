@@ -4,7 +4,8 @@ import {catchError, finalize, tap, throwError} from 'rxjs';
 import {SharedHelper} from './shared-helper';
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const sharedHelper = inject(SharedHelper);
-  sharedHelper.spinnerShow()
+  if(!sharedHelper.isApisWithNoSpinner(req.url))
+    sharedHelper.spinnerShow()
   return next(req).pipe(
     tap((event: any) => {
       if(event.status == 200)
@@ -21,4 +22,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
       sharedHelper.spinnerHide();
     })
   )
+
 };
+
+

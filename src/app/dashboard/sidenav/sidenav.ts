@@ -23,4 +23,7 @@ export class Sidenav implements OnInit{
     let div = document.getElementById("document-guide");
     !this.showGuide ? div?.style.setProperty('display', 'none') : div?.style.setProperty('display', 'flex');
   }
+  navigate(path: string){
+    this.sharedService.customNavigation(path,'navbar_screen_title_manage_profile')
+  }
 }

@@ -7,17 +7,20 @@ import {Client, Message} from '@stomp/stompjs';
 
 import {BehaviorSubject, map} from 'rxjs';
 import {environment} from '../../config/environment';
-import {AsyncPipe, NgFor, NgIf} from '@angular/common';
-import {EmployeeService} from '../../services/employee-service';
+import {AsyncPipe, CommonModule, NgFor, NgIf} from '@angular/common';
+import {PublicService} from '../../services/public-service';
 import {TimeAgoPipe} from '../../pipes/time-ago-pipe';
+import {Dialog} from 'primeng/dialog';
+import {NotificationDetails} from '../features/notification-details/notification-details';
 @Component({
   selector: 'app-navbar',
   imports: [
+    CommonModule,
     TranslatePipe,
     AsyncPipe,
-    NgFor,
     TimeAgoPipe,
-    NgIf
+    Dialog,
+    NotificationDetails
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
@@ -28,10 +31,12 @@ export class Navbar {
   notifications$ = this.notificationsSubject.asObservable();
   dropdownMenu?: any ;
   notificationShown: boolean = false ;
+  showDetails: boolean = false ;
   unreadCount$ = this.notifications$.pipe(
     map(list => (list ?? []).filter(n => !n.read).length)
   );
-  constructor(public sharedService: Shared,private ngZone: NgZone,private employeeService: EmployeeService) {
+  notificationDto?: NotificationDTO
+  constructor(public sharedService: Shared,private ngZone: NgZone,private publicService: PublicService) {
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS(environment.apiBaseUrl + '/ws'),
       reconnectDelay: 5000
@@ -50,7 +55,7 @@ export class Navbar {
   }
 
   getAllNotifications(){
-    this.employeeService.getNotifications(this.sharedService.principal?.email).subscribe({
+    this.publicService.getNotifications(this.sharedService.principal?.email,false).subscribe({
       next: (apiResponse: ApiResponse)  => {
         if(apiResponse.success){
           apiResponse.data.forEach((notification: NotificationDTO) => {
@@ -60,12 +65,6 @@ export class Navbar {
       },
       error: (e: any) => console.error(e)
     })
-  }
-
-  getSortedNotifications(notifications: any[]) {
-    return [...notifications].sort(
-      (a, b) => new Date(b.at).getTime() - new Date(a.at).getTime()
-    );
   }
 
   private addNotification(notification: any) {
@@ -84,6 +83,13 @@ export class Navbar {
     event.preventDefault();
     this.dropdownMenu.classList.toggle('show');
     this.notificationShown = !this.notificationShown;
+    if(!this.notificationShown) this.setNotifications();
+  }
+
+  private setNotificationsReadStatus() {
+    this.unreadCount$ = this.notifications$.pipe(
+      map(list => (list ?? []).filter(n => !n.read).length)
+    );
   }
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
@@ -93,8 +99,39 @@ export class Navbar {
         !target.closest('[dropdown-trigger]')) {
         this.dropdownMenu.classList.remove('show');
         this.notificationShown = false;
+        this.setNotifications();
       }
     }
   }
+  setNotifications() {
+    let current = this.notificationsSubject.value;
+    let unreadCount = 0
+    this.unreadCount$.subscribe( number => unreadCount = number)
+    if(current?.length > 0 && unreadCount > 0) {
+      this.publicService.setNotificationsReadStatus(this.notificationsSubject.value).subscribe({
+        next: (apiResponse: ApiResponse) => {
+          if(apiResponse.success){
 
+            this.notificationsSubject = new BehaviorSubject<any[]>([]);
+            current.forEach((notification: NotificationDTO) => {
+              notification.read = true
+            })
+            this.notificationsSubject.next([...current]);
+            this.notifications$ = this.notificationsSubject.asObservable();
+            this.setNotificationsReadStatus();
+          }
+        },
+        error: (e: any) => console.error(e)
+      })
+    }
+  }
+  showAllNotifications(event: Event){
+    this.toggleDropdown(event);
+    this.sharedService.customNavigation('dashboard//notifications','notifications_history_title');
+  }
+
+  showDetailsDialog(data: any){
+    this.notificationDto = data;
+    this.showDetails = true;
+  }
 }

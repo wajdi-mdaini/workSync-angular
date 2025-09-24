@@ -14,6 +14,9 @@
   "auth_forget_password_title" : "Forget your password?",
   "auth_forget_password_message" : "You will receive a verification code on this email address.",
   "auth_forget_password_server_down_error_message" : "We’re unable to complete this process right now because of a server issue. Please try again later.",
+  "auth_reset_password_title" : "Reset your password",
+  "auth_reset_password_wrong_current_password_message" : "The current password you entered is incorrect.",
+  "auth_reset_password_wrong_confirm_password_message" : "The confirmation password does not match the new password.",
   "auth_reset_password_required_length_message" : "At least 8 characters",
   "auth_reset_password_required_upper_message" : "At least one uppercase letter (A–Z)",
   "auth_reset_password_required_lower_message" : "At least one lowercase letter (a–z)",
@@ -33,11 +36,33 @@
   "sidebar_manage_employees_section": "Manage employees",
   "sidebar_manage_company_section": "Manage company",
   "navbar_screen_title_dashboard": "Dashboard",
+  "navbar_screen_title_home": "Home",
   "navbar_role_admin_title": "Administration",
   "navbar_role_manager_title": "Management",
+  "navbar_notification_empty_list": "No notifications",
+  "notifications_history_title": "Notifications history",
   "navbar_notification_total_number_title": "You have {{ number }} new notifications",
   "upload_profile_picture_success": "Your profile picture uploaded successfully.",
   "upload_profile_picture_failed": "Failed to upload your profile picture.",
+  "notification_details_title": "Notification details",
+  "notification_list_title": "Notification history",
+  "notification_filed_not_set_yet": " {{ field }} not set yet",
+  "navbar_screen_title_manage_profile": "Manage profile",
+  "manage_profile_edit_profile_details_title": "Edit Profile details",
+  "manage_profile_edit_user_information_title": "User Information",
+  "manage_profile_edit_first_name_title": "First name",
+  "manage_profile_edit_last_name_title": "Last name",
+  "manage_profile_edit_email_title": "Email address",
+  "manage_profile_edit_date_birth_title": "Date of birth",
+  "manage_profile_edit_contact_information_title": "Contact Information",
+  "manage_profile_edit_address_title": "Address",
+  "manage_profile_edit_city_title": "City",
+  "manage_profile_edit_country_title": "Country",
+  "manage_profile_edit_postal_code_title": "Postal code",
+  "manage_profile_edit_qualifications_title": "Qualifications",
+  "manage_profile_edit_degree_title": "Degree",
+  "manage_profile_edit_job_title_title": "Job title",
+  "manage_profile_edit_profile_picture_title": "Edit profile picture",
 
 
   "input_company_name_placeholder" : "Company name",
@@ -59,6 +84,7 @@
   "button_get_rest_password": "Reset your password",
   "button_need_guide": "Need guide?",
   "button_documentation": "Documentation",
+  "button_save": "Save changes",
 
 
   "link_sign_in": "Sign in",
@@ -69,9 +95,15 @@
   "link_company_details": "Company details",
   "link_dashboard": "Dashboard",
   "link_manage_employees": "Manage employees",
+  "link_show_all_notifications_history": "Show all history",
+  "link_edit_profile_picture": "Edit profile picture",
+
 
   "notification_new_joiner_title": "New Employee Joined",
   "notification_new_joiner_message": "<strong>{{ name }}</strong> has been added to your WorkSync team and completed their password setup.",
+
+
+  "edit_profile_picture_dialog": "Edit profile picture",
 
 
 

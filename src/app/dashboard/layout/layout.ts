@@ -14,7 +14,6 @@ import {Shared} from '../../services/shared';
   imports: [
     Sidenav,
     Navbar,
-    SummaryCards,
     Footer,
     Branding,
     RouterOutlet
@@ -23,10 +22,6 @@ import {Shared} from '../../services/shared';
   styleUrl: './layout.scss'
 })
 export class Layout {
-  constructor(private authService: AuthService,private sharedService: Shared) {
-    // authService.getProfile().subscribe({
-    //   next: (apiResponse: ApiResponse) => this.sharedService.principal = apiResponse.data.user,
-    //   error: () => console.log('Error getting profile'),
-    // });
+  constructor() {
   }
 }

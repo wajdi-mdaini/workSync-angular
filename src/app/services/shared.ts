@@ -86,8 +86,10 @@ export class Shared {
     localStorage.setItem('preferredLanguage',this.selectedLanguage.code);
   }
 
-  customNavigation(routerLink: string,screenTitle: string) {
+  customNavigation(routerLink: string,screenTitle?: string) {
+    if (screenTitle != null) {
+      this.navBarScreenTitleLabel = screenTitle;
+    }
     this.router.navigate([routerLink]);
-    this.navBarScreenTitleLabel = screenTitle;
   }
 }

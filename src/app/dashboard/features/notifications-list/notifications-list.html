@@ -1,0 +1,50 @@
+<div class="w-full px-6 py-6 mx-auto">
+
+  <div class="flex flex-wrap -mx-3">
+    <div class="flex-none w-full max-w-full px-3">
+      <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+        <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+          <h6 class="dark:text-white">{{ 'notification_list_title' | translate }}</h6>
+        </div>
+        <div class="flex-auto px-0 pt-0 pb-2">
+          <div class="p-0 overflow-x-auto ps">
+            <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+              <p-table
+                [value]="notifications"
+                [rowHover]="true"
+                [paginator]="true" [rows]="5"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                [rowsPerPageOptions]="[5, 10, 20]"
+              >
+                <ng-template #body let-notification>
+                  <tr (click)="showDetailsDialog(notification)">
+                    <td>
+                      <div [innerHTML]="notification.messageLabel | translate:{'name': notification.fromName}">
+                      </div>
+                    </td>
+                    <td>{{ notification.at | date:'short'}}</td>
+                    <td>
+                      <img class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl"
+                          [src]="notification.fromProfilePictureUrl">
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<p-dialog *ngIf="showDetails"
+  [dismissableMask]="true"
+  [header]="'notification_details_title' | translate"
+  [modal]="true"
+  [(visible)]="showDetails"
+  [style]="{ width: '75rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true">
+  <app-notification-details [notificationId]="notificationDto?.id"></app-notification-details>
+</p-dialog>
