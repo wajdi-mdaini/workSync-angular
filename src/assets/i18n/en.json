@@ -63,6 +63,7 @@
   "manage_profile_edit_degree_title": "Degree",
   "manage_profile_edit_job_title_title": "Job title",
   "manage_profile_edit_profile_picture_title": "Edit profile picture",
+  "manage_profile_edit_profile_done": "Your profile has been updated successfully.",
 
 
   "input_company_name_placeholder" : "Company name",
@@ -97,13 +98,14 @@
   "link_manage_employees": "Manage employees",
   "link_show_all_notifications_history": "Show all history",
   "link_edit_profile_picture": "Edit profile picture",
-
+  "link_view_order_chart": "View team order",
 
   "notification_new_joiner_title": "New Employee Joined",
   "notification_new_joiner_message": "<strong>{{ name }}</strong> has been added to your WorkSync team and completed their password setup.",
 
 
   "edit_profile_picture_dialog": "Edit profile picture",
+  "view_order_chart_dialog_title": "Your team order",
 
 
 

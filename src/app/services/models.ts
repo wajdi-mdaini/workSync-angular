@@ -98,5 +98,8 @@ export interface NotificationDTO {
   fromId: string;
   fromProfilePictureUrl: string;
   read: boolean;
-
+}
+export interface TeamDetailsResponse{
+  teamManager: User;
+  members: User[];
 }

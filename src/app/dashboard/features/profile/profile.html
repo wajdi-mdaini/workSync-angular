@@ -39,6 +39,10 @@
         <i class="fa fa-map-marker" aria-hidden="true"></i>
         {{ getUserFullAddress ? getUserFullAddress : 'notification_filed_not_set_yet' | translate:{'field': 'Full address'} }}
       </div>
+      <div class="mb-2 font-semibold leading-relaxed text-base dark:text-white/80 text-slate-700">
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+        {{ user?.email }}
+      </div>
       <div class="mt-6 mb-2 font-semibold leading-relaxed text-base dark:text-white/80 text-slate-700">
         <i class="fa fa-briefcase" aria-hidden="true"></i>
         {{  user?.role == Role.ADMIN ? 'Solution Admin' :
@@ -51,6 +55,7 @@
       </div>
     </div>
   </div>
+  <app-order-chart></app-order-chart>
 </div>
 <p-dialog *ngIf="showProfilePictureDialog"
           [dismissableMask]="true"
@@ -61,3 +66,4 @@
   <img style="width: 100% !important;height:100% !important;" (click)="showProfilePicture()"
        class="h-auto max-w-full border-2 border-white border-solid" [src]="user?.profilePictureUrl" alt="profile image">
 </p-dialog>
+

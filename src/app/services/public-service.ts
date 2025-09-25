@@ -30,11 +30,15 @@ export class PublicService {
     return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/getnotificationdetails?id=' + id,{ withCredentials: true });
   }
 
-  getProfileDetails(email: string): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/getprofiledetails?email=' + email,{ withCredentials: true });
+  setProfileDetails(body: any): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(environment.apiBaseUrl + '/public/editprofile', body ,{ withCredentials: true });
   }
 
   checkCurrentPassword(password: string, email: string | undefined): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/checkCurrentPassword?password=' + password + '&email=' + email,{ withCredentials: true });
+  }
+
+  getTeamMembers(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/teammembers',{ withCredentials: true });
   }
 }

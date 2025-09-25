@@ -1,0 +1,22 @@
+<p-dialog
+  [dismissableMask]="true"
+  [header]="'view_order_chart_dialog_title' | translate"
+  [modal]="true"
+  [(visible)]="doShowOrderChart"
+  [style]="{ width: '45rem' }"
+  (onHide)="hideDialog()">
+  <div class="card flex justify-center overflow-x-auto">
+    <p-organization-chart [value]="data" [collapsible]="true">
+      <ng-template let-node pTemplate="person">
+        <div [ngClass]="{'p-organizationchart-node-selected': currentUser?.email == node.data.email}" class="flex items-center gap-2 p-2 rounded-lg shadow bg-white ">
+          <img [src]="node.data.image" class="w-10 h-10 rounded-full" />
+          <div>
+            <div class="font-semibold text-sm" *ngIf="node.data.teamName">{{ node.data.teamName }}</div>
+            <div class="font-semibold text-sm">{{ node.data.name }}</div>
+            <div class="text-xs text-gray-500">{{ node.data.title }}</div>
+          </div>
+        </div>
+      </ng-template>
+    </p-organization-chart>
+  </div>
+</p-dialog>

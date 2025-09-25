@@ -4,12 +4,14 @@ import {Profile} from '../profile/profile';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Shared} from '../../../services/shared';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {User} from '../../../services/models';
+import {ApiResponse, User} from '../../../services/models';
 import {DatePicker} from 'primeng/datepicker';
 import {Dialog} from 'primeng/dialog';
 import {NotificationDetails} from '../notification-details/notification-details';
 import {ResetPassword} from '../../../auth/reset-password/reset-password';
 import {UploadFileDialog} from '../upload-file-dialog/upload-file-dialog';
+import {OrderChart} from '../order-chart/order-chart';
+import {PublicService} from '../../../services/public-service';
 
 @Component({
   selector: 'app-manage-profile',
@@ -22,6 +24,7 @@ import {UploadFileDialog} from '../upload-file-dialog/upload-file-dialog';
     Dialog,
     ResetPassword,
     UploadFileDialog,
+    OrderChart,
   ],
   templateUrl: './manage-profile.html',
   styleUrl: './manage-profile.scss'
@@ -32,7 +35,8 @@ export class ManageProfile implements OnInit {
   showSaveButton: boolean = false;
   doChangePassword: boolean = false;
   doChangeProfilePicture: boolean = false;
-  constructor(public sharedService: Shared, private formBuilder: FormBuilder) {
+  doShowOrderChart: boolean = false;
+  constructor(public sharedService: Shared, private formBuilder: FormBuilder,private publicService: PublicService) {
   }
 
   ngOnInit(): void {
@@ -44,7 +48,7 @@ export class ManageProfile implements OnInit {
 
   initForms(){
     this.formGroup = this.formBuilder.group({
-      email: [this.user.email, [Validators.required, Validators.email]],
+      email: [{ value: this.user.email, disabled: true }, [Validators.required, Validators.email]],
       firstname: [this.user.firstname, [Validators.required]],
       lastname: [this.user.lastname, [Validators.required]],
       dateOfBirth: [new Date(this.user.dateOfBirth), [Validators.required]],
@@ -88,5 +92,22 @@ export class ManageProfile implements OnInit {
       let oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
       return lastReset > oneHourAgo;
     } else return false;
+  }
+
+  saveChanges(){
+    if(this.formGroup.invalid) return;
+
+    this.publicService.setProfileDetails(this.formGroup.value).subscribe({
+      next: (apiResponse: ApiResponse) => {
+        if(apiResponse.success){
+          if(this.sharedService.principal?.email == apiResponse.data.email) {
+            this.sharedService.principal = apiResponse.data;
+            this.showSaveButton = !this.isDeeplyEquals();
+          }
+        }
+      },
+      error: (err)=> { console.error(err)}
+    })
+
   }
 }

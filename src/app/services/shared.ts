@@ -55,17 +55,8 @@ export class Shared {
 
     });
 
-    this.initNavBarScreenTitleLabel()
   }
 
-  initNavBarScreenTitleLabel(){
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: NavigationEnd) => {
-        let currentUrl = event.urlAfterRedirects;
-        currentUrl.includes('dashboard') ? this.navBarScreenTitleLabel = 'navbar_screen_title_dashboard' : null;
-      });
-  }
   logout(){
     this.authService.logout().subscribe(success => {
       this.router.navigate(['/auth/login']);

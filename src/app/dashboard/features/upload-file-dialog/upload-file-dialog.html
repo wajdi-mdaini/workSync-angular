@@ -1,9 +1,10 @@
-<p-dialog *ngIf="doChangeProfilePicture"
+<p-dialog
           [dismissableMask]="true"
           [header]="'edit_profile_picture_dialog' | translate"
           [modal]="true"
           [(visible)]="doChangeProfilePicture"
-          [style]="{ width: '45rem' }">
+          [style]="{ width: '45rem' }"
+          (onHide)="hideDialog()">
   <div class="card">
     <p-fileupload [withCredentials]="true"
                   name="file"

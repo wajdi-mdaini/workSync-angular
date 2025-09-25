@@ -11,7 +11,7 @@ import {User} from '../../../services/models';
 @Component({
   selector: 'app-upload-file-dialog',
   imports: [FileUploadModule,
-    ButtonModule, Dialog, NgIf, TranslatePipe
+    ButtonModule, Dialog, TranslatePipe
   ],
   templateUrl: './upload-file-dialog.html',
   styleUrl: './upload-file-dialog.scss'
@@ -34,4 +34,8 @@ export class UploadFileDialog {
       this.newUser.emit(response);
     }
   }
+  hideDialog(){
+    this.doChangeProfilePictureChange.emit(false);
+  }
+  protected readonly alert = alert;
 }
