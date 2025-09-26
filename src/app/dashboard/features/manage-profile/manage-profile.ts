@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, NgIf} from '@angular/common';
+import {DatePipe, NgClass, NgIf} from '@angular/common';
 import {Profile} from '../profile/profile';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Shared} from '../../../services/shared';
@@ -25,11 +25,13 @@ import {PublicService} from '../../../services/public-service';
     ResetPassword,
     UploadFileDialog,
     OrderChart,
+    NgClass,
   ],
   templateUrl: './manage-profile.html',
   styleUrl: './manage-profile.scss'
 })
 export class ManageProfile implements OnInit {
+  isSaveButtonClicked: boolean = false;
   formGroup: FormGroup = new FormGroup({});
   user!: User;
   showSaveButton: boolean = false;
@@ -95,6 +97,7 @@ export class ManageProfile implements OnInit {
   }
 
   saveChanges(){
+    this.isSaveButtonClicked = true
     if(this.formGroup.invalid) return;
 
     this.publicService.setProfileDetails(this.formGroup.value).subscribe({

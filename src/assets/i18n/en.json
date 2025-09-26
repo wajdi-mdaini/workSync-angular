@@ -64,7 +64,8 @@
   "manage_profile_edit_job_title_title": "Job title",
   "manage_profile_edit_profile_picture_title": "Edit profile picture",
   "manage_profile_edit_profile_done": "Your profile has been updated successfully.",
-
+  "manage_profile_edit_profile_required_fields_error": "Please fill in all fields.",
+  "navbar_screen_title_manage_company": "Manage company",
 
   "input_company_name_placeholder" : "Company name",
   "input_first_name_placeholder" : "Name",

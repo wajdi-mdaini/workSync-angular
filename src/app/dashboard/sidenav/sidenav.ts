@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Shared} from '../../services/shared';
 import {TranslatePipe} from '@ngx-translate/core';
 import {NavigationEnd, Router} from '@angular/router';
@@ -12,11 +12,16 @@ import {filter} from 'rxjs';
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.scss'
 })
-export class Sidenav implements OnInit{
+export class Sidenav implements OnInit,AfterViewInit {
   showGuide: boolean = false;
   selectedMenuLinkClasses: string[] = ['bg-blue-500/13', 'font-semibold', 'text-slate-700']
   constructor(public sharedService: Shared,private router: Router) {
   }
+
+  ngAfterViewInit(): void {
+      let div = document.getElementById("document-guide");
+      div?.style.setProperty('display', 'none');
+    }
 
   ngOnInit(): void {
     document.getElementById("document-guide")?.style?.setProperty('display', 'none');
@@ -29,10 +34,12 @@ export class Sidenav implements OnInit{
         if(currentUrl.endsWith('dashboard')) {
           this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_dashboard';
           this.doHighlight("dashboard-link")
-        }
-        if(currentUrl.endsWith('profile')) {
+        }else if(currentUrl.endsWith('profile')) {
           this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_profile';
           this.doHighlight("profile-link");
+        }else if(currentUrl.endsWith('company')) {
+          this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_company';
+          this.doHighlight("company-link");
         }
   }
   toggleGuide(){
@@ -44,6 +51,7 @@ export class Sidenav implements OnInit{
     this.clearHighlight();
     if(screenTitle == 'navbar_screen_title_dashboard') this.doHighlight("dashboard-link")
     else if (screenTitle == 'navbar_screen_title_manage_profile') this.doHighlight("profile-link");
+    else if (screenTitle == 'navbar_screen_title_manage_company') this.doHighlight("company-link");
     this.sharedService.customNavigation(path,screenTitle)
   }
   doHighlight(elementId: string){

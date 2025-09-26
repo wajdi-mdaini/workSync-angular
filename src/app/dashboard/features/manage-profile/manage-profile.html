@@ -29,17 +29,19 @@
         <form [formGroup]="formGroup" (keyup)="setUserDetails()">
         <div class="flex-auto p-6">
           <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'manage_profile_edit_user_information_title' | translate }}</p>
+          <label *ngIf="isSaveButtonClicked && formGroup.invalid" class="inline-block mb-2 ml-1 text-xs text-slate-700 dark:text-white/80" style="color: rgb(245, 75, 74) !important;">{{ 'manage_profile_edit_profile_required_fields_error' | translate}}</label>
+
           <div class="flex flex-wrap -mx-3">
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
               <div class="mb-4">
                 <label for="first-name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_first_name_title' | translate}}</label>
-                <input type="text" name="first-name" formControlName="firstname" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <input type="text" name="first-name" formControlName="firstname" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('firstname')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
               <div class="mb-4">
                 <label for="last-name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_last_name_title' | translate}}</label>
-                <input type="text" name="last-name" formControlName="lastname" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <input type="text" name="last-name" formControlName="lastname" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('lastname')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
@@ -51,7 +53,7 @@
             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
               <div class="mb-4">
                 <label for="date-of-birth" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_date_birth_title' | translate}}</label>
-                <p-datePicker formControlName="dateOfBirth" dateFormat="dd.mm.yy" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"/>
+                <p-datePicker formControlName="dateOfBirth" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('dateOfBirth')?.errors?.['required']}" dateFormat="dd.mm.yy" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"/>
               </div>
             </div>
 
@@ -64,25 +66,25 @@
             <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
               <div class="mb-4">
                 <label for="address" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_address_title' | translate}}</label>
-                <input type="text" name="address" formControlName="address" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <input type="text" name="address" formControlName="address" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('address')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
               <div class="mb-4">
                 <label for="city" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_city_title' | translate}}</label>
-                <input type="text" name="city" formControlName="city" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <input type="text" name="city" formControlName="city" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('city')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
               <div class="mb-4">
                 <label for="country" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_country_title' | translate}}</label>
-                <input type="text" name="country" formControlName="country" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <input type="text" name="country" formControlName="country" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('country')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
               <div class="mb-4">
                 <label for="postal-code" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_postal_code_title' | translate}}</label>
-                <input type="text" name="postal-code" formControlName="postCode" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <input type="text" name="postal-code" formControlName="postCode" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('postCode')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
               </div>
             </div>
           </div>
@@ -93,13 +95,13 @@
             <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
               <div class="mb-4">
                 <label for="degree" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_degree_title' | translate}}</label>
-                <input type="text" name="degree" formControlName="degree" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <input type="text" name="degree" formControlName="degree" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('degree')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
               </div>
             </div>
             <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
               <div class="mb-4">
                 <label for="title" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_job_title_title' | translate}}</label>
-                <input type="text" name="title" formControlName="title" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                <input type="text" name="title" formControlName="title" [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('title')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
               </div>
             </div>
           </div>
