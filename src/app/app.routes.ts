@@ -10,6 +10,7 @@ import {NotificationsList} from './dashboard/features/notifications-list/notific
 import {Profile} from './dashboard/features/profile/profile';
 import {NotificationDetails} from './dashboard/features/notification-details/notification-details';
 import {ManageProfile} from './dashboard/features/manage-profile/manage-profile';
+import {ManageCompany} from './dashboard/features/manage-company/manage-company';
 
 
 export const routes: Routes = [
@@ -27,6 +28,7 @@ export const routes: Routes = [
       {path: '', component: WelcomePage},
       {path: 'notifications', component: NotificationsList},
       {path: 'profile', component: ManageProfile},
+      {path: 'company', component: ManageCompany},
     ]}
 
 

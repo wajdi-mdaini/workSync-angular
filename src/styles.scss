@@ -76,4 +76,9 @@ input:disabled {
 .border-green-500 {
   border-color: rgb(45 206 137) !important;
 }
-
+.p-textarea:enabled:focus{
+  border-color: inherit !important;
+}
+.p-iftalabel:has(input:focus) label, .p-iftalabel:has(input:-webkit-autofill) label, .p-iftalabel:has(textarea:focus) label, .p-iftalabel:has(.p-inputwrapper-focus) label {
+  color: inherit !important;
+}
