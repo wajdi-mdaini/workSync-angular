@@ -33,7 +33,7 @@
   "auth_signup_used_email_error_message" : "This email address already used.",
   "auth_signup_used_company_name_error_message" : "This company already exist.",
   "auth_profile_expired_error_message": "Oops! We couldn’t load your profile. Please sign in again.",
-  "sidebar_manage_employees_section": "Manage employees",
+  "sidebar_manage_users_section": "Manage users",
   "sidebar_manage_company_section": "Manage company",
   "navbar_screen_title_dashboard": "Dashboard",
   "navbar_screen_title_home": "Home",
@@ -48,6 +48,7 @@
   "notification_list_title": "Notification history",
   "notification_filed_not_set_yet": " {{ field }} not set yet",
   "navbar_screen_title_manage_profile": "Manage profile",
+  "navbar_screen_title_manage_teams": "Manage teams",
   "manage_profile_edit_profile_details_title": "Edit Profile details",
   "manage_profile_edit_user_information_title": "User Information",
   "manage_profile_edit_first_name_title": "First name*",
@@ -77,6 +78,15 @@
   "manage_company_edit_address_title": "Company address*",
   "manage_company_used_name_warning": "Company name already used",
   "manage_company_edit_success_message": "Your company details has been successfully edited.",
+  "manage_teams_default_header": "Manage your company teams",
+  "manage_teams_edit_team_header": "Edit team",
+  "manage_teams_edit_team_name": "Team name",
+  "manage_teams_edit_team_manager": "Team manager",
+  "manage_teams_edit_team_description": "Team description",
+  "manage_teams_edit_team_employees": "Manage team employees",
+  "manage_teams_edit_team_empty_target_users_list": "There is no users assigned to this team.",
+  "manage_teams_edit_team_manager_placeholder": "Select a manager",
+  "manage_teams_edit_done": "Team updated successfully.",
 
   "input_company_name_placeholder" : "Company name",
   "input_first_name_placeholder" : "Name",
@@ -85,6 +95,10 @@
   "input_password_placeholder" : "Password",
   "input_password_confirm_placeholder" : "Confirm password",
   "input_current_password_placeholder" : "Current password",
+  "input_picklist_source_placeholder" : "Search by email",
+  "input_picklist_target_placeholder" : "Search by email",
+  "input_picklist_source_header" : "Choose one of this users to add to this team",
+  "input_picklist_target_header" : "List of users in this team",
 
   "error_status_0": "Your requests could not reach the server. This may be due to your internet connection or the server being unavailable.",
   "error_status_403": "You are not authorized to perform this action.",
@@ -107,7 +121,10 @@
   "link_profile": "Profile",
   "link_company_details": "Company details",
   "link_dashboard": "Dashboard",
-  "link_manage_employees": "Manage employees",
+  "link_manage_teams": "Manage teams",
+  "link_add_team": "Add team",
+  "link_cancel_editing": "Cancel editing",
+  "link_save_editing": "Save",
   "link_show_all_notifications_history": "Show all history",
   "link_edit_profile_picture": "Edit profile picture",
   "link_view_order_chart": "View team order",
@@ -118,6 +135,10 @@
 
   "edit_profile_picture_dialog": "Edit profile picture",
   "view_order_chart_dialog_title": "Your team order",
+
+
+  "table_teams_teams_name": "Team name",
+  "table_teams_teams_description": "Team description",
 
 
 

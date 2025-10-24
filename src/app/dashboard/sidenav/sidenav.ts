@@ -20,11 +20,10 @@ export class Sidenav implements OnInit,AfterViewInit {
 
   ngAfterViewInit(): void {
       let div = document.getElementById("document-guide");
-      div?.style.setProperty('display', 'none');
+      if(div) div.style.setProperty("display", "none", "important");
     }
 
   ngOnInit(): void {
-    document.getElementById("document-guide")?.style?.setProperty('display', 'none');
     this.initNavBarScreenTitleLabel()
     }
 
@@ -40,6 +39,9 @@ export class Sidenav implements OnInit,AfterViewInit {
         }else if(currentUrl.endsWith('company')) {
           this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_company';
           this.doHighlight("company-link");
+        }else if(currentUrl.endsWith('teams')) {
+          this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_teams';
+          this.doHighlight("teams-link");
         }
   }
   toggleGuide(){
@@ -52,6 +54,7 @@ export class Sidenav implements OnInit,AfterViewInit {
     if(screenTitle == 'navbar_screen_title_dashboard') this.doHighlight("dashboard-link")
     else if (screenTitle == 'navbar_screen_title_manage_profile') this.doHighlight("profile-link");
     else if (screenTitle == 'navbar_screen_title_manage_company') this.doHighlight("company-link");
+    else if (screenTitle == 'navbar_screen_title_manage_teams') this.doHighlight("teams-link");
     this.sharedService.customNavigation(path,screenTitle)
   }
   doHighlight(elementId: string){

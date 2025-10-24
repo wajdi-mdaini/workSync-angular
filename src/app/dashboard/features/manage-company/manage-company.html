@@ -5,7 +5,7 @@
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
           <div class="flex items-center">
             <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'manage_company_edit_company_information_title' | translate }}</p>
-            <button *ngIf="showSaveButton" (click)="saveChanges()" type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85 bg-blue-500">{{ 'button_save' | translate}}</button>
+            <button [disabled]="!showSaveButton" (click)="saveChanges()" type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85 bg-blue-500">{{ 'button_save' | translate}}</button>
           </div>
         </div>
 

@@ -1,0 +1,28 @@
+<div class="w-full p-6 mx-auto" xmlns="http://www.w3.org/1999/html">
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border">
+        <p-table
+          [value]="teams"
+          [rowHover]="true"
+          [paginator]="true" [rows]="5"
+          [tableStyle]="{ 'min-width': '50rem' }"
+          [rowsPerPageOptions]="[5, 10, 20]"
+        >
+          <ng-template #header>
+            <tr>
+              <th style="width:30%">{{ 'table_teams_teams_name' | translate }}</th>
+              <th style="width:70%">{{ 'table_teams_teams_description' | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-team>
+            <tr class="cursor-pointer" (click)="onclickToEdit(team)">
+              <td>{{ team.name }}</td>
+              <td>{{ team.description }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

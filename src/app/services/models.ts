@@ -103,3 +103,9 @@ export interface TeamDetailsResponse{
   teamManager: User;
   members: User[];
 }
+export interface EditTeamRequest{
+  remainingUsers: string[];
+  teamMembers: string[];
+  managerEmail: string;
+  team: Team;
+}

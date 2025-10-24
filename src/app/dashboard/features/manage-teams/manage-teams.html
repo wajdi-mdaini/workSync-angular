@@ -1,0 +1,33 @@
+<div class="w-full p-6 mx-auto" xmlns="http://www.w3.org/1999/html">
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+        <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+          <div class="flex items-center">
+            <p class="mb-0 dark:text-white/80">{{ screenHeaderLabel | translate}}</p>
+            <a *ngIf="showAddLink" class="ml-auto dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand flex items-center whitespace-nowrap px-4 transition-colors">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <span class="duration-300 opacity-100 pointer-events-none ease">{{ "link_add_team" | translate}}</span>
+            </a>
+            <a (click)="doSave()" *ngIf="showCancelEditingLink" class="ml-auto dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand flex items-center whitespace-nowrap px-4 transition-colors">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="fa fa-database" aria-hidden="true"></i>
+              </div>
+              <span class="duration-300 opacity-100 pointer-events-none ease">{{ "link_save_editing" | translate}}</span>
+            </a>
+            <a (click)="cancelEditing()" *ngIf="showCancelEditingLink" class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand flex items-center whitespace-nowrap px-4 transition-colors">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </div>
+              <span class="duration-300 opacity-100 pointer-events-none ease">{{ "link_cancel_editing" | translate}}</span>
+            </a>
+          </div>
+        </div>
+        <app-teams-list *ngIf="showTeamsList" [teams]="teams" (editTeam)="editTeam($event)"></app-teams-list>
+        <app-team-form *ngIf="showTeamForm" [team]="teamToEdit"></app-team-form>
+      </div>
+    </div>
+  </div>
+</div>
