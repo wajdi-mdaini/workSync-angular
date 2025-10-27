@@ -79,14 +79,22 @@
   "manage_company_used_name_warning": "Company name already used",
   "manage_company_edit_success_message": "Your company details has been successfully edited.",
   "manage_teams_default_header": "Manage your company teams",
+  "manage_teams_add_team_header": "Add new team",
   "manage_teams_edit_team_header": "Edit team",
   "manage_teams_edit_team_name": "Team name",
   "manage_teams_edit_team_manager": "Team manager",
   "manage_teams_edit_team_description": "Team description",
   "manage_teams_edit_team_employees": "Manage team employees",
   "manage_teams_edit_team_empty_target_users_list": "There is no users assigned to this team.",
+  "manage_teams_edit_team_empty_source_users_list": "There is no users to assign to this team.",
   "manage_teams_edit_team_manager_placeholder": "Select a manager",
   "manage_teams_edit_done": "Team updated successfully.",
+  "manage_teams_add_done": "Team added successfully.",
+  "manage_teams_delete_team_confirm_dialog_message": "Deleting this team will downgrade its manager, unassign all members, and notify them (Deleting this team cannot be undone). Do you want to continue?",
+  "manage_teams_delete_team_confirm_dialog_header": "Delete team",
+  "manage_teams_delete_team_success_deleting_message": "Team deleted. The manager was downgraded to employee, all members were unassigned, and everyone was notified.",
+  "manage_teams_delete_team_notification_title": "Team deletion notice",
+  "manage_teams_delete_team_notification_message": "The team you were part of has been deleted by <strong> {{ name }} </strong>. Your manager privileges have been revoked (if any), and you are no longer assigned to any team.",
 
   "input_company_name_placeholder" : "Company name",
   "input_first_name_placeholder" : "Name",
@@ -97,7 +105,7 @@
   "input_current_password_placeholder" : "Current password",
   "input_picklist_source_placeholder" : "Search by email",
   "input_picklist_target_placeholder" : "Search by email",
-  "input_picklist_source_header" : "Choose one of this users to add to this team",
+  "input_picklist_source_header" : "Choose users to add to team",
   "input_picklist_target_header" : "List of users in this team",
 
   "error_status_0": "Your requests could not reach the server. This may be due to your internet connection or the server being unavailable.",
@@ -112,6 +120,8 @@
   "button_need_guide": "Need guide?",
   "button_documentation": "Documentation",
   "button_save": "Save changes",
+  "button_cancel": "Cancel",
+  "button_delete": "Delete",
 
 
   "link_sign_in": "Sign in",
@@ -124,7 +134,9 @@
   "link_manage_teams": "Manage teams",
   "link_add_team": "Add team",
   "link_cancel_editing": "Cancel editing",
+  "link_cancel_adding": "Cancel adding",
   "link_save_editing": "Save",
+  "link_save_adding": "Save",
   "link_show_all_notifications_history": "Show all history",
   "link_edit_profile_picture": "Edit profile picture",
   "link_view_order_chart": "View team order",
@@ -139,6 +151,7 @@
 
   "table_teams_teams_name": "Team name",
   "table_teams_teams_description": "Team description",
+  "table_search_input_placeholder": "Type to search",
 
 
 

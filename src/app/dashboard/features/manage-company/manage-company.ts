@@ -24,7 +24,7 @@ import {CompanyService} from '../../../services/company-service';
 })
 export class ManageCompany implements OnInit {
   isSaveButtonClicked: boolean = false;
-  showSaveButton: boolean = false;
+  disableSaveButton: boolean = true;
   formGroup: FormGroup = new FormGroup({});
   company!: Company;
 
@@ -35,7 +35,7 @@ export class ManageCompany implements OnInit {
 
   ngOnInit(): void {
     if(this.sharedService.principal) {
-      this.company = structuredClone(this.sharedService.principal.team.company);
+      this.company = structuredClone(this.sharedService.company);
       this.initForms();
     }
   }
@@ -58,11 +58,11 @@ export class ManageCompany implements OnInit {
     this.company.email = this.formGroup.controls['email'].value == '' ? null : this.formGroup.controls['email'].value;
     this.company.phone = this.formGroup.controls['phone'].value == '' ? null : this.formGroup.controls['phone'].value;
     this.company.website = this.formGroup.controls['website'].value == '' ? null : this.formGroup.controls['website'].value;
-    this.showSaveButton = !this.isDeeplyEquals();
+    this.disableSaveButton = this.isDeeplyEquals();
   }
 
   isDeeplyEquals(): boolean{
-    return JSON.stringify(this.company) === JSON.stringify(this.sharedService.principal?.team.company);
+    return JSON.stringify(this.company) === JSON.stringify(this.sharedService.company);
   }
 
   saveChanges(){
@@ -73,8 +73,12 @@ export class ManageCompany implements OnInit {
     this.companyService.changeCompanyDetails(this.company).subscribe({
       next: (apiResponse: ApiResponse) => {
         if(apiResponse.success)
-          if(this.sharedService.principal)
-            this.sharedService.principal.team.company = apiResponse.data;
+          if(this.sharedService.principal) {
+            if(this.sharedService.principal.team)
+              this.sharedService.principal.team.company = apiResponse.data;
+            this.sharedService.company = apiResponse.data;
+            this.disableSaveButton = true;
+          }
       },
       error: (error: Error) => {console.error(error);}
     })

@@ -2,19 +2,67 @@
   <div class="flex flex-wrap -mx-3">
     <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
       <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border">
+
+
+        <p-pickList [source]="allUsers"
+                    [target]="targetUsers"
+                    [dragdrop]="false"
+                    [responsive]="true"
+                    [sourceHeader]=" 'input_picklist_source_header' | translate "
+                    [targetHeader]=" ('input_picklist_target_header' | translate) + '*' "
+                    filterBy="email"
+                    (onMoveToTarget)="moveToTarget($event)"
+                    (onMoveAllToTarget)="moveToTarget($event)"
+                    (onMoveToSource)="moveToSource($event)"
+                    (onMoveAllToSource)="moveToSource($event)"
+                    [showSourceControls]="false"
+                    [showTargetControls]="false"
+                    [sourceFilterPlaceholder]="'input_picklist_source_placeholder' | translate "
+                    [targetFilterPlaceholder]=" 'input_picklist_target_placeholder' | translate "
+                    breakpoint="1400px"
+                    scrollHeight="20rem">
+          <ng-template let-user let-selected="selected" #item>
+            <div class="flex flex-wrap p-1 items-center gap-4 w-full">
+              <img
+                class="w-12 shrink-0 rounded"
+                [src]=" user.profilePictureUrl "
+                [alt]="user.firstname + ' ' + user.lastname"
+              />
+              <div class="flex-1 flex flex-col">
+                <span class="font-medium text-sm">
+                  {{ user.firstname }} {{ user.lastname }}
+                  <i class="fa fa-star" aria-hidden="true" *ngIf="user.role == Role.MANAGER"></i></span>
+                <span
+                  [ngClass]="{
+                        'text-surface-500': !selected,
+                        'dark:text-surface-400': !selected,
+                        'text-inherit': selected,
+                    }"
+                >{{ user.email }}</span
+                >
+              </div>
+              <span class="font-bold sm:ml-8">{{ user.creationDate | date:'dd-MM-yyyy' }}</span>
+            </div>
+          </ng-template>
+        </p-pickList>
+
+        <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+        <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'manage_teams_edit_team_employees' | translate }}</p>
+
+
         <form  [formGroup]="formGroup" >
           <div class="flex-auto p-6">
             <div class="flex flex-wrap -mx-3">
               <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                 <div class="mb-4">
-                  <label for="name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_teams_edit_team_name' | translate}}</label>
+                  <label for="name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_teams_edit_team_name' | translate}}*</label>
                   <input type="text" name="name" formControlName="name" [ngClass]="{ 'border-red-500': formGroup.get('name')?.errors?.['required']}" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
                 </div>
               </div>
 
               <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                 <div class="mb-4">
-                  <label for="name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_teams_edit_team_manager' | translate}}</label>
+                  <label for="name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_teams_edit_team_manager' | translate}}*</label>
                     <p-select [options]="targetUsers" formControlName="manager"
                               optionLabel="email"
                               [filter]="true"
@@ -49,56 +97,13 @@
                 <div class="mb-4">
                   <p-ifta-label>
                     <textarea class="w-100" pTextarea id="description" formControlName="description" rows="5" cols="30" style="resize: none"></textarea>
-                    <label for="description">{{ 'manage_teams_edit_team_description' | translate}}</label>
+                    <label for="description">{{ 'manage_teams_edit_team_description' | translate}}*</label>
                   </p-ifta-label>
                 </div>
               </div>
             </div>
           </div>
         </form>
-        <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
-        <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'manage_teams_edit_team_employees' | translate }}</p>
-
-        <p-pickList [source]="allUsers"
-                    [target]="targetUsers"
-                    [dragdrop]="false"
-                    [responsive]="true"
-                    [sourceHeader]=" 'input_picklist_source_header' | translate "
-                    [targetHeader]=" 'input_picklist_target_header' | translate "
-                    filterBy="email"
-                    (onMoveToTarget)="moveToTarget($event)"
-                    (onMoveAllToTarget)="moveToTarget($event)"
-                    (onMoveToSource)="moveToSource($event)"
-                    (onMoveAllToSource)="moveToSource($event)"
-                    [showSourceControls]="false"
-                    [showTargetControls]="false"
-                    [sourceFilterPlaceholder]="'input_picklist_source_placeholder' | translate "
-                    [targetFilterPlaceholder]=" 'input_picklist_target_placeholder' | translate "
-                    breakpoint="1400px"
-                    scrollHeight="20rem">
-          <ng-template let-user let-selected="selected" #item>
-            <div class="flex flex-wrap p-1 items-center gap-4 w-full">
-              <img
-                class="w-12 shrink-0 rounded"
-                [src]=" user.profilePictureUrl "
-                [alt]="user.firstname + ' ' + user.lastname"
-              />
-              <div class="flex-1 flex flex-col">
-                <span class="font-medium text-sm">{{ user.firstname }} {{ user.lastname }}</span>
-                <span
-                  [ngClass]="{
-                        'text-surface-500': !selected,
-                        'dark:text-surface-400': !selected,
-                        'text-inherit': selected,
-                    }"
-                >{{ user.email }}</span
-                >
-              </div>
-              <span class="font-bold sm:ml-8">{{ user.creationDate | date:'dd-MM-yyyy' }}</span>
-            </div>
-          </ng-template>
-        </p-pickList>
-
       </div>
     </div>
   </div>

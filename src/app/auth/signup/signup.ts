@@ -50,9 +50,7 @@ export class Signup {
     }
     this.authService.signUp(signUpRequest).subscribe({
       next: (result: ApiResponse)=> {
-        if(result.success){
-          this.router.navigate(['/auth/login']);
-        }
+        this.router.navigate(['/auth/login']);
       },
       error: ()=> {
         console.error('Error signing up');

@@ -59,7 +59,8 @@ export class Navbar {
       next: (apiResponse: ApiResponse)  => {
         if(apiResponse.success){
           apiResponse.data.forEach((notification: NotificationDTO) => {
-            this.addNotification(notification);
+            let current = this.notificationsSubject.value;
+            this.notificationsSubject.next([notification, ...current]);
           })
         }
       },
@@ -68,8 +69,10 @@ export class Navbar {
   }
 
   private addNotification(notification: any) {
-    const current = this.notificationsSubject.value;
-    this.notificationsSubject.next([notification, ...current]);
+    if(notification.toEmail == this.sharedService.principal?.email) {
+      const current = this.notificationsSubject.value;
+      this.notificationsSubject.next([notification, ...current]);
+    }
   }
 
   get getRole(): string {

@@ -34,7 +34,7 @@ export class OrderChart implements OnInit {
             expanded: true,
             type: 'person',
             data: {
-              teamName:  this.currentUser?.team.name,
+              teamName:  this.currentUser?.teams != null &&  this.currentUser?.teams.length > 0 ? this.currentUser?.team.name : '',
               image: teamManager?.profilePictureUrl,
               name: teamManager?.firstname + ' ' + teamManager?.lastname,
               title: teamManager?.role,
@@ -42,7 +42,11 @@ export class OrderChart implements OnInit {
             },
           }
           let treeChildren: any[] = [];
-          teamMembers.forEach((member: User) => {
+          if(! teamMembers && this.currentUser) {
+            teamMembers = []
+            teamMembers.push(this.currentUser)
+          }
+          teamMembers?.forEach((member: User) => {
             if(member.email != teamManager.email) {
               let row: any = {
                 expanded: true,

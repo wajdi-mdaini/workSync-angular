@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {TranslatePipe} from '@ngx-translate/core';
 import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../services/auth-service';
-import {ApiResponse, LoginRequest, Role, User} from '../../services/models';
+import {ApiResponse, Company, LoginRequest, Role, User} from '../../services/models';
 import {NgClass, NgIf} from '@angular/common';
 import {Shared} from '../../services/shared';
 
@@ -60,9 +60,11 @@ export class Signin implements OnInit {
       next: (apiResponse: ApiResponse) => {
         if (apiResponse.success){
           let user: User = apiResponse.data?.user;
+          let company: Company = apiResponse.data?.company;
             this.blockedUser = false;
             this.wrongCritical = false;
             this.sharedService.principal = user;
+            this.sharedService.company = company;
             this.setStoredEmail();
             if(user.role == Role.ADMIN || user.role == Role.MANAGER){
               if(user.firstLogin) this.sharedService.customNavigation('/auth/firstlogin','navbar_screen_title_dashboard');

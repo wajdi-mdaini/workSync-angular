@@ -10,6 +10,13 @@ p-button .p-fileupload-choose-button{
 .p-organizationchart-node-selected{
   color: #2D3887 !important;
 }
+
+.p-listbox .p-listbox-list .p-listbox-option.p-listbox-option-selected,
+.p-datatable-filter-constraint-selected,
+.p-paginator-page.p-paginator-page-selected{
+  background: rgba(84, 93, 152, 0.13) !important;
+  color: #2D3887 !important;
+}
 a {
   all: unset;
   cursor: pointer;
@@ -81,4 +88,7 @@ input:disabled {
 }
 .p-iftalabel:has(input:focus) label, .p-iftalabel:has(input:-webkit-autofill) label, .p-iftalabel:has(textarea:focus) label, .p-iftalabel:has(.p-inputwrapper-focus) label {
   color: inherit !important;
+}
+.p-confirmdialog{
+  max-width: 30% !important;
 }

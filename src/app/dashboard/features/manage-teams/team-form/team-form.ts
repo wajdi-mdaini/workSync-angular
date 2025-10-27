@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ApiResponse, Team, User} from '../../../../services/models';
+import {ApiResponse, Role, Team, User} from '../../../../services/models';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {DatePipe, NgClass} from '@angular/common';
+import {DatePipe, NgClass, NgIf} from '@angular/common';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {IftaLabel} from 'primeng/iftalabel';
 import {Textarea} from 'primeng/textarea';
@@ -22,7 +22,8 @@ import {SelectModule} from 'primeng/select';
     Textarea,
     PickList,
     DatePipe,
-    SelectModule
+    SelectModule,
+    NgIf
   ],
   templateUrl: './team-form.html',
   styleUrl: './team-form.scss'
@@ -50,29 +51,33 @@ export class TeamForm implements OnInit {
         if(data.success){
           this.allUsers = data.data;
           if(this.allUsers == null || this.allUsers.length == 0){
-            this.messageService.add({ severity: 'warn', summary: 'Warning', detail: this.translate.instant('manage_teams_edit_team_empty_target_users_list'), life: 3000});
+            this.messageService.add({ severity: 'warn', summary: 'Warning', detail: this.translate.instant('manage_teams_edit_team_empty_source_users_list'), life: 3000});
             this.router.navigate(['/dashboard/teams'])
           }
         }
       },
       error: error => {console.log(error)}
     })
-    this.publicService.getTeamMembers().subscribe({
-      next: (data: ApiResponse) => {
-        if(data.success){
-          this.targetUsers = data.data.members;
-          if(this.team){
-            this.targetUsers.forEach(user => {
-              user.teams.forEach(team => {
-                if(team.id == this.team?.id)
-                  this.formGroup.get('manager')?.setValue(user)
+    if(this.team) {
+      this.managerService.getTeamMembers(this.team.id).subscribe({
+        next: (data: ApiResponse) => {
+          if (data.success) {
+            this.targetUsers = data.data;
+            if (this.team) {
+              this.targetUsers.forEach(user => {
+                user.teams.forEach(team => {
+                  if (team.id == this.team?.id)
+                    this.formGroup.get('manager')?.setValue(user)
+                })
               })
-            })
+            }
           }
+        },
+        error: error => {
+          console.log(error)
         }
-      },
-      error: error => {console.log(error)}
-    })
+      })
+    }
   }
 
   initForms(){
@@ -115,4 +120,6 @@ export class TeamForm implements OnInit {
         this.formGroup.get('manager')?.setValue(null);
     });
   }
+
+  protected readonly Role = Role;
 }

@@ -68,6 +68,7 @@ export interface SharedSettings {
 }
 export interface LoginResponse {
   user: User;
+  company: Company;
 }
 export interface LoginRequest{
   email: string;
@@ -108,4 +109,9 @@ export interface EditTeamRequest{
   teamMembers: string[];
   managerEmail: string;
   team: Team;
+}
+export interface AddTeamRequest{
+  memberEmails: string[];
+  team: Team;
+  managerEmail: string;
 }

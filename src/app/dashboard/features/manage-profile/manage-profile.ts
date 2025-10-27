@@ -53,7 +53,7 @@ export class ManageProfile implements OnInit {
       email: [{ value: this.user.email, disabled: true }, [Validators.required, Validators.email]],
       firstname: [this.user.firstname, [Validators.required]],
       lastname: [this.user.lastname, [Validators.required]],
-      dateOfBirth: [new Date(this.user.dateOfBirth), [Validators.required]],
+      dateOfBirth: [this.user?.dateOfBirth ? new Date(this.user.dateOfBirth): new Date(new Date().setFullYear(new Date().getFullYear() - 20)), [Validators.required]],
       degree: [this.user.degree, [Validators.required]],
       title: [this.user.title, [Validators.required]],
       address: [this.user.address, [Validators.required]],
@@ -67,7 +67,7 @@ export class ManageProfile implements OnInit {
     this.user.email = this.formGroup.controls['email'].value == '' ? null : this.formGroup.controls['email'].value;
     this.user.firstname = this.formGroup.controls['firstname'].value == '' ? null : this.formGroup.controls['firstname'].value;
     this.user.lastname = this.formGroup.controls['lastname'].value == '' ? null : this.formGroup.controls['lastname'].value;
-    this.user.dateOfBirth = new Date(this.formGroup.controls['dateOfBirth'].value).getTime();
+    this.user.dateOfBirth = new Date(this.formGroup.controls['dateOfBirth'].value)?.getTime();
     this.user.degree = this.formGroup.controls['degree'].value == '' ? null : this.formGroup.controls['degree'].value;
     this.user.title = this.formGroup.controls['title'].value == '' ? null : this.formGroup.controls['title'].value;
     this.user.address = this.formGroup.controls['address'].value == '' ? null : this.formGroup.controls['address'].value;
@@ -100,7 +100,7 @@ export class ManageProfile implements OnInit {
     this.isSaveButtonClicked = true
     if(this.formGroup.invalid) return;
 
-    this.publicService.setProfileDetails(this.formGroup.value).subscribe({
+    this.publicService.setProfileDetails( this.formGroup.getRawValue() ).subscribe({
       next: (apiResponse: ApiResponse) => {
         if(apiResponse.success){
           if(this.sharedService.principal?.email == apiResponse.data.email) {

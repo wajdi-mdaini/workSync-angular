@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {RouterOutlet} from '@angular/router';
-import {ApiResponse, Company, EditTeamRequest, Team, User} from '../../../services/models';
+import {AddTeamRequest, ApiResponse, Company, EditTeamRequest, Team, User} from '../../../services/models';
 import {CompanyService} from '../../../services/company-service';
 import {Shared} from '../../../services/shared';
 import {TeamsList} from './teams-list/teams-list';
@@ -27,8 +27,10 @@ export class ManageTeams {
   teams: Team[] = []
   showTeamsList: boolean = true;
   showAddLink: boolean = true;
+  addTeam: boolean = false;
   showTeamForm: boolean = false;
   showCancelEditingLink: boolean = false;
+  showCancelAddingLink: boolean = false;
   teamToEdit?: Team;
   constructor(private companyService: CompanyService,
               private managerService: ManagerService,
@@ -38,7 +40,7 @@ export class ManageTeams {
     this.getAllTeams()
   }
   getAllTeams(){
-    let company: Company | undefined = this.sharedService.principal?.team.company
+    let company: Company = this.sharedService.company
     if(company) {
       this.managerService.getCompanyTeams(company).subscribe({
         next: (apiResponse: ApiResponse) => {
@@ -53,7 +55,9 @@ export class ManageTeams {
     this.showTeamsList = false;
     this.showAddLink = false;
     this.showTeamForm = true;
+    this.addTeam = false;
     this.showCancelEditingLink = true
+    this.showCancelAddingLink = false
     this.screenHeaderLabel = 'manage_teams_edit_team_header'
   }
   cancelEditing(){
@@ -62,7 +66,21 @@ export class ManageTeams {
     this.showAddLink = true;
     this.showTeamForm = false;
     this.showCancelEditingLink = false
+    this.showCancelAddingLink = false
+    this.addTeam = false
     this.screenHeaderLabel = 'manage_teams_default_header'
+  }
+  addNewTeam(){
+    this.showTeamsList = false;
+    this.showAddLink = false;
+    this.showTeamForm = false;
+    this.showCancelEditingLink = false
+    this.showCancelAddingLink = true
+    this.addTeam = true;
+    this.screenHeaderLabel = 'manage_teams_add_team_header'
+  }
+  cancelAdding(){
+    this.cancelEditing();
   }
 
   doSave(){
@@ -102,5 +120,35 @@ export class ManageTeams {
     let emails: string[] = [];
     users.forEach(user => emails.push(user.email))
     return emails;
+  }
+
+  doSaveAdding(){
+    if(this.teamForm.formGroup.invalid) return
+    if(this.teamForm.targetUsers == null || this.teamForm.targetUsers.length == 0){
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: this.translate.instant('manage_teams_edit_team_empty_target_users_list'), life: 3000});
+      return;
+    }
+    if(this.sharedService.principal){
+      let newTeam: Team = {} as Team;
+      newTeam.manager = this.teamForm.formGroup.get('manager')?.value;
+      newTeam.description = this.teamForm.formGroup.get('description')?.value;
+      newTeam.name = this.teamForm.formGroup.get('name')?.value;
+      newTeam.company = this.sharedService.company;
+      newTeam.members = this.teamForm.targetUsers;
+      let addTeamRequest: AddTeamRequest = {
+        memberEmails: this.getEmailList(this.teamForm.targetUsers),
+        team: newTeam,
+        managerEmail: this.teamForm.formGroup.get('manager')?.value?.email
+      };
+      this.managerService.addTeam(addTeamRequest).subscribe({
+        next: (apiResponse: ApiResponse) => {
+          if (apiResponse.success) {
+            this.teams.push(apiResponse.data);
+            this.cancelAdding();
+          }
+        },
+        error: err => console.log(err)
+      })
+    }
   }
 }

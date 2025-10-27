@@ -25,9 +25,6 @@ export class AuthService {
   loginCheck(): Observable<any> {
     return this.http.get(environment.apiBaseUrl+'/auth/login/check',{ withCredentials: true });
   }
-  getProfile(): Observable<any> {
-    return this.http.get(environment.apiBaseUrl+'/auth/profile',{ withCredentials: true });
-  }
   getSharedSettings(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(environment.apiBaseUrl+'/auth/settings')
   }

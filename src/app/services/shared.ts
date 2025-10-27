@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {ApiResponse, SharedSettings, User} from './models';
+import {ApiResponse, Company, SharedSettings, User} from './models';
 import {SharedHelper} from './shared-helper';
 import {MessageService} from 'primeng/api';
 import {NavigationEnd, Router} from '@angular/router';
@@ -16,6 +16,7 @@ export class Shared {
     verificationCodeExpireIn: 0
   };
   principal?: User;
+  company!: Company;
   selectedLanguage: any;
   translationLanguagesList: any[] = [
     { name: 'English', code: 'en' },
