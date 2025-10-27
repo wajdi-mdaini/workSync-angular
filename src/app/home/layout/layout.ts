@@ -10,7 +10,4 @@ import {Shared} from '../../services/shared';
 export class Layout {
   constructor(private sharedService: Shared) {
   }
-  logout(){
-    this.sharedService.logout();
-  }
 }

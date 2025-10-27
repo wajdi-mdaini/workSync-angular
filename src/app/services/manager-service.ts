@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AddTeamRequest, ApiResponse, Company, EditTeamRequest, Team} from './models';
+import {AddTeamRequest, ApiResponse, Company, EditTeamRequest, GetUsersRequest, Team} from './models';
 import {Observable} from 'rxjs';
 import {environment} from '../config/environment';
 
@@ -10,8 +10,8 @@ import {environment} from '../config/environment';
 export class ManagerService {
   constructor(private http: HttpClient) {}
 
-  getAllEmployees(): Observable<ApiResponse>{
-    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/management/getallemployees',{withCredentials: true});
+  getAllEmployees(companyId: number): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/management/getallemployees?id=' + companyId ,{withCredentials: true});
   }
 
   getCompanyTeams(company: Company): Observable<ApiResponse>{
@@ -30,7 +30,14 @@ export class ManagerService {
     return this.http.put<ApiResponse>(environment.apiBaseUrl + '/management/addteam',addTeamRequest,{withCredentials: true});
   }
 
+  getUsers(getUsersRequest: GetUsersRequest): Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(environment.apiBaseUrl + '/management/getUsers',getUsersRequest,{withCredentials: true});
+  }
+
   deleteTeam(teamId: number): Observable<ApiResponse>{
     return this.http.delete<ApiResponse>(environment.apiBaseUrl + '/management/deleteteam?id='+ teamId,{withCredentials: true});
+  }
+  getManagerList(companyId: number): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/management/getmanagerlist?id='+ companyId,{withCredentials: true});
   }
 }

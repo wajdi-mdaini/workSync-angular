@@ -115,3 +115,7 @@ export interface AddTeamRequest{
   team: Team;
   managerEmail: string;
 }
+export interface GetUsersRequest{
+  user: User;
+  company: Company;
+}

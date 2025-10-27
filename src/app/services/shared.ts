@@ -15,7 +15,7 @@ export class Shared {
     verificationCodeLength: 0,
     verificationCodeExpireIn: 0
   };
-  principal?: User;
+  principal!: User;
   company!: Company;
   selectedLanguage: any;
   translationLanguagesList: any[] = [

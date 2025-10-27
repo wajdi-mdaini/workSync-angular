@@ -11,6 +11,7 @@ import {ManagerService} from '../../../../services/manager-service';
 import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
 import {SelectModule} from 'primeng/select';
+import {Shared} from '../../../../services/shared';
 
 @Component({
   selector: 'app-team-form',
@@ -33,20 +34,55 @@ export class TeamForm implements OnInit {
   formGroup: FormGroup = new FormGroup({});
   allUsers: User[] = [];
   targetUsers: User[] = [];
+  managerList: User[] = [];
   constructor(private formBuilder: FormBuilder,
               private managerService: ManagerService,
               private messageService: MessageService,
               private router: Router,
               private translate: TranslateService,
-              private publicService: PublicService) {}
+              private sharedService: Shared) {}
 
   ngOnInit() {
     this.initForms()
     this.initPicklistData();
+    this.getManagerList();
+  }
+
+  getManagerList(){
+    this.managerService.getManagerList(this.sharedService.company.id).subscribe({
+      next: (apiResponse: ApiResponse) => {
+        if(apiResponse.success)
+          this.managerList = apiResponse.data;
+      },
+      error: err => {console.log(err)}
+    })
+  }
+
+  get managers(){
+    let list = structuredClone(this.managerList);
+    list.push(...this.targetUsers);
+
+    // remove duplicates by 'email'
+    const unique = list.filter(
+      (item, index, self) => index === self.findIndex(u => u.email === item.email)
+    );
+    return unique;
+  }
+
+  addToTargetList(){
+    let selectedManager: User = this.formGroup.get('manager')?.value
+    if(selectedManager){
+      let result: boolean = true;
+      this.targetUsers.forEach(user => {
+        if(user.email === selectedManager.email) result = false;
+      })
+      if(result)
+      this.moveToTarget({items:[selectedManager]});
+    }
   }
 
   initPicklistData(){
-    this.managerService.getAllEmployees().subscribe({
+    this.managerService.getAllEmployees(this.sharedService.company.id).subscribe({
       next: (data: ApiResponse) => {
         if(data.success){
           this.allUsers = data.data;

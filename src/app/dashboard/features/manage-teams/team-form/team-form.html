@@ -30,8 +30,8 @@
               />
               <div class="flex-1 flex flex-col">
                 <span class="font-medium text-sm">
-                  {{ user.firstname }} {{ user.lastname }}
-                  <i class="fa fa-star" aria-hidden="true" *ngIf="user.role == Role.MANAGER"></i></span>
+                  {{ user.firstname }} {{ user.lastname }} <b style="font-size: 8px;"> {{ user.role }}</b>
+                  <i class="fa fa-star" aria-hidden="true" *ngIf="user.role == Role.MANAGER" style="font-size: 10px;"></i></span>
                 <span
                   [ngClass]="{
                         'text-surface-500': !selected,
@@ -63,11 +63,12 @@
               <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                 <div class="mb-4">
                   <label for="name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_teams_edit_team_manager' | translate}}*</label>
-                    <p-select [options]="targetUsers" formControlName="manager"
+                    <p-select [options]="managers" formControlName="manager"
                               optionLabel="email"
                               [filter]="true"
                               filterBy="email"
                               [showClear]="true"
+                              (onChange)="addToTargetList()"
                               [placeholder]=" 'manage_teams_edit_team_manager_placeholder' | translate"
                               [ngClass]="{ 'border-red-500': formGroup.get('manager')?.errors?.['required']}"
                               class="w-full md:w-56">
@@ -77,7 +78,7 @@
                             [src]=" selectedUser.profilePictureUrl "
                             [alt]="selectedUser.firstname + ' ' + selectedUser.lastname"
                             style="width: 18px" />
-                          <div [title]="selectedUser.email">{{ selectedUser.firstname }} {{ selectedUser.lastname }}</div>
+                          <div [title]="selectedUser.email">{{ selectedUser.firstname }} {{ selectedUser.lastname }} <b style="font-size: 10px;"> {{ selectedUser.role }}</b></div>
                         </div>
                       </ng-template>
                       <ng-template let-user #item>
@@ -86,7 +87,7 @@
                             [src]=" user.profilePictureUrl "
                             [alt]="user.firstname + ' ' + user.lastname"
                             style="width: 18px" />
-                          <div [title]="user.email">{{ user.firstname }} {{ user.lastname }}</div>
+                          <div [title]="user.email">{{ user.firstname }} {{ user.lastname }} <b style="font-size: 10px;"> {{ user.role }}</b></div>
                         </div>
                       </ng-template>
                     </p-select>

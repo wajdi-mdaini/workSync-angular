@@ -42,6 +42,9 @@ export class Sidenav implements OnInit,AfterViewInit {
         }else if(currentUrl.endsWith('teams')) {
           this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_teams';
           this.doHighlight("teams-link");
+        }else if(currentUrl.endsWith('users')) {
+          this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_users';
+          this.doHighlight("users-link");
         }
   }
   toggleGuide(){
@@ -55,6 +58,7 @@ export class Sidenav implements OnInit,AfterViewInit {
     else if (screenTitle == 'navbar_screen_title_manage_profile') this.doHighlight("profile-link");
     else if (screenTitle == 'navbar_screen_title_manage_company') this.doHighlight("company-link");
     else if (screenTitle == 'navbar_screen_title_manage_teams') this.doHighlight("teams-link");
+    else if (screenTitle == 'navbar_screen_title_manage_users') this.doHighlight("users-link");
     this.sharedService.customNavigation(path,screenTitle)
   }
   doHighlight(elementId: string){
@@ -65,5 +69,8 @@ export class Sidenav implements OnInit,AfterViewInit {
     for(let link of links){
       link.classList.remove(this.selectedMenuLinkClasses[0],this.selectedMenuLinkClasses[1],this.selectedMenuLinkClasses[2]);
     }
+  }
+  doLogout(){
+    this.sharedService.logout();
   }
 }

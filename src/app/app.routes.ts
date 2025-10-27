@@ -13,6 +13,7 @@ import {ManageProfile} from './dashboard/features/manage-profile/manage-profile'
 import {ManageCompany} from './dashboard/features/manage-company/manage-company';
 import {ManageTeams} from './dashboard/features/manage-teams/manage-teams';
 import {TeamsList} from './dashboard/features/manage-teams/teams-list/teams-list';
+import {ManageUsers} from './dashboard/features/manage-users/manage-users';
 
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
       {path: 'profile', component: ManageProfile},
       {path: 'company', component: ManageCompany},
       {path: 'teams', component: ManageTeams},
+      {path: 'users', component: ManageUsers},
     ]}
 
 
