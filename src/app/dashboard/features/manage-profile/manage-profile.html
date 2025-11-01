@@ -127,4 +127,4 @@
 </p-dialog>
 
 <app-upload-file-dialog (newUser)="setPrincipal($event)" [(doChangeProfilePicture)]="doChangeProfilePicture"></app-upload-file-dialog>
-<app-order-chart *ngIf="doShowOrderChart" [(doShowOrderChart)]="doShowOrderChart"></app-order-chart>
+<app-order-chart [user]="sharedService.principal" *ngIf="doShowOrderChart" [(doShowOrderChart)]="doShowOrderChart"></app-order-chart>

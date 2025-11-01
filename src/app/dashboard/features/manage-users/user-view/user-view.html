@@ -1,0 +1,17 @@
+<p-dialog
+  [dismissableMask]="true"
+  [header]="'manage_users_view_user_details_dialog_header' | translate"
+  [modal]="true"
+  [(visible)]="showViewDialog"
+  [style]="{ width: '45rem' }"
+  (onHide)="hideDialog()">
+  <a *ngIf="user.team" (click)="doShowOrderChart()" style="padding-left: 0px !important;" class="ml-auto dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap px-4 transition-colors">
+    <div style="padding-left: 0px;padding-right: 0px;" class="ml-auto flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+      <i class="fa fa-eye" aria-hidden="true"></i>
+    </div>
+    <span class="duration-300 opacity-100 pointer-events-none ease">{{ "link_view_order_chart" | translate}}</span>
+  </a>
+  <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0 md:mt-0" *ngIf="user">
+          <app-profile [(user)]="user"></app-profile>
+  </div>
+</p-dialog>

@@ -38,7 +38,7 @@ export class PublicService {
     return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/checkCurrentPassword?password=' + password + '&email=' + email,{ withCredentials: true });
   }
 
-  getTeamMembers(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/teammembers',{ withCredentials: true });
+  getTeamMembers(userEmail: string | undefined): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/teammembers?id='+ userEmail,{ withCredentials: true });
   }
 }

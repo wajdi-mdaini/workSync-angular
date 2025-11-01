@@ -3,8 +3,8 @@ import { OrganizationChartModule } from 'primeng/organizationchart';
 import {TreeNode} from 'primeng/api';
 import {Shared} from '../../../services/shared';
 import {PublicService} from '../../../services/public-service';
-import {ApiResponse, User} from '../../../services/models';
-import {CommonModule} from '@angular/common';
+import {ApiResponse, TeamDetailsResponse, User} from '../../../services/models';
+import {CommonModule, NgFor} from '@angular/common';
 import {Dialog} from 'primeng/dialog';
 import {TranslatePipe} from '@ngx-translate/core';
 @Component({
@@ -18,54 +18,58 @@ import {TranslatePipe} from '@ngx-translate/core';
 export class OrderChart implements OnInit {
   @Input() doShowOrderChart: boolean = false;
   @Output() doShowOrderChartChange= new EventEmitter<boolean>;
-  currentUser?: User
+  @Input() user?: User
   data: TreeNode[] = []
+  teamsAndMembers: TeamDetailsResponse[] = [];
   constructor(private sharedService: Shared,private publicService: PublicService) {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.sharedService.principal
-    this.publicService.getTeamMembers().subscribe({
+    this.getTeamsMembersList()
+  }
+  getTeamsMembersList(){
+    this.publicService.getTeamMembers(this.user?.email).subscribe({
       next: (apiResponse: ApiResponse) => {
         if(apiResponse.success){
-          let teamManager: User = apiResponse.data.teamManager;
-          let teamMembers: User[] = apiResponse.data.members;
-          let tree: any = {
-            expanded: true,
-            type: 'person',
-            data: {
-              teamName:  this.currentUser?.teams != null &&  this.currentUser?.teams.length > 0 ? this.currentUser?.team.name : '',
-              image: teamManager?.profilePictureUrl,
-              name: teamManager?.firstname + ' ' + teamManager?.lastname,
-              title: teamManager?.role,
-              email: teamManager?.email,
-            },
-          }
-          let treeChildren: any[] = [];
-          if(! teamMembers && this.currentUser) {
-            teamMembers = []
-            teamMembers.push(this.currentUser)
-          }
-          teamMembers?.forEach((member: User) => {
-            if(member.email != teamManager.email) {
-              let row: any = {
-                expanded: true,
-                type: 'person',
-                data: {
-                  image: member?.profilePictureUrl,
-                  name: member?.firstname + ' ' + member?.lastname,
-                  title: member?.role,
-                  email: member?.email
-                },
-                children: []
-              }
-              treeChildren.push(row)
-            }
-          })
-          tree.children = treeChildren;
-          this.data.push(tree);
-        }
+          this.teamsAndMembers = apiResponse.data;
 
+          this.teamsAndMembers.forEach(teamDetailsResponse => {
+            let teamManager: User = teamDetailsResponse?.manager;
+            let teamMembers: User[] = teamDetailsResponse?.members;
+
+            let tree: any = {
+              expanded: true,
+              type: 'person',
+              data: {
+                teamName: teamDetailsResponse?.team?.name,
+                image: teamManager?.profilePictureUrl,
+                name: teamManager?.firstname + ' ' + teamManager?.lastname,
+                title: teamManager?.role,
+                email: teamManager?.email,
+              },
+            };
+            let treeChildren: any[] = [];
+            teamMembers?.forEach((member: User) => {
+              if(member.email != teamManager.email) {
+                let row: any = {
+                  expanded: true,
+                  type: 'person',
+                  data: {
+                    image: member?.profilePictureUrl,
+                    name: member?.firstname + ' ' + member?.lastname,
+                    title: member?.role,
+                    email: member?.email
+                  },
+                  children: []
+                }
+                treeChildren.push(row)
+              }
+            });
+            tree.children = treeChildren;
+            this.data.push(tree);
+          })
+
+        }
       },
       error: (error) => {console.log(error)}
     })

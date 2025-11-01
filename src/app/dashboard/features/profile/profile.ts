@@ -10,8 +10,7 @@ import {OrderChart} from '../order-chart/order-chart';
   imports: [
     TranslatePipe,
     Dialog,
-    NgIf,
-    OrderChart
+    NgIf
   ],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'

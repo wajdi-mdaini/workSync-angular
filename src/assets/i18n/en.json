@@ -56,6 +56,7 @@
   "manage_profile_edit_last_name_title": "Last name*",
   "manage_profile_edit_email_title": "Email address*",
   "manage_profile_edit_date_birth_title": "Date of birth*",
+  "manage_profile_edit_team_title": "Team*",
   "manage_profile_edit_contact_information_title": "Contact Information",
   "manage_profile_edit_address_title": "Address*",
   "manage_profile_edit_city_title": "City*",
@@ -96,6 +97,21 @@
   "manage_teams_delete_team_success_deleting_message": "Team deleted. The manager was downgraded to employee, all members were unassigned, and everyone was notified.",
   "manage_teams_delete_team_notification_title": "Team deletion notice",
   "manage_teams_delete_team_notification_message": "The team you were part of has been deleted by <strong> {{ name }} </strong>. Your manager privileges have been revoked (if any), and you are no longer assigned to any team.",
+  "manage_users_default_header": "Manage users ( {{number}} users )",
+  "manage_users_edit_user_dialog_header": "Edit user",
+  "manage_users_add_user_dialog_header": "Add user",
+  "manage_users_view_user_details_dialog_header": "View user details",
+  "manage_users_delete_user_confirm_dialog_header": "Delete user",
+  "manage_users_users_list_no_team": "No team",
+  "manage_users_users_list_team_name": "Team : {{teamName}} - {{teamDescription}}",
+  "manage_users_delete_user_confirm_dialog_message": "Are you sure you want to delete this user? Deleting this user will permanently remove all their notifications, documents, and personal details.",
+  "manage_users_delete_user_done": "User deleted successfully",
+
+  "preview_eye_title": "Preview",
+  "edit_pencil_title": "Edit",
+  "delete_trash_title": "Delete",
+
+
 
   "input_company_name_placeholder" : "Company name",
   "input_first_name_placeholder" : "Name",
@@ -121,6 +137,7 @@
   "button_need_guide": "Need guide?",
   "button_documentation": "Documentation",
   "button_save": "Save changes",
+  "button_add_user": "Save user",
   "button_cancel": "Cancel",
   "button_delete": "Delete",
 
@@ -142,9 +159,12 @@
   "link_show_all_notifications_history": "Show all history",
   "link_edit_profile_picture": "Edit profile picture",
   "link_view_order_chart": "View team order",
+  "link_add_user": "Add new user",
 
   "notification_new_joiner_title": "New Employee Joined",
   "notification_new_joiner_message": "<strong>{{ name }}</strong> has been added to your WorkSync team and completed their password setup.",
+  "notification_edit_user_title": "Your personal details has been updated",
+  "notification_edit_user_message": "<strong>{{ name }}</strong> has made changes to your personal details.",
 
 
   "edit_profile_picture_dialog": "Edit profile picture",
@@ -154,6 +174,8 @@
   "table_teams_teams_name": "Team name",
   "table_teams_teams_description": "Team description",
   "table_search_input_placeholder": "Type to search",
+  "table_users_user_name": "User name",
+  "table_users_user_email": "User email",
 
 
 

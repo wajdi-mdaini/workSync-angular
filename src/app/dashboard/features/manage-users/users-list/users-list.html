@@ -1,0 +1,60 @@
+<div class="w-full p-6 mx-auto" xmlns="http://www.w3.org/1999/html">
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border">
+        <p-table
+          [value]="users"
+          [rowHover]="true"
+          [paginator]="true" [rows]="5"
+          [tableStyle]="{ 'min-width': '50rem' }"
+          [rowsPerPageOptions]="[5, 10, 20]"
+        >
+          <ng-template #header>
+            <tr>
+              <th style="width:40%">{{ 'table_users_user_name' | translate }}</th>
+              <th style="width:30%">{{ 'table_users_user_email' | translate }}</th>
+              <th style="width:auto"></th>
+              <th></th>
+            </tr>
+            <tr>
+              <th>
+                <p-columnFilter type="text" field="firstname" [placeholder]=" 'table_search_input_placeholder' | translate" ariaLabel="Filter Name" filterOn="input"></p-columnFilter>
+              </th>
+              <th>
+                <p-columnFilter type="text" field="email" [placeholder]=" 'table_search_input_placeholder' | translate" ariaLabel="Filter email" filterOn="input"></p-columnFilter>
+              </th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-user>
+            <tr class="cursor-pointer" [title]="user?.team?.name == null ? ('manage_users_users_list_no_team' | translate): ('manage_users_users_list_team_name' | translate : {teamName : user?.team?.name,teamDescription: user?.team?.description})">
+              <td (click)="null" style="--cell-width: 40%;">
+                <div class="flex items-center gap-2">
+                  <img
+                    [src]=" user.profilePictureUrl "
+                    [alt]="user.firstname + ' ' + user.lastname"
+                    style="width: 55px;border-radius: 50%;object-fit: cover;" />
+                  <div>{{ user.firstname }} {{ user.lastname }} <b style="font-size: 10px;"> {{ user.role }}</b></div>
+                </div>
+              </td>
+              <td (click)="null" style="--cell-width: 30%;">{{ user.email }}</td>
+              <td style="text-align: right;">
+                <a (click)="doView(user)"  title="{{ 'preview_eye_title' | translate }}" style="color:#2dcebd ;padding-right: 10px;font-size: 12px;">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </a>
+                <a (click)="doEdit(user)" title="{{ 'edit_pencil_title' | translate }}" style="color:#fb9940; padding-right: 10px;font-size: 12px;">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a (click)="doConfirmDelete($event,user)" title="{{ 'delete_trash_title' | translate }}" style="color: #f5563f;font-size: 12px;">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-confirmDialog />
+      </div>
+    </div>
+  </div>
+</div>

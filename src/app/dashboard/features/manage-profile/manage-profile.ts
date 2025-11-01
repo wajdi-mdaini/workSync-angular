@@ -67,7 +67,8 @@ export class ManageProfile implements OnInit {
     this.user.email = this.formGroup.controls['email'].value == '' ? null : this.formGroup.controls['email'].value;
     this.user.firstname = this.formGroup.controls['firstname'].value == '' ? null : this.formGroup.controls['firstname'].value;
     this.user.lastname = this.formGroup.controls['lastname'].value == '' ? null : this.formGroup.controls['lastname'].value;
-    this.user.dateOfBirth = new Date(this.formGroup.controls['dateOfBirth'].value)?.getTime();
+    if(new Date(this.formGroup.controls['dateOfBirth'].value)?.getTime() != 1130544570328)
+      this.user.dateOfBirth = new Date(this.formGroup.controls['dateOfBirth'].value)?.getTime();
     this.user.degree = this.formGroup.controls['degree'].value == '' ? null : this.formGroup.controls['degree'].value;
     this.user.title = this.formGroup.controls['title'].value == '' ? null : this.formGroup.controls['title'].value;
     this.user.address = this.formGroup.controls['address'].value == '' ? null : this.formGroup.controls['address'].value;

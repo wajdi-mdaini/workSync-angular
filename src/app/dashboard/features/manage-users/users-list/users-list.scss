@@ -1,0 +1,7 @@
+td {
+  max-width: var(--cell-width, 40%);
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

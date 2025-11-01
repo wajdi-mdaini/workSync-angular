@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AddTeamRequest, ApiResponse, Company, EditTeamRequest, GetUsersRequest, Team} from './models';
+import {AddTeamRequest, ApiResponse, Company, EditTeamRequest, EditUserRequest, GetUsersRequest, Team} from './models';
 import {Observable} from 'rxjs';
 import {environment} from '../config/environment';
 
@@ -37,7 +37,16 @@ export class ManagerService {
   deleteTeam(teamId: number): Observable<ApiResponse>{
     return this.http.delete<ApiResponse>(environment.apiBaseUrl + '/management/deleteteam?id='+ teamId,{withCredentials: true});
   }
+
   getManagerList(companyId: number): Observable<ApiResponse>{
     return this.http.get<ApiResponse>(environment.apiBaseUrl + '/management/getmanagerlist?id='+ companyId,{withCredentials: true});
+  }
+
+  editUser(editUserRequest: EditUserRequest): Observable<ApiResponse>{
+    return this.http.put<ApiResponse>(environment.apiBaseUrl + '/management/edituser',editUserRequest,{withCredentials: true});
+  }
+
+  deleteUser(userEmail: string): Observable<ApiResponse>{
+    return this.http.delete<ApiResponse>(environment.apiBaseUrl + '/management/deleteuser?id=' + userEmail,{withCredentials: true});
   }
 }

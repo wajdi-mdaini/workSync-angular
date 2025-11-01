@@ -3,7 +3,7 @@ export interface User {
   password: string;
   firstname: string;
   lastname: string;
-  dateOfBirth: number;
+  dateOfBirth: any;
   creationDate: number;
   lastPasswordResetDate: number;
   firstLogin: boolean;
@@ -101,8 +101,9 @@ export interface NotificationDTO {
   read: boolean;
 }
 export interface TeamDetailsResponse{
-  teamManager: User;
+  team: Team;
   members: User[];
+  manager: User;
 }
 export interface EditTeamRequest{
   remainingUsers: string[];
@@ -116,6 +117,10 @@ export interface AddTeamRequest{
   managerEmail: string;
 }
 export interface GetUsersRequest{
+  userEmail: string;
+  companyId: number;
+}
+export interface EditUserRequest{
+  editRequest: boolean;
   user: User;
-  company: Company;
 }

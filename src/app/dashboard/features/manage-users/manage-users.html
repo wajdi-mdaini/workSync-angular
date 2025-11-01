@@ -1,1 +1,24 @@
-<p>manage-users works!</p>
+<div class="w-full p-6 mx-auto" xmlns="http://www.w3.org/1999/html">
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+        <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+          <div class="flex items-center">
+            <p class="mb-0 dark:text-white/80">{{ screenHeaderLabel | translate:{ number: usersList?.length } }}</p>
+            <a (click)="doAddUser()" *ngIf="true" class="ml-auto dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand flex items-center whitespace-nowrap px-4 transition-colors">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <span class="duration-300 opacity-100 pointer-events-none ease">{{ "link_add_user" | translate}}</span>
+            </a>
+          </div>
+        </div>
+        <app-users-list (userToEdit)="doEdit($event)" (userToView)="doView($event)" [(users)]="usersList" ></app-users-list>
+        <app-user-form *ngIf="showEditDialog" [(showDialog)]="showEditDialog" [userToEdit]="userToEdit" (editUserInList)="editUserInList($event)"></app-user-form>
+        <app-user-form *ngIf="showAddDialog" [(showDialog)]="showAddDialog" (editUserInList)="editUserInList($event)"></app-user-form>
+        <app-user-view *ngIf="showViewDialog" [(showOrderChart)]="showOrderChart" [(showViewDialog)]="showViewDialog" [user]="userToView"></app-user-view>
+        <app-order-chart *ngIf="showOrderChart" [(doShowOrderChart)]="showOrderChart" [user]="userToView"></app-order-chart>
+      </div>
+    </div>
+  </div>
+</div>
