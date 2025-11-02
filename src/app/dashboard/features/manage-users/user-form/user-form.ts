@@ -9,7 +9,7 @@ import {ResetPassword} from "../../../../auth/reset-password/reset-password";
 import {TranslatePipe} from "@ngx-translate/core";
 import {UploadFileDialog} from "../../upload-file-dialog/upload-file-dialog";
 import {Shared} from '../../../../services/shared';
-import {ApiResponse, EditUserRequest, Team, User} from '../../../../services/models';
+import {ApiResponse, EditUserRequest, Team, User, UserDTO} from '../../../../services/models';
 import {ManagerService} from '../../../../services/manager-service';
 import {Select} from 'primeng/select';
 
@@ -113,7 +113,7 @@ export class UserForm implements OnInit {
 
     let editUserRequest: EditUserRequest = {
       editRequest: isEditRequest,
-      user: this.getUser
+      userDTO: this.getUser
     }
     this.managerService.editUser(editUserRequest).subscribe({
       next: (response: ApiResponse) => {
@@ -128,8 +128,8 @@ export class UserForm implements OnInit {
     })
   }
 
-  get getUser(): User{
-    let user = {} as User;
+  get getUser(): UserDTO{
+    let user: UserDTO = {} as UserDTO;
     user.firstname = this.formGroup.get('firstname')?.value;
     user.email = this.formGroup.get('email')?.value;
     user.lastname = this.formGroup.get('lastname')?.value;
@@ -140,7 +140,7 @@ export class UserForm implements OnInit {
     user.postCode = this.formGroup.get('postCode')?.value;
     user.degree = this.formGroup.get('degree')?.value;
     user.title = this.formGroup.get('title')?.value;
-    user.team = this.formGroup.get('team')?.value;
+    user.teamId = this.formGroup.get('team')?.value?.id;
 
     return user;
   }

@@ -58,7 +58,7 @@
             <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;" *ngIf="(notifications$ | async)?.length || 0 > 0">
               <ng-container *ngFor="let notification of notifications$ | async">
                 <li [ngClass]="{'unread-notification' : !notification.read}" class="relative mb-2">
-                  <a (click)="showDetailsDialog(notification)" class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors" href="javascript:;">
+                  <a (click)="showDetailsDialog($event,notification)" class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors" href="javascript:;">
                     <div class="flex py-1">
                       <div class="my-auto">
                         <img [src]="notification.fromProfilePictureUrl" class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />

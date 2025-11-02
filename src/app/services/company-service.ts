@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ApiResponse, Company} from './models';
+import {ApiResponse, Company, CompanyDTO} from './models';
 import {Observable} from 'rxjs';
 import {environment} from '../config/environment';
 
@@ -9,7 +9,7 @@ import {environment} from '../config/environment';
 })
 export class CompanyService {
   constructor(private http: HttpClient) {}
-  changeCompanyDetails(company: Company): Observable<ApiResponse>{
+  changeCompanyDetails(company: CompanyDTO): Observable<ApiResponse>{
     return this.http.post<ApiResponse>(environment.apiBaseUrl + '/company/setcompanydetails',company,{withCredentials: true});
   }
 }

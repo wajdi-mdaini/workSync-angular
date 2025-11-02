@@ -23,6 +23,8 @@ export interface User {
   country: string;
   postCode: string;
   title: string;
+  documents: Document[];
+  company: Company;
 }
 export interface Team{
   id: number
@@ -45,6 +47,7 @@ export interface Company {
   website: string;
   companyCreator: User;
   teams: Team[];
+  members: User[];
   branding: Branding[];
 }
 export interface CustomNotification {
@@ -122,5 +125,34 @@ export interface GetUsersRequest{
 }
 export interface EditUserRequest{
   editRequest: boolean;
-  user: User;
+  userDTO: UserDTO;
+}
+export interface Document{
+  id: number;
+  title : string;
+  description : string;
+  url : string;
+  to : User;
+}
+export interface UserDTO{
+    firstname: string;
+    email: string;
+    lastname: string;
+    dateOfBirth: number;
+    address: string;
+    city: string;
+    country: string;
+    postCode: string;
+    degree: string;
+    title: string;
+    teamId: number;
+}
+export interface CompanyDTO {
+  companyName: string;
+  companyEmail: string;
+  description: string;
+  companyPhone: number;
+  companyWebLink: string;
+  companyAddress: string;
+  companyId: number;
 }

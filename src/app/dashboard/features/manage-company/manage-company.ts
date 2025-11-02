@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {TranslatePipe} from "@ngx-translate/core";
-import {ApiResponse, Company} from '../../../services/models';
+import {ApiResponse, Company, CompanyDTO} from '../../../services/models';
 import {Shared} from '../../../services/shared';
 import {IftaLabel} from 'primeng/iftalabel';
 import {Textarea} from 'primeng/textarea';
@@ -70,7 +70,16 @@ export class ManageCompany implements OnInit {
 
     if(this.formGroup.invalid) return;
 
-    this.companyService.changeCompanyDetails(this.company).subscribe({
+    let companyDTO: CompanyDTO = {
+      companyAddress: this.company.address,
+      companyEmail: this.company.email,
+      companyName: this.company.name,
+      companyPhone: this.company.phone,
+      companyWebLink: this.company.website,
+      description: this.company.description,
+      companyId: this.company.id
+    }
+    this.companyService.changeCompanyDetails(companyDTO).subscribe({
       next: (apiResponse: ApiResponse) => {
         if(apiResponse.success)
           if(this.sharedService.principal) {

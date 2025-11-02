@@ -133,8 +133,24 @@ export class Navbar {
     this.sharedService.customNavigation('dashboard//notifications','notifications_history_title');
   }
 
-  showDetailsDialog(data: any){
+  showDetailsDialog(event: any, data: any){
+    this.toggleDropdown(event)
+    if(data.titleLabel == "notification_edit_user_title") {
+      this.clearHighlight();
+      this.sharedService.customNavigation('dashboard/profile','navbar_screen_title_manage_profile')
+      this.doHighlight("profile-link");
+    }
     this.notificationDto = data;
     this.showDetails = true;
+  }
+  selectedMenuLinkClasses: string[] = ['bg-blue-500/13', 'font-semibold', 'text-slate-700']
+  doHighlight(elementId: string){
+    document.getElementById(elementId)?.classList.add(this.selectedMenuLinkClasses[0],this.selectedMenuLinkClasses[1],this.selectedMenuLinkClasses[2]);
+  }
+  clearHighlight(){
+    let links = document.getElementsByClassName("bg-blue-500/13")
+    for(let link of links){
+      link.classList.remove(this.selectedMenuLinkClasses[0],this.selectedMenuLinkClasses[1],this.selectedMenuLinkClasses[2]);
+    }
   }
 }

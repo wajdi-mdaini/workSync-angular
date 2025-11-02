@@ -68,6 +68,9 @@
   "manage_profile_edit_profile_picture_title": "Edit profile picture",
   "manage_profile_edit_profile_done": "Your profile has been updated successfully.",
   "manage_profile_edit_profile_required_fields_error": "Please fill in all fields.",
+  "manage_profile_role_admin": "Solution Admin",
+  "manage_profile_role_manager": "Solution manager",
+  "manage_profile_role_employee": "Solution employee",
   "navbar_screen_title_manage_company": "Manage company",
   "manage_company_edit_details_title": "Edit company details",
   "manage_company_edit_company_information_title": "Edit company details",
@@ -106,10 +109,16 @@
   "manage_users_users_list_team_name": "Team : {{teamName}} - {{teamDescription}}",
   "manage_users_delete_user_confirm_dialog_message": "Are you sure you want to delete this user? Deleting this user will permanently remove all their notifications, documents, and personal details.",
   "manage_users_delete_user_done": "User deleted successfully",
+  "manage_users_edit_user_done": "User edited successfully",
+  "manage_users_add_user_done": "User added successfully",
 
   "preview_eye_title": "Preview",
   "edit_pencil_title": "Edit",
   "delete_trash_title": "Delete",
+
+
+  "manager_employees_text": "Members",
+  "manager_teams_text": "Team",
 
 
 

@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Role, User} from '../../../services/models';
+import {ApiResponse, Role, TeamDetailsResponse, User} from '../../../services/models';
 import {TranslatePipe} from '@ngx-translate/core';
 import {Dialog} from 'primeng/dialog';
 import {NgIf} from '@angular/common';
-import {OrderChart} from '../order-chart/order-chart';
+import {PublicService} from '../../../services/public-service';
 
 @Component({
   selector: 'app-profile',
@@ -19,8 +19,28 @@ export class Profile implements OnInit {
   @Input() user?: User;
   @Output() userChange = new EventEmitter<User>();
   showProfilePictureDialog: boolean = false;
+  teamsNumber: number = 0;
+  employeeNumber: number = 0;
+  constructor(private publicService: PublicService) {
+  }
     ngOnInit(): void {
+    this.teamsNumber = 0;
+    this.employeeNumber = 0;
+    if(this.user && this.user.role == Role.MANAGER)
+      this.publicService.getTeamMembers(this.user?.email).subscribe({
+        next: (apiResponse: ApiResponse) => {
+          if(apiResponse.success){
+            apiResponse.data.forEach((teamDetailsResponse: TeamDetailsResponse) => {
+              if(teamDetailsResponse.manager.email == this.user?.email){
+                this.employeeNumber += teamDetailsResponse.members.length
+                this.teamsNumber ++;
+              }
 
+            })
+          }
+        },
+        error: (err) => {console.log(err)},
+      })
     }
 
   getAge(timestamp: number | undefined): any {

@@ -15,17 +15,16 @@
     <div class="flex flex-wrap -mx-3">
       <div class="w-full max-w-full px-3 flex-1-0">
         <div class="flex justify-center">
-          <div class="grid text-center">
-            <span class="font-bold dark:text-white text-lg">22</span>
-            <span class="leading-normal dark:text-white text-sm opacity-80">Friends</span>
+          <div class="grid text-center" *ngIf="user?.role == Role.MANAGER">
+            <span class="font-bold dark:text-white text-lg">{{ employeeNumber }}</span>
+            <span class="leading-normal dark:text-white text-sm opacity-80">{{ 'manager_employees_text' | translate}}</span>
           </div>
           <div class="grid mx-6 text-center">
-            <span class="font-bold dark:text-white text-lg">10</span>
-            <span class="leading-normal dark:text-white text-sm opacity-80">Photos</span>
+            <span class="leading-normal dark:text-white text-sm opacity-80" style="padding-top: 40%;">{{ user?.role }}</span>
           </div>
-          <div class="grid text-center">
-            <span class="font-bold dark:text-white text-lg">89</span>
-            <span class="leading-normal dark:text-white text-sm opacity-80">Comments</span>
+          <div class="grid text-center" *ngIf="user?.role == Role.MANAGER">
+            <span class="font-bold dark:text-white text-lg">{{ teamsNumber }}</span>
+            <span class="leading-normal dark:text-white text-sm opacity-80">{{ 'manager_teams_text' | translate}}</span>
           </div>
         </div>
       </div>
@@ -35,7 +34,7 @@
         {{ user?.firstname }} {{ user?.lastname}}
         <span class="font-light">, {{  getAge( user?.dateOfBirth) }}</span>
       </h5>
-      <div class="mb-2 font-semibold leading-relaxed text-base dark:text-white/80 text-slate-700">
+      <div class="dark:text-white/80">
         <i class="fa fa-map-marker" aria-hidden="true"></i>
         {{ getUserFullAddress ? getUserFullAddress : 'notification_filed_not_set_yet' | translate:{'field': 'Full address'} }}
       </div>
@@ -43,11 +42,11 @@
         <i class="fa fa-envelope" aria-hidden="true"></i>
         {{ user?.email }}
       </div>
-      <div class="mt-6 mb-2 font-semibold leading-relaxed text-base dark:text-white/80 text-slate-700">
+      <div class="dark:text-white/80">
         <i class="fa fa-briefcase" aria-hidden="true"></i>
-        {{  user?.role == Role.ADMIN ? 'Solution Admin' :
-            user?.role == Role.MANAGER ? 'Solution Manager' :
-          'Solution Employee' }} - {{ user?.title ? user && user.title : 'notification_filed_not_set_yet' | translate:{'field': 'Jot title'} }}
+        {{  (user?.role == Role.ADMIN ? 'manage_profile_role_admin' :
+            user?.role == Role.MANAGER ? 'manage_profile_role_manager'  :
+          'manage_profile_role_employee') | translate }} - {{ user?.title ? user && user.title : 'notification_filed_not_set_yet' | translate:{'field': 'Jot title'} }}
       </div>
       <div class="dark:text-white/80">
         <i class="fa fa-university" aria-hidden="true"></i>
