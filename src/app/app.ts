@@ -1,4 +1,4 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA, signal} from '@angular/core';
+import {ChangeDetectorRef, Component, CUSTOM_ELEMENTS_SCHEMA, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {Shared} from './services/shared';
 import {Toast} from 'primeng/toast';
@@ -16,8 +16,13 @@ import {ApiResponse} from './services/models';
 })
 export class App {
   protected readonly title = signal('angular-demo');
-  constructor(private sharedService: Shared,public sharedHelper: SharedHelper,private authService: AuthService) {
+  constructor(private sharedService: Shared,
+    private cdr: ChangeDetectorRef, public sharedHelper: SharedHelper,private authService: AuthService) {
     sharedService.applyTranslation();
+  }
+
+  ngAfterContentChecked() {
+    this.cdr.detectChanges(); // Safely re-run change detection when spinner changes to avoid angular console error
   }
 
 }
