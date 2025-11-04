@@ -14,6 +14,7 @@ import {ManageCompany} from './dashboard/features/manage-company/manage-company'
 import {ManageTeams} from './dashboard/features/manage-teams/manage-teams';
 import {TeamsList} from './dashboard/features/manage-teams/teams-list/teams-list';
 import {ManageUsers} from './dashboard/features/manage-users/manage-users';
+import {ManageDocument} from './dashboard/features/manage-document/manage-document';
 
 
 export const routes: Routes = [
@@ -22,7 +23,7 @@ export const routes: Routes = [
       {path: 'login', component: Signin},
       {path: 'signup', component: Signup},
       {path: 'forgetpassword', component: Forgetpassword},
-      {path: 'firstlogin', component: FirstLogin},
+      {path: 'firstlogin', component: FirstLogin, canActivate: [authGuard]},
     ]},
   {path: 'home', loadComponent: () => import('./home/layout/layout').then(m => m.Layout) ,canActivate: [authGuard],
     children: []},
@@ -34,6 +35,7 @@ export const routes: Routes = [
       {path: 'company', component: ManageCompany},
       {path: 'teams', component: ManageTeams},
       {path: 'users', component: ManageUsers},
+      {path: 'documents', component: ManageDocument},
     ]}
 
 

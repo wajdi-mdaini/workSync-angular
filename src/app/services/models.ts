@@ -129,10 +129,14 @@ export interface EditUserRequest{
 }
 export interface Document{
   id: number;
-  title : string;
+  name : string;
   description : string;
+  size : string;
   url : string;
+  type : string;
   to : User;
+  from : User;
+  at: number;
 }
 export interface UserDTO{
     firstname: string;
@@ -155,4 +159,10 @@ export interface CompanyDTO {
   companyWebLink: string;
   companyAddress: string;
   companyId: number;
+}
+export interface DocumentDTO {
+  name: string;
+  description: string;
+  toUserEmail: string;
+  documentId: number;
 }

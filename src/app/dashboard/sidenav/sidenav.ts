@@ -3,11 +3,14 @@ import {Shared} from '../../services/shared';
 import {TranslatePipe} from '@ngx-translate/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs';
+import {Role} from '../../services/models';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-sidenav',
   imports: [
-    TranslatePipe
+    TranslatePipe,
+    NgIf
   ],
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.scss'
@@ -45,6 +48,9 @@ export class Sidenav implements OnInit,AfterViewInit {
         }else if(currentUrl.endsWith('users')) {
           this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_users';
           this.doHighlight("users-link");
+        }else if(currentUrl.endsWith('documents')) {
+          this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_documents';
+          this.doHighlight("document-link");
         }
   }
   toggleGuide(){
@@ -59,6 +65,7 @@ export class Sidenav implements OnInit,AfterViewInit {
     else if (screenTitle == 'navbar_screen_title_manage_company') this.doHighlight("company-link");
     else if (screenTitle == 'navbar_screen_title_manage_teams') this.doHighlight("teams-link");
     else if (screenTitle == 'navbar_screen_title_manage_users') this.doHighlight("users-link");
+    else if (screenTitle == 'navbar_screen_title_manage_documents') this.doHighlight("document-link");
     this.sharedService.customNavigation(path,screenTitle)
   }
   doHighlight(elementId: string){
@@ -73,4 +80,6 @@ export class Sidenav implements OnInit,AfterViewInit {
   doLogout(){
     this.sharedService.logout();
   }
+
+  protected readonly Role = Role;
 }

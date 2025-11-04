@@ -139,6 +139,10 @@ export class Navbar {
       this.clearHighlight();
       this.sharedService.customNavigation('dashboard/profile','navbar_screen_title_manage_profile')
       this.doHighlight("profile-link");
+    } else if(data.titleLabel == "manage_document_add_document_notification_title") {
+      this.clearHighlight();
+      this.sharedService.customNavigation('dashboard/documents','navbar_screen_title_manage_documents')
+      this.doHighlight("document-link");
     }
     this.notificationDto = data;
     this.showDetails = true;

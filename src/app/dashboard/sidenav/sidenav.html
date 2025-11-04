@@ -31,11 +31,20 @@
         </a>
       </li>
 
-      <li class="w-full mt-4">
+      <li class="mt-0.5 w-full">
+        <a id="document-link" class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" (click)="navigate('dashboard/documents','navbar_screen_title_manage_documents')">
+          <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+          </div>
+          <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">{{ "link_document" | translate}}</span>
+        </a>
+      </li>
+
+      <li class="w-full mt-4" *ngIf="sharedService?.principal?.role == Role.ADMIN">
         <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">{{ "sidebar_manage_company_section" | translate}}</h6>
       </li>
 
-      <li class="mt-0.5 w-full">
+      <li class="mt-0.5 w-full" *ngIf="sharedService?.principal?.role == Role.ADMIN">
         <a id="company-link" class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" (click)="navigate('dashboard/company','navbar_screen_title_manage_company')">
           <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
             <i class="fa fa-info" aria-hidden="true"></i>
@@ -44,11 +53,11 @@
         </a>
       </li>
 
-      <li class="w-full mt-4">
+      <li class="w-full mt-4" *ngIf="sharedService?.principal?.role == Role.ADMIN || sharedService?.principal?.role == Role.MANAGER">
         <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">{{ "sidebar_manage_users_section" | translate}}</h6>
       </li>
 
-      <li class="mt-0.5 w-full">
+      <li class="mt-0.5 w-full" *ngIf="sharedService?.principal?.role == Role.ADMIN || sharedService?.principal?.role == Role.MANAGER">
         <a id="teams-link" (click)="navigate('dashboard/teams','navbar_screen_title_manage_teams')" class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
           <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
             <i class="fa fa-address-card" aria-hidden="true"></i>
@@ -56,7 +65,7 @@
           <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">{{ "link_manage_teams" | translate}}</span>
         </a>
       </li>
-      <li class="mt-0.5 w-full">
+      <li class="mt-0.5 w-full" *ngIf="sharedService?.principal?.role == Role.ADMIN || sharedService?.principal?.role == Role.MANAGER">
         <a id="users-link" (click)="navigate('dashboard/users','navbar_screen_title_manage_users')" class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
           <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
             <i class="fa fa-users" aria-hidden="true"></i>

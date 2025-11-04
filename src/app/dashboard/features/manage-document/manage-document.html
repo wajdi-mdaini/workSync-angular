@@ -1,0 +1,154 @@
+<div class="w-full p-6 mx-auto" xmlns="http://www.w3.org/1999/html">
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+        <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+          <div class="flex items-center">
+            <p class="mb-0 dark:text-white/80">{{ screenHeaderLabel | translate }}</p>
+            <a (click)="doAddDocument()" class="ml-auto dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand flex items-center whitespace-nowrap px-4 transition-colors">
+              <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <span class="duration-300 opacity-100 pointer-events-none ease">{{ "link_add_document" | translate}}</span>
+            </a>
+          </div>
+        </div>
+        <app-document-list (documentToEdit)="doEdit($event)" [(documentsTo)]="documentListTo" [(documentsFrom)]="documentListFrom"></app-document-list>
+        </div>
+    </div>
+  </div>
+</div>
+<p-dialog
+  [dismissableMask]="true"
+  [header]="'manage_document_upload_document_dialog' | translate"
+  [modal]="true"
+  [(visible)]="showAddDialog"
+  *ngIf="showAddDialog"
+  [style]="{ width: '45rem' }"
+  (onHide)="hideAddDialog()">
+  <div class="card">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0" style="padding-bottom: 10px !important;">
+      <p-select [options]="toList" [(ngModel)]="toUser"
+                optionLabel="email"
+                [filter]="true"
+                filterBy="email"
+                [showClear]="true"
+                (onChange)="setBaseURL()"
+                [placeholder]=" 'manage_document_select_to_user' | translate"
+                [ngClass]="{ 'border-red-500': uploadClicked && (toUser.email == null || toUser.email == '') }"
+                class="w-full md:w-56">
+        <ng-template #selectedItem let-selectedUser>
+          <div class="flex items-center gap-2">
+            <img
+              [src]=" selectedUser.profilePictureUrl "
+              [alt]="selectedUser.firstname + ' ' + selectedUser.lastname"
+              style="width: 18px" />
+            <div [title]="selectedUser.email">{{ selectedUser.firstname }} {{ selectedUser.lastname }} <b style="font-size: 10px;"> {{ selectedUser.role }}</b>
+              <i class="fa fa-star" aria-hidden="true" *ngIf="selectedUser.role == Role.MANAGER" style="font-size: 10px;"></i></div>
+          </div>
+        </ng-template>
+        <ng-template let-user #item>
+          <div class="flex items-center gap-2">
+            <img
+              [src]=" user.profilePictureUrl "
+              [alt]="user.firstname + ' ' + user.lastname"
+              style="width: 18px" />
+            <div>{{ user.firstname }} {{ user.lastname }}</div>
+
+            <div class="dark:text-white dark:opacity-80 text-sm transition-colors">{{ user.email }} <b style="font-size: 10px;"> {{ user.role }}</b>
+              <i class="fa fa-star" aria-hidden="true" *ngIf="user.role == Role.MANAGER" style="font-size: 10px;"></i></div>
+          </div>
+        </ng-template>
+      </p-select>
+    </div>
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <p-ifta-label (keyup)="setBaseURL()">
+        <textarea class="w-100" pTextarea id="description" [(ngModel)]="documentDescriptionAddInput" rows="5" cols="30" style="resize: none"></textarea>
+        <label for="description">{{ 'manage_document_description' | translate}}</label>
+      </p-ifta-label>
+    </div>
+
+    <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+    <p-fileupload [withCredentials]="true"
+                  name="file"
+                  [url]="uploadPath"
+                  (onUpload)="onUpload($event)"
+                  [multiple]="false"
+                  accept="image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  maxFileSize="5000000"
+                  mode="advanced">
+      <ng-template #empty>
+        <div>{{ 'manage_document_upload_file_message_field' | translate }}</div>
+      </ng-template>
+    </p-fileupload>
+  </div>
+</p-dialog>
+
+<p-dialog
+  [dismissableMask]="true"
+  [header]="'manage_document_upload_document_dialog' | translate"
+  [modal]="true"
+  [(visible)]="showEditDialog"
+  *ngIf="showEditDialog"
+  [style]="{ width: '45rem' }"
+  (onHide)="hideAddDialog()">
+  <div class="card">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0" style="padding-bottom: 10px !important;">
+      <p-select [options]="toList" [(ngModel)]="toUser"
+                optionLabel="email"
+                [filter]="true"
+                filterBy="email"
+                [showClear]="true"
+                (onChange)="setBaseURL()"
+                [placeholder]=" 'manage_document_select_to_user' | translate"
+                [ngClass]="{ 'border-red-500': uploadClicked && (toUser.email == null || toUser.email == '') }"
+                class="w-full md:w-56">
+        <ng-template #selectedItem let-selectedUser>
+          <div class="flex items-center gap-2">
+            <img
+              [src]=" selectedUser.profilePictureUrl "
+              [alt]="selectedUser.firstname + ' ' + selectedUser.lastname"
+              style="width: 18px" />
+            <div [title]="selectedUser.email">{{ selectedUser.firstname }} {{ selectedUser.lastname }} <b style="font-size: 10px;"> {{ selectedUser.role }}</b>
+              <i class="fa fa-star" aria-hidden="true" *ngIf="selectedUser.role == Role.MANAGER" style="font-size: 10px;"></i></div>
+          </div>
+        </ng-template>
+        <ng-template let-user #item>
+          <div class="flex items-center gap-2">
+            <img
+              [src]=" user.profilePictureUrl "
+              [alt]="user.firstname + ' ' + user.lastname"
+              style="width: 18px" />
+            <div>{{ user.firstname }} {{ user.lastname }}</div>
+
+            <div class="dark:text-white dark:opacity-80 text-sm transition-colors">{{ user.email }} <b style="font-size: 10px;"> {{ user.role }}</b>
+              <i class="fa fa-star" aria-hidden="true" *ngIf="user.role == Role.MANAGER" style="font-size: 10px;"></i></div>
+          </div>
+        </ng-template>
+      </p-select>
+    </div>
+
+    <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <div class="mb-2">
+        <label for="name" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_document_edit_document_name_input' | translate}}</label>
+        <input type="text" [(ngModel)]="documentNameInput" name="name" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+      </div>
+    </div>
+
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <p-ifta-label>
+        <textarea class="w-100" pTextarea id="description" [(ngModel)]="documentDescriptionEditInput" rows="5" cols="30" style="resize: none"></textarea>
+        <label for="description">{{ 'manage_document_description' | translate}}</label>
+      </p-ifta-label>
+    </div>
+
+    <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+      <div class="flex items-center">
+        <button [disabled]="isSaveChangesDisabled" (click)="saveChanges()" type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85 bg-blue-500">{{ 'button_save' | translate}}</button>
+      </div>
+    </div>
+
+  </div>
+</p-dialog>

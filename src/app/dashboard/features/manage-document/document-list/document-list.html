@@ -1,0 +1,138 @@
+<div class="w-full p-6 mx-auto" xmlns="http://www.w3.org/1999/html">
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+
+      <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'manage_document_to_list_title' | translate}}</p>
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="documentsTo.length > 0">
+        <p-table
+          [value]="documentsTo"
+          [rowHover]="true"
+          [paginator]="true" [rows]="5"
+          [tableStyle]="{ 'min-width': '50rem' }"
+          [rowsPerPageOptions]="[5, 10, 20]"
+        >
+          <ng-template #header>
+            <tr>
+              <th>
+                <p-columnFilter class="text-xs" type="text" field="name" [placeholder]=" 'table_search_input_placeholder' | translate" ariaLabel="Filter Name" filterOn="input"></p-columnFilter>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-document>
+            <tr class="cursor-pointer hover:bg-gray-50 transition-colors duration-150">
+              <td (click)="downloadDocument(document)" style="--cell-width: 30%;" [title]="document.description" class="py-2 px-3 text-gray-500 text-xs">{{ document.name }}</td>
+              <td (click)="downloadDocument(document)" style="--cell-width: 5%;" class="py-2 px-3 text-gray-500 text-xs">
+                <img *ngIf="document.type == 'pdf'"
+                     src="assets/img/pdf-icon.jpg"
+                     title="pdf file"
+                     style="width: 25px;" />
+
+                <img  *ngIf="document.type == 'doc'"
+                      src="assets/img/doc-icon.png"
+                      title="doc file"
+                      style="width: 25px;" />
+
+                <img  *ngIf="document.type == 'docx'"
+                      src="assets/img/docx-icon.png"
+                      title="docx file"
+                      style="width: 25px;" />
+
+                <img  *ngIf="document.type != 'docx' && document.type != 'doc' && document.type != 'pdf'"
+                      src="assets/img/image-icon.png"
+                      [title]="'image file .' + document.type "
+                      style="width: 25px;" />
+              </td>
+              <td (click)="downloadDocument(document)" style="--cell-width: 5%;" class="py-2 px-3 text-gray-500 text-xs">{{ document.size }}</td>
+              <td (click)="downloadDocument(document)" style="--cell-width: 10%;" class="py-2 px-3 text-gray-500 text-xs">{{ document.at | date:'short'}}</td>
+              <td (click)="downloadDocument(document)" style="--cell-width: 10%;" class="py-2">
+                <div class="flex items-center gap-2">
+                  <img
+                    [src]=" document.from.profilePictureUrl "
+                    [alt]="document.from.firstname + ' ' + document.from.lastname"
+                    [title]="document.from.firstname + ' ' + document.from.lastname + '(' + document.from.email + ')'"
+                    style="width: 40px;border-radius: 50%;object-fit: cover;" />
+
+                </div>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-confirmDialog />
+      </div>
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="documentsTo.length == 0">
+        <div class=" text-center py-2 px-3 text-gray-500 text-xs">{{ 'manage_document_empty_to_list_message' | translate}}</div>
+      </div>
+
+      <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+      <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'manage_document_from_list_title' | translate}}</p>
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="documentsFrom.length > 0">
+        <p-table
+          [value]="documentsFrom"
+          [rowHover]="true"
+          [paginator]="true" [rows]="5"
+          [tableStyle]="{ 'min-width': '50rem' }"
+          [rowsPerPageOptions]="[5, 10, 20]"
+        >
+          <ng-template #header>
+            <tr>
+              <th>
+                <p-columnFilter class="text-xs" type="text" field="name" [placeholder]=" 'table_search_input_placeholder' | translate" ariaLabel="Filter Name" filterOn="input"></p-columnFilter>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-document>
+            <tr class="cursor-pointer hover:bg-gray-50 transition-colors duration-150">
+              <td (click)="downloadDocument(document)" style="--cell-width: 30%;" [title]="document.description" class="py-2 px-3 text-gray-500 text-xs">{{ document.name }}</td>
+              <td (click)="downloadDocument(document)" style="--cell-width: 5%;" class="py-2 px-3 text-gray-500 text-xs">
+                <img *ngIf="document.type == 'pdf'"
+                      src="assets/img/pdf-icon.jpg"
+                      title="pdf file"
+                      style="width: 25px;" />
+
+                <img  *ngIf="document.type == 'doc'"
+                      src="assets/img/doc-icon.png"
+                      title="doc file"
+                      style="width: 25px;" />
+
+                <img  *ngIf="document.type == 'docx'"
+                      src="assets/img/docx-icon.png"
+                      title="docx file"
+                      style="width: 25px;" />
+
+                <img  *ngIf="document.type != 'docx' && document.type != 'doc' && document.type != 'pdf'"
+                      src="assets/img/image-icon.png"
+                      [title]="'image file .' + document.type "
+                      style="width: 25px;" />
+
+              </td>
+              <td (click)="downloadDocument(document)" style="--cell-width: 5%;" class="py-2 px-3 text-gray-500 text-xs">{{ document.size }}</td>
+              <td (click)="downloadDocument(document)" style="--cell-width: 10%;" class="py-2 px-3 text-gray-500 text-xs">{{ document.at | date:'short'}}</td>
+              <td (click)="downloadDocument(document)" style="--cell-width: 10%;" class="py-2">
+                <div class="flex items-center gap-2">
+                  <img
+                    [src]=" document.to.profilePictureUrl "
+                    [alt]="document.to.firstname + ' ' + document.to.lastname"
+                    [title]="document.to.firstname + ' ' + document.to.lastname + '(' + document.to.email + ')'"
+                    style="width: 40px;border-radius: 50%;object-fit: cover;" />
+
+                </div>
+              </td>
+              <td style="text-align: right;">
+                <a (click)="doEdit(document)" title="{{ 'edit_pencil_title' | translate }}" style="color:#fb9940; padding-right: 10px;font-size: 12px;">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a (click)="doConfirmDelete($event,document)" title="{{ 'delete_trash_title' | translate }}" style="color: #f5563f;font-size: 12px;">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-confirmDialog />
+      </div>
+      <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="documentsFrom.length == 0">
+        <div class=" text-center py-2 px-3 text-gray-500 text-xs">{{ 'manage_document_empty_from_list_message' | translate}}</div>
+      </div>
+    </div>
+  </div>
+</div>

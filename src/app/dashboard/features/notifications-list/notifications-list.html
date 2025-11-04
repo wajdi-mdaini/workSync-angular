@@ -9,21 +9,24 @@
         <div class="flex-auto px-0 pt-0 pb-2">
           <div class="p-0 overflow-x-auto ps">
             <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+              <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="notifications.length == 0">
+                <div class=" text-center py-2 px-3 text-gray-500 text-xs">{{ 'notification_empty_list_message' | translate}}</div>
+              </div>
               <p-table
                 [value]="notifications"
                 [rowHover]="true"
-                [paginator]="true" [rows]="5"
+                [paginator]="true" [rows]="10"
                 [tableStyle]="{ 'min-width': '50rem' }"
                 [rowsPerPageOptions]="[5, 10, 20]"
               >
                 <ng-template #body let-notification>
-                  <tr (click)="showDetailsDialog(notification)">
-                    <td>
+                  <tr (click)="showDetailsDialog(notification)" class="cursor-pointer hover:bg-gray-50 transition-colors duration-150">
+                    <td class="py-2 px-3 text-gray-500 text-xs">
                       <div [innerHTML]="notification.messageLabel | translate:{'name': notification.fromName}">
                       </div>
                     </td>
-                    <td>{{ notification.at | date:'short'}}</td>
-                    <td>
+                    <td class="py-2 px-3 text-gray-500 text-xs">{{ notification.at | date:'short'}}</td>
+                    <td class="py-2 px-3 text-gray-500 text-xs">
                       <img class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl"
                           [src]="notification.fromProfilePictureUrl">
                     </td>

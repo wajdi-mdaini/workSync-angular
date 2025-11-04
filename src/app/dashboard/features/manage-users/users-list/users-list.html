@@ -28,7 +28,7 @@
           </ng-template>
           <ng-template #body let-user>
             <tr class="cursor-pointer" [title]="user?.team?.name == null ? ('manage_users_users_list_no_team' | translate): ('manage_users_users_list_team_name' | translate : {teamName : user?.team?.name,teamDescription: user?.team?.description})">
-              <td (click)="null" style="--cell-width: 40%;">
+              <td style="--cell-width: 40%;">
                 <div class="flex items-center gap-2">
                   <img
                     [src]=" user.profilePictureUrl "
@@ -37,7 +37,7 @@
                   <div>{{ user.firstname }} {{ user.lastname }} <b style="font-size: 10px;"> {{ user.role }}</b></div>
                 </div>
               </td>
-              <td (click)="null" style="--cell-width: 30%;">{{ user.email }}</td>
+              <td style="--cell-width: 30%;">{{ user.email }}</td>
               <td style="text-align: right;">
                 <a (click)="doView(user)"  title="{{ 'preview_eye_title' | translate }}" style="color:#2dcebd ;padding-right: 10px;font-size: 12px;">
                   <i class="fa fa-eye" aria-hidden="true"></i>

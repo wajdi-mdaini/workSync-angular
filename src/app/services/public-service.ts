@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../config/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ApiResponse, NotificationDTO} from './models';
+import {ApiResponse, CompanyDTO, Document, DocumentDTO, NotificationDTO} from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,25 @@ export class PublicService {
 
   getTeamMembers(userEmail: string | undefined): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/teammembers?id='+ userEmail,{ withCredentials: true });
+  }
+
+  getDocumentsTo(userEmail: string | undefined): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/getdocumentto?email='+ userEmail,{ withCredentials: true });
+  }
+
+  getDocumentsFrom(userEmail: string | undefined): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/getdocumentfrom?email='+ userEmail,{ withCredentials: true });
+  }
+
+  getToListUsers(email: string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/gettolistusers?email='+ email,{ withCredentials: true });
+  }
+
+  deleteDocument(documentId: number): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(environment.apiBaseUrl + '/public/deletedocument?id='+ documentId,{ withCredentials: true });
+  }
+
+  editDocument(documentDTO: DocumentDTO): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(environment.apiBaseUrl + '/public/editdocument' , documentDTO,{ withCredentials: true });
   }
 }

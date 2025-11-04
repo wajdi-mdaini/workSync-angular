@@ -66,11 +66,13 @@ export class Signin implements OnInit {
             this.sharedService.principal = user;
             this.sharedService.company = company;
             this.setStoredEmail();
-            if(user.role == Role.ADMIN || user.role == Role.MANAGER){
-              if(user.firstLogin) this.sharedService.customNavigation('/auth/firstlogin','navbar_screen_title_dashboard');
-              else this.sharedService.customNavigation('dashboard','navbar_screen_title_dashboard');
+            if(user.firstLogin) this.sharedService.customNavigation('/auth/firstlogin','navbar_screen_title_dashboard');
+            else {
+              if (user.role == Role.ADMIN || user.role == Role.MANAGER)
+                this.sharedService.customNavigation('dashboard', 'navbar_screen_title_dashboard');
+              else
+                this.sharedService.customNavigation('home', 'navbar_screen_title_home');
             }
-            else this.sharedService.customNavigation('home','navbar_screen_title_home');
         }
     }
     ,error: (err) => {

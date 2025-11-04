@@ -92,3 +92,33 @@ input:disabled {
 .p-confirmdialog{
   max-width: 30% !important;
 }
+
+app-document-list{
+  .p-datatable-tbody > tr > td,
+  .p-datatable-thead > tr > th{
+    border-color: transparent !important;
+  }
+  .p-paginator-pages,
+  .p-select-label,
+  p-columnfilterformelement .p-inputtext{
+    font-size: 10px !important;
+  }
+  .p-paginator .p-icon{
+    width: 12px !important;
+  }
+}
+
+app-notifications-list{
+  .p-datatable-tbody > tr > td,
+  .p-datatable-thead > tr > th{
+    border-color: transparent !important;
+  }
+  .p-paginator-pages,
+  .p-select-label,
+  p-columnfilterformelement .p-inputtext{
+    font-size: 10px !important;
+  }
+  .p-paginator .p-icon{
+    width: 12px !important;
+  }
+}
