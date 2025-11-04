@@ -132,6 +132,7 @@
   "manage_document_delete_document_dialog_message": "Are you sure you want to delete this document? Deleting it will also remove the recipient’s notification.",
   "manage_document_delete_document_could_error": "Document deleting from cloud error",
   "manage_document_edit_document_name_input": "Document name",
+  "manage_document_edit_document_dialog_header": "Update document details",
 
   "preview_eye_title": "Preview",
   "edit_pencil_title": "Edit",
