@@ -129,19 +129,27 @@ export class Navbar {
     }
   }
   showAllNotifications(event: Event){
+    let basePath = 'dashboard'
+    if(this.sharedService.principal?.role == Role.EMPLOYEE){
+      basePath = 'home'
+    }
     this.toggleDropdown(event);
-    this.sharedService.customNavigation('dashboard//notifications','notifications_history_title');
+    this.sharedService.customNavigation(basePath + '/notifications','notifications_history_title');
   }
 
   showDetailsDialog(event: any, data: any){
+    let basePath = 'dashboard'
+    if(this.sharedService.principal?.role == Role.EMPLOYEE){
+      basePath = 'home'
+    }
     this.toggleDropdown(event)
     if(data.titleLabel == "notification_edit_user_title") {
       this.clearHighlight();
-      this.sharedService.customNavigation('dashboard/profile','navbar_screen_title_manage_profile')
+      this.sharedService.customNavigation(basePath + '/profile','navbar_screen_title_manage_profile')
       this.doHighlight("profile-link");
     } else if(data.titleLabel == "manage_document_add_document_notification_title") {
       this.clearHighlight();
-      this.sharedService.customNavigation('dashboard/documents','navbar_screen_title_manage_documents')
+      this.sharedService.customNavigation(basePath + '/documents','navbar_screen_title_manage_documents')
       this.doHighlight("document-link");
     }
     this.notificationDto = data;
