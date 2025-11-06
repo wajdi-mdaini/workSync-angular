@@ -14,6 +14,7 @@ html:not(.dark) .checked\:checkbox-bg:checked{
   background-color: var(--second_button_background-color);
 }
 html:not(.dark) .breadcrumb-text-color li,
+html:not(.dark) .breadcrumb-text-color .p-select-label,
 html:not(.dark) .breadcrumb-text-color li a{
   .ease{
     background-color: var(--second_button_background-color) !important;
@@ -131,7 +132,30 @@ html:not(.dark) .second-button-background-style:disabled{
     border-color: rgb(17 28 68 / var(--tw-bg-opacity));
   }
 }
-
+app-body{
+  p-select{
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+}
+app-navbar{
+  p-select{
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+  p-select:hover{
+    border-color:rgb(255 255 255 / 1) !important;
+  }
+  .p-select-dropdown{
+    display: none;
+  }
+  .p-select-label{
+    color:rgb(255 255 255 / 1) !important;
+  }
+  p-selectitem{
+    font-size: 12px;
+  }
+}
 ::-webkit-scrollbar-thumb {
   background: rgba(74, 70, 70, 0.86) !important;
   border-radius: 10px;

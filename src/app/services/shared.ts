@@ -69,12 +69,20 @@ export class Shared {
   }
 
   applyTranslation(){
-    // default + auto-detect browser language (basic example)
-    this.translate.setDefaultLang('en');
     const browserLang:string = navigator.language?.split('-')[0] ?? 'en';
-    this.selectedLanguage = this.translationLanguagesList.filter( (a) => a.code === browserLang).length !== 0 ?
-      this.translationLanguagesList.filter( (a) => a.code === browserLang)[0] :
-      this.translationLanguagesList[0]
+    let preferredLanguageCode: any = '';
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      preferredLanguageCode = localStorage.getItem('preferredLanguage');
+    }
+    if(preferredLanguageCode && preferredLanguageCode != '') {
+      let preferredLanguageName: any = this.translationLanguagesList.filter( (a) => a.code === preferredLanguageCode)[0]?.name;
+      this.selectedLanguage = {name: preferredLanguageName, code: preferredLanguageCode}
+    }
+    else{
+      this.selectedLanguage = this.translationLanguagesList.filter( (a) => a.code === browserLang).length !== 0 ?
+        this.translationLanguagesList.filter( (a) => a.code === browserLang)[0] :
+        this.translationLanguagesList[0]
+    }
     this.translate.use(this.selectedLanguage.code);
   }
   switchLang() {

@@ -12,6 +12,8 @@ import {PublicService} from '../../services/public-service';
 import {TimeAgoPipe} from '../../pipes/time-ago-pipe';
 import {Dialog} from 'primeng/dialog';
 import {NotificationDetails} from '../features/notification-details/notification-details';
+import {Select} from 'primeng/select';
+import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-navbar',
   imports: [
@@ -20,7 +22,9 @@ import {NotificationDetails} from '../features/notification-details/notification
     AsyncPipe,
     TimeAgoPipe,
     Dialog,
-    NotificationDetails
+    NotificationDetails,
+    Select,
+    FormsModule
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'

@@ -24,6 +24,9 @@
             </div>
           </a>
         </li>
+        <li class="flex items-center px-2">
+          <p-select optionLabel="code" [options]="sharedService.translationLanguagesList" [(ngModel)]="sharedService.selectedLanguage" (onChange)="sharedService.switchLang()" class="w-full md:w-56"/>
+        </li>
 
         <!-- notifications -->
 
