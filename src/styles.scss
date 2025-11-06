@@ -1,4 +1,143 @@
 @use 'large' as *;
+@use 'small' as *;
+
+:root {
+  --dashboard_header_background-color: rgb(102 109 228);
+  --first_button_background-color: rgb(102 109 228);
+  --first_button_disabled_background-color: rgb(170, 174, 238);
+  --second_button_background-color: rgb(45 56 135);
+  --second_button_disabled_background-color: rgb(120, 130, 180);
+  --selected_menu_li_text_color: rgb(52 71 103 / 1);
+  --selected_menu_li_background_color: rgb(94 114 228 / 0.13);
+}
+html:not(.dark) .checked\:checkbox-bg:checked{
+  background-color: var(--second_button_background-color);
+}
+html:not(.dark) .breadcrumb-text-color li,
+html:not(.dark) .breadcrumb-text-color li a{
+  .ease{
+    background-color: var(--second_button_background-color) !important;
+  }
+  color: var(--second_button_background-color) !important;
+}
+
+.to-gold {
+  --tw-gradient-to: rgb(218, 165, 32);
+}
+.from-dark-gold{
+  --tw-gradient-from: rgba(218, 165, 32, 0.15);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.selected-nav-menu {
+  color: var(--selected_menu_li_text_color);
+  background-color: var(--selected_menu_li_background_color);
+}
+
+.header-background-style{
+  background-color: var(--dashboard_header_background-color) !important;
+}
+html:not(.dark) .first-button-background-style{
+  background-color: var(--first_button_background-color) !important;
+}
+app-branding p-fileupload{
+  .p-fileupload-header{
+    padding: 0px;
+  }
+}
+
+html:not(.dark) app-branding p-fileupload{
+  .p-fileupload-content{
+    padding: 0px !important;
+    .p-fileupload-file-actions{
+      display: none !important;
+    }
+  }
+  button{
+    background-color: var(--second_button_background-color) !important;
+    border: 0px;
+    span{
+      --tw-text-opacity: 1;
+      color: rgb(255 255 255 / var(--tw-text-opacity));
+    }
+  }
+}
+html:not(.dark) .first-button-background-style:disabled{
+  background-color: var(--first_button_disabled_background-color) !important;
+}
+html:not(.dark) .second-button-background-style{
+  background-color: var(--second_button_background-color) !important;
+}
+html:not(.dark) .second-button-background-style:disabled{
+  background-color: var(--second_button_disabled_background-color) !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark .dark\:upload-file-custom {
+  .p-fileupload-advanced,
+  .p-fileupload-header{
+    background-color: transparent !important;
+  }
+}
+
+.dark .dark\:dark-calendar-bg {
+  input {
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 28 68 / var(--tw-bg-opacity)) !important;
+  }
+}
+
+.dark .dark\:dark-calendar-text {
+  input{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+}
+
+.dark .dark\:dark-dialog {
+  .p-dialog,.p-dialog-content input,p-select{
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 28 68 / var(--tw-bg-opacity)) !important;
+  }
+  .p-fileupload{
+    --tw-bg-opacity: 1;
+    background-color: rgb(108 117 125 / var(--tw-bg-opacity));
+    .p-fileupload-content{
+      color: rgb(233 236 239 / var(--tw-bg-opacity));
+    }
+  }
+  .p-dialog-header,.p-dialog-header-actions p-button button{
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+}
+
+.dark .dark\:dark-table{
+  input{
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 28 68 / var(--tw-bg-opacity)) !important;
+  }
+  th,td,p-paginator,p-select,.p-select-list-container{
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 28 68 / var(--tw-bg-opacity));
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    border-color: rgb(17 28 68 / var(--tw-bg-opacity));
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(74, 70, 70, 0.86) !important;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
 .p-fileupload-advanced {
   border: 0px solid transparent !important;
 }

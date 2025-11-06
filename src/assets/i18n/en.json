@@ -133,6 +133,18 @@
   "manage_document_delete_document_could_error": "Document deleting from cloud error",
   "manage_document_edit_document_name_input": "Document name",
   "manage_document_edit_document_dialog_header": "Update document details",
+  "branding_dialog_header_title": "Branding dashboard",
+  "branding_dialog_header_message": "Customize you company style.",
+  "branding_dialog_change_app_theme_background": "Company theme",
+  "branding_dard_light_mode_title": "Light / Dark",
+  "branding_fixed_nav_bar_title": "Navbar fixed",
+  "branding_company_logo_title": "Company logo",
+  "branding_company_logo_message": "Choose you company logo.",
+  "branding_company_logo_update_done": "Your company logo updated successfully.",
+  "branding_company_logo_update_failed": "Your company logo update failed.",
+  "branding_reset_confirm_header": "Reset personalized styles",
+  "branding_reset_confirm_message": "Are you sure you want to delete all your personalized styles? If you confirm, the page will refresh and your company logo will not be deleted.",
+
 
   "preview_eye_title": "Preview",
   "edit_pencil_title": "Edit",
@@ -193,6 +205,7 @@
   "link_view_order_chart": "View team order",
   "link_add_user": "Add new user",
   "link_add_document": "Upload document",
+  "link_reset_branding": "Default style",
 
   "notification_new_joiner_title": "New Employee Joined",
   "notification_new_joiner_message": "<strong>{{ name }}</strong> has been added to your WorkSync team and completed their password setup.",

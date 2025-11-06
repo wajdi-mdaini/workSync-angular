@@ -20,6 +20,7 @@
 </div>
 <p-dialog
   [dismissableMask]="true"
+  class="dark:dark-dialog"
   [header]="'manage_document_upload_document_dialog' | translate"
   [modal]="true"
   [(visible)]="showAddDialog"
@@ -86,6 +87,7 @@
 
 <p-dialog
   [dismissableMask]="true"
+  class="dark:dark-dialog"
   [header]="'manage_document_edit_document_dialog_header' | translate"
   [modal]="true"
   [(visible)]="showEditDialog"
@@ -139,14 +141,14 @@
 
     <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
       <p-ifta-label>
-        <textarea class="w-100" pTextarea id="description" [(ngModel)]="documentDescriptionEditInput" rows="5" cols="30" style="resize: none"></textarea>
+        <textarea class="w-100 dark:bg-slate-850" pTextarea id="description" [(ngModel)]="documentDescriptionEditInput" rows="5" cols="30" style="resize: none"></textarea>
         <label for="description">{{ 'manage_document_description' | translate}}</label>
       </p-ifta-label>
     </div>
 
     <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
       <div class="flex items-center">
-        <button [disabled]="isSaveChangesDisabled" (click)="saveChanges()" type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85 bg-blue-500">{{ 'button_save' | translate}}</button>
+        <button [disabled]="isSaveChangesDisabled" (click)="saveChanges()" type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85 first-button-background-style">{{ 'button_save' | translate}}</button>
       </div>
     </div>
 

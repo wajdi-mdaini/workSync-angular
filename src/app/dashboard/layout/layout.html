@@ -1,24 +1,24 @@
-<div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
-<div class="col-md-12" style="max-width: 98%">
+<div class="absolute w-full dark:hidden min-h-75 header-background-style"></div>
+<div class="col-lg-12" style="max-width: 98%">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-lg-2">
       <!-- sidenav  -->
       <app-sidenav></app-sidenav>
       <!-- end sidenav -->
     </div>
-    <div class="col-md-10">
+    <div class="col-lg-10">
       <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
         <!-- Navbar -->
         <app-navbar></app-navbar>
         <!-- end Navbar -->
         <!-- cards -->
-        <div class="w-full px-6 py-6 mx-auto">
+        <div class="w-full px-6 py-6 mx-auto app-body">
           <router-outlet></router-outlet>
           <app-footer></app-footer>
         </div>
         <!-- end cards -->
       </main>
-      <app-branding></app-branding>
+      <app-branding *ngIf="sharedService.principal.role == Role.ADMIN"></app-branding>
     </div>
   </div>
 </div>

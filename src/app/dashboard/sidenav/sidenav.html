@@ -1,13 +1,43 @@
 <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
-  <div class="" style="overflow: hidden;max-width: 84%;">
-    <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden" sidenav-close></i>
-    <a style="display: flex;"class="block px-8 py-6 m-0 text-sm whitespace-nowrap dark:text-white text-slate-700">
-      <img src="assets/img/workSync-logo-small.svg" class="inline h-full max-w-full transition-all duration-200 dark:hidden ease-nav-brand max-h-8" alt="main_logo" />
-      <img src="assets/img/workSync-logo-small-dark.svg" class="hidden h-full max-w-full transition-all duration-200 dark:inline ease-nav-brand max-h-8" alt="main_logo" />
-      <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand" style="
-        white-space: normal;word-wrap: break-word;">{{sharedService.company.name}}</span>
+  <div class="overflow-hidden max-w-[84%]">
+    <i
+      class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden"
+      (click)="sharedService.toggleMenu()"
+    ></i>
+
+    <a class="flex flex-wrap items-center px-4 py-6 m-0 text-sm text-slate-700 dark:text-white">
+      <!-- Logo -->
+      <img
+        *ngIf="!sharedService.company.logoURL || sharedService.company?.logoURL == ''"
+        src="assets/img/workSync-logo-small.svg"
+        alt="main_logo"
+        style="border-radius: 15%"
+        class="logo-image object-cover rounded-[15%] flex-shrink-0 dark:hidden"
+      />
+      <img
+        *ngIf="!sharedService.company.logoURL || sharedService.company?.logoURL == ''"
+        src="assets/img/workSync-logo-small-dark.svg"
+        alt="main_logo"
+        style="border-radius: 15%"
+        class="logo-image object-cover rounded-[15%] flex-shrink-0 dark:inline"
+      />
+      <img
+        *ngIf="sharedService.company.logoURL && sharedService.company.logoURL != ''"
+        [src]="sharedService.company.logoURL"
+        style="border-radius: 15%"
+        alt="main_logo"
+        class="logo-image object-cover rounded-[15%] flex-shrink-0"
+      />
+
+      <!-- Company name -->
+      <span
+        class="ml-2 font-semibold leading-snug text-wrap break-words overflow-hidden text-ellipsis max-w-[75%]"
+      >
+      {{ sharedService.company.name }}
+    </span>
     </a>
   </div>
+
 
   <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
 
@@ -108,7 +138,7 @@
     </div>
   </div>
 
-  <button (click)="toggleGuide()" class="pt-2 bg-white bottom-0 flex-auto w-full p-2 pt-0 text-center fixed mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+  <button (click)="toggleGuide()" class="dark:bg-gradient-to-tl dark:bg-slate-900 dark:text-white hover:shadow-xs pt-2 bg-white bottom-0 flex-auto w-full p-2 pt-0 text-center fixed mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
     {{ "button_need_guide" | translate }}
   </button>
 </aside>

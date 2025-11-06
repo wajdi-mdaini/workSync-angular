@@ -42,7 +42,7 @@ export class ManageTeams {
   getAllTeams(){
     let company: Company = this.sharedService.company
     if(company) {
-      this.managerService.getCompanyTeams(company).subscribe({
+      this.managerService.getCompanyTeams(company.id).subscribe({
         next: (apiResponse: ApiResponse) => {
           this.teams = apiResponse.data;
         },

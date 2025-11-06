@@ -5,9 +5,10 @@ import {SummaryCards} from '../summary-cards/summary-cards';
 import {Footer} from '../footer/footer';
 import {Branding} from '../branding/branding';
 import {RouterOutlet} from '@angular/router';
-import {ApiResponse} from '../../services/models';
+import {ApiResponse, Role} from '../../services/models';
 import {AuthService} from '../../services/auth-service';
 import {Shared} from '../../services/shared';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-layout',
@@ -16,12 +17,15 @@ import {Shared} from '../../services/shared';
     Navbar,
     Footer,
     Branding,
-    RouterOutlet
+    RouterOutlet,
+    NgIf
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.scss'
 })
 export class Layout {
-  constructor() {
+  constructor(public sharedService: Shared) {
   }
+
+  protected readonly Role = Role;
 }

@@ -14,7 +14,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   return authService.loginCheck().pipe(
     map((apiResponse: ApiResponse) => {
       sharedService.principal = apiResponse.data.user;
-      sharedService.company = apiResponse.data.company;
+      sharedService.setCompanyAndApplyBranding(apiResponse.data.company);
       router.url
       if( (sharedService.principal.firstLogin && !state.url.endsWith('firstlogin')) ||
         (!sharedService.principal.firstLogin && state.url.endsWith('firstlogin')) ) {
@@ -25,7 +25,7 @@ export const authGuard: CanActivateFn = (route, state) => {
           ((sharedService.principal.role == Role.ADMIN || sharedService.principal.role == Role.MANAGER) && state.url.includes('home')) ){
           sharedService.logout();
           return false;
-        }else if( (sharedService.principal.role == Role.EMPLOYEE && !state.url.includes('home')) ||
+        }else if( (sharedService.principal.role == Role.EMPLOYEE && (!state.url.includes('home') && !state.url.endsWith('firstlogin'))) ||
           (sharedService.principal.role == Role.EMPLOYEE && state.url.includes('dashboard')) ){
           sharedService.logout();
           return false;

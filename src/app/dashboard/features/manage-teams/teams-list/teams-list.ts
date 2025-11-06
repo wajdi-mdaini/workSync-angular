@@ -26,8 +26,7 @@ export class TeamsList {
  @Output() editTeam = new EventEmitter();
  constructor(private confirmationService: ConfirmationService,
              private translate: TranslateService,
-             private managerService: ManagerService,
-             private messageService: MessageService) {
+             private managerService: ManagerService) {
  }
  onclickToEdit(team: Team) {
    this.editTeam.emit(team);

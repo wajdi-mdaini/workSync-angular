@@ -105,6 +105,14 @@ export class Navbar {
         this.setNotifications();
       }
     }
+    if (this.sharedService.isMenuShown) {
+      const target = event.target as HTMLElement;
+      const link = document.getElementById('menu-toggle')
+      if ((!this.sharedService.menu.contains(target) && !link?.contains(target)) &&
+        !target.closest('[dropdown-trigger]')) {
+        this.sharedService.toggleMenu();
+      }
+    }
   }
   setNotifications() {
     let current = this.notificationsSubject.value;
@@ -165,4 +173,5 @@ export class Navbar {
       link.classList.remove(this.selectedMenuLinkClasses[0],this.selectedMenuLinkClasses[1],this.selectedMenuLinkClasses[2]);
     }
   }
+
 }

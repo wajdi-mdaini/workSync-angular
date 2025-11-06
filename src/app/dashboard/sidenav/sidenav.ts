@@ -17,7 +17,6 @@ import {NgIf} from '@angular/common';
 })
 export class Sidenav implements OnInit,AfterViewInit {
   showGuide: boolean = false;
-  selectedMenuLinkClasses: string[] = ['bg-blue-500/13', 'font-semibold', 'text-slate-700']
   constructor(public sharedService: Shared,private router: Router) {
   }
 
@@ -60,6 +59,7 @@ export class Sidenav implements OnInit,AfterViewInit {
   }
   navigate(path: string,screenTitle: string){
     this.clearHighlight();
+    this.sharedService.toggleMenu();
     if(screenTitle == 'navbar_screen_title_dashboard') this.doHighlight("dashboard-link")
     else if (screenTitle == 'navbar_screen_title_manage_profile') this.doHighlight("profile-link");
     else if (screenTitle == 'navbar_screen_title_manage_company') this.doHighlight("company-link");
@@ -69,12 +69,12 @@ export class Sidenav implements OnInit,AfterViewInit {
     this.sharedService.customNavigation(path,screenTitle)
   }
   doHighlight(elementId: string){
-    document.getElementById(elementId)?.classList.add(this.selectedMenuLinkClasses[0],this.selectedMenuLinkClasses[1],this.selectedMenuLinkClasses[2]);
+    document.getElementById(elementId)?.classList.add('selected-nav-menu');
   }
   clearHighlight(){
-    let links = document.getElementsByClassName("bg-blue-500/13")
+    let links = document.getElementsByClassName("selected-nav-menu")
     for(let link of links){
-      link.classList.remove(this.selectedMenuLinkClasses[0],this.selectedMenuLinkClasses[1],this.selectedMenuLinkClasses[2]);
+      link.classList.remove('selected-nav-menu');
     }
   }
   doLogout(){

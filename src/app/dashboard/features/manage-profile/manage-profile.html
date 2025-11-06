@@ -5,20 +5,20 @@
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
           <div class="flex items-center">
             <p class="mb-0 dark:text-white/80">{{ "manage_profile_edit_profile_details_title" | translate}}</p>
-            <button type="button" [disabled]="canChangePassword" (click)="doChangePassword = true" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" style="background-color: rgb(45 56 135) !important;">{{ 'button_get_rest_password' | translate}}</button>
-            <button type="button" *ngIf="showSaveButton" (click)="saveChanges()" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" style="margin-left: 10px;">{{ 'button_save' | translate }}</button>
+            <button type="button" [disabled]="canChangePassword" (click)="doChangePassword = true" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85 second-button-background-style">{{ 'button_get_rest_password' | translate}}</button>
+            <button type="button" *ngIf="showSaveButton" (click)="saveChanges()" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in first-button-background-style border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85" style="margin-left: 10px;">{{ 'button_save' | translate }}</button>
           </div>
         </div>
         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pt-0 pb-0">
           <div class="flex items-center">
-            <a  (click)="doChangeProfilePicture = true" style="padding-left: 0px !important;" class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap px-4 transition-colors">
+            <a  (click)="doChangeProfilePicture = true" style="padding-left: 0px !important;white-space: break-spaces;" class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 flex items-center px-4 transition-colors">
               <div style="padding-left: 0px;padding-right: 0px;" class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">{{ "link_edit_profile_picture" | translate}}</span>
             </a>
 
-            <a  (click)="doShowOrderChart = true" style="padding-left: 0px !important;" class="ml-auto dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap px-4 transition-colors">
+            <a  (click)="doShowOrderChart = true" style="padding-left: 0px !important;white-space: break-spaces;" class="ml-auto dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap px-4 transition-colors">
               <div style="padding-left: 0px;padding-right: 0px;" class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="fa fa-eye" aria-hidden="true"></i>
               </div>
@@ -55,7 +55,7 @@
                 <label for="date-of-birth" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_date_birth_title' | translate}}</label>
                 <p-datePicker (onSelect)="setUserDetails()"
                               formControlName="dateOfBirth"
-                              [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('dateOfBirth')?.errors?.['required']}" dateFormat="dd.mm.yy" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"/>
+                              [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('dateOfBirth')?.errors?.['required']}" dateFormat="dd.mm.yy" class="dark:dark-calendar-bg dark:dark-calendar-text focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"/>
               </div>
             </div>
 
@@ -118,6 +118,7 @@
 </div>
 
 <p-dialog *ngIf="doChangePassword"
+          class="dark:dark-dialog"
           [dismissableMask]="true"
           [header]="'auth_reset_password_title' | translate"
           [modal]="true"

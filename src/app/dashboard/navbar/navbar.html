@@ -15,18 +15,13 @@
         <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease"></div>
       </div>
       <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-        <li class="flex items-center pl-4 xl:hidden">
-          <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
+        <li class="flex items-center pl-4 pr-4 xl:hidden">
+          <a (click)="sharedService.toggleMenu()" href="javascript:;" id="menu-toggle" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
             <div class="w-4.5 overflow-hidden">
               <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
               <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
               <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
             </div>
-          </a>
-        </li>
-        <li class="flex items-center px-4">
-          <a href="javascript:;" class="p-0 text-sm text-white transition-all ease-nav-brand">
-            <i fixed-plugin-button-nav class="cursor-pointer fa fa-cog"></i>
           </a>
         </li>
 
@@ -49,7 +44,7 @@
           </a>
 
           <ul id="dropdownMenu" dropdown-menu
-              class="text-sm transform-dropdown duration-250 min-w-44 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg bg-white px-2 py-4 text-left text-slate-500 opacity-0 transition-all">
+              class="dark:bg-slate-850 text-sm transform-dropdown duration-250 min-w-44 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg bg-white px-2 py-4 text-left text-slate-500 opacity-0 transition-all">
             <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;">
               <li class="relative mb-2 items-center" style="text-align: center;">
                 {{ 'navbar_notification_total_number_title' | translate:{number: (unreadCount$ | async) } }} <hr>
@@ -97,6 +92,7 @@
   </div>
 </nav>
 <p-dialog *ngIf="showDetails"
+          class="dark:dark-dialog"
           [dismissableMask]="true"
           [header]="'notification_details_title' | translate"
           [modal]="true"

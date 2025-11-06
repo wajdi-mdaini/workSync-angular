@@ -45,6 +45,8 @@ export interface Company {
   email: string;
   phone: number;
   website: string;
+  logoURL: string;
+  logoPublicId: string;
   companyCreator: User;
   teams: Team[];
   members: User[];

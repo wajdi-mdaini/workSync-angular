@@ -1,0 +1,14 @@
+@media( max-width: 324px){
+  body{
+    display: none !important;
+  }
+}
+@media( max-width: 990px) {
+  .app-body {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  p-toast{
+    max-width: 50% !important;
+  }
+}

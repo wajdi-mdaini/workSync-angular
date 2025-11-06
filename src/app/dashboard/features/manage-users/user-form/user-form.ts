@@ -50,7 +50,7 @@ export class UserForm implements OnInit {
   }
 
   initTeamsList() {
-    this.managerService.getCompanyTeams(this.sharedService.company).subscribe({
+    this.managerService.getCompanyTeams(this.sharedService.company.id).subscribe({
       next: (apiResponse: ApiResponse) => {
         this.teams = apiResponse.data;
       },

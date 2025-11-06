@@ -1,5 +1,6 @@
 <p-dialog
   [dismissableMask]="true"
+  class="dark:dark-dialog"
   [header]="( userToEdit.email != null ? 'manage_users_edit_user_dialog_header' : 'manage_users_add_user_dialog_header' ) | translate"
   [modal]="true"
   [(visible)]="showDialog"
@@ -12,7 +13,7 @@
           <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
             <div class="flex items-center">
               <p class="mb-0 dark:text-white/80">{{ "manage_profile_edit_profile_details_title" | translate}}</p>
-              <button type="button" *ngIf="showSaveButton" (click)="saveChanges()" class="inline-block px-8 py-2 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">{{ ( userToEdit.email != null ? 'button_save' : 'button_add_user' ) | translate }}</button>
+              <button type="button" *ngIf="showSaveButton" (click)="saveChanges()" class="inline-block px-8 py-2 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in first-button-background-style border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">{{ ( userToEdit.email != null ? 'button_save' : 'button_add_user' ) | translate }}</button>
             </div>
           </div>
           <form [formGroup]="formGroup" (keyup)="setUserDetails()">
@@ -44,7 +45,7 @@
                     <label for="date-of-birth" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_date_birth_title' | translate}}</label>
                     <p-datePicker (onSelect)="setDateOfBirth()"
                                   formControlName="dateOfBirth"
-                                  [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('dateOfBirth')?.errors?.['required']}" dateFormat="dd.mm.yy" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"/>
+                                  [ngClass]="{ 'border-red-500': isSaveButtonClicked && formGroup.get('dateOfBirth')?.errors?.['required']}" dateFormat="dd.mm.yy" class="dark:dark-calendar-bg dark:dark-calendar-text focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"/>
                   </div>
                 </div>
                 <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">

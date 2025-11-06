@@ -14,8 +14,8 @@ export class ManagerService {
     return this.http.get<ApiResponse>(environment.apiBaseUrl + '/management/getallemployees?id=' + companyId ,{withCredentials: true});
   }
 
-  getCompanyTeams(company: Company): Observable<ApiResponse>{
-    return this.http.post<ApiResponse>(environment.apiBaseUrl + '/management/getteams',company,{withCredentials: true});
+  getCompanyTeams(companyId: number): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/management/getteams?id='+ companyId,{withCredentials: true});
   }
 
   editTeam(editTeamRequest: EditTeamRequest): Observable<ApiResponse>{

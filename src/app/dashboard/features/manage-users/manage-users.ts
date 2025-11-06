@@ -24,7 +24,7 @@ import {OrderChart} from '../order-chart/order-chart';
 })
 export class ManageUsers implements OnInit {
   screenHeaderLabel: string = 'manage_users_default_header';
-  usersList!: User[];
+  usersList: User[] = [];
   userToEdit!: User;
   userToView!: User;
   showAddDialog: boolean = false;

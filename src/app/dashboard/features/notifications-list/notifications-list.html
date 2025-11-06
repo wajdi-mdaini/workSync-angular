@@ -9,11 +9,12 @@
         <div class="flex-auto px-0 pt-0 pb-2">
           <div class="p-0 overflow-x-auto ps">
             <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-              <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="notifications.length == 0">
+              <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="notifications?.length == 0">
                 <div class=" text-center py-2 px-3 text-gray-500 text-xs">{{ 'notification_empty_list_message' | translate}}</div>
               </div>
               <p-table
                 [value]="notifications"
+                class="dark:dark-table"
                 [rowHover]="true"
                 [paginator]="true" [rows]="10"
                 [tableStyle]="{ 'min-width': '50rem' }"
@@ -44,6 +45,7 @@
 
 <p-dialog *ngIf="showDetails"
   [dismissableMask]="true"
+  class="dark:dark-dialog"
   [header]="'notification_details_title' | translate"
   [modal]="true"
   [(visible)]="showDetails"

@@ -64,7 +64,7 @@ export class Signin implements OnInit {
             this.blockedUser = false;
             this.wrongCritical = false;
             this.sharedService.principal = user;
-            this.sharedService.company = company;
+            this.sharedService.setCompanyAndApplyBranding(company);
             this.setStoredEmail();
             if(user.firstLogin) this.sharedService.customNavigation('/auth/firstlogin','navbar_screen_title_dashboard');
             else {
