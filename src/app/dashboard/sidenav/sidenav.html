@@ -19,7 +19,7 @@
         src="assets/img/workSync-logo-small-dark.svg"
         alt="main_logo"
         style="border-radius: 15%"
-        class="logo-image object-cover rounded-[15%] flex-shrink-0 dark:inline"
+        class="logo-image object-cover rounded-[15%] hidden flex-shrink-0 dark:inline"
       />
       <img
         *ngIf="sharedService.company.logoURL && sharedService.company.logoURL != ''"
@@ -101,6 +101,14 @@
             <i class="fa fa-users" aria-hidden="true"></i>
           </div>
           <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">{{ "link_manage_users" | translate}}</span>
+        </a>
+      </li>
+      <li class="mt-0.5 w-full" *ngIf="sharedService?.principal?.role == Role.ADMIN || sharedService?.principal?.role == Role.MANAGER">
+        <a id="holidays-link" (click)="navigate('dashboard/holidays','navbar_screen_title_manage_holidays')" class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors">
+          <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+          </div>
+          <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">{{ "home_nav_bar_holiday_link" | translate}}</span>
         </a>
       </li>
 

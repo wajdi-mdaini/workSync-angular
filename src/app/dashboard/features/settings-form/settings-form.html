@@ -1,0 +1,133 @@
+<div style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;">
+  <li class="relative mb-2 items-center" style="text-align: center;">
+    {{ 'settings_dialog_title' | translate }}
+    <hr>
+  </li>
+</div>
+<ng-container>
+  <form [formGroup]="formGroup" style="max-height: 200px;overflow-x: scroll;">
+    <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'settings_dialog_reset_password_settings_title' | translate}}</p>
+    <li class="relative mb-2 flex items-center justify-between gap-3">
+      <div
+        class="text-sm leading-normal dark:text-white dark:opacity-60"
+        [innerHTML]="'settings_dialog_min_password_length' | translate">
+      </div>
+      <input
+        (blur)="saveChanges()"
+        style="max-width: 80px; padding-left: 5px; padding-right: 5px;"
+        min="8"
+        max="20"
+        step="1"
+        formControlName="passwordMinLength"
+        [ngClass]="{'invalid-form': isTouched && (formGroup.get('passwordMinLength')?.errors?.['max'] || formGroup.get('passwordMinLength')?.errors?.['min'])}"
+        (keyup)="onMaxAndMinLimitPasswordLength($event)"
+        type="number"
+        class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline rounded-lg border border-solid border-gray-300 bg-white py-2 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+        aria-label="verification code length"
+      />
+    </li>
+    <li class="relative mb-2 flex items-center justify-between gap-3">
+      <div
+        class="text-sm leading-normal dark:text-white dark:opacity-60"
+        [innerHTML]="'settings_dialog_verification_code_length' | translate">
+      </div>
+      <input
+        (blur)="saveChanges()"
+        style="max-width: 80px; padding-left: 5px; padding-right: 5px;"
+        min="0"
+        max="6"
+        step="1"
+        formControlName="verificationCodeLength"
+        [ngClass]="{'invalid-form': isTouched && formGroup.get('verificationCodeLength')?.errors?.['max']}"
+        (keyup)="onMaxLimitVerificationCodeLength($event)"
+        type="number"
+        class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline rounded-lg border border-solid border-gray-300 bg-white py-2 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+        aria-label="verification code length"
+      />
+    </li>
+    <li class="relative mb-2 flex items-center justify-between gap-3">
+      <div
+        class="text-sm leading-normal dark:text-white dark:opacity-60"
+        [innerHTML]="'settings_dialog_verification_code_expire_in' | translate">
+      </div>
+      <input
+        (blur)="saveChanges()"
+        style="max-width: 80px; padding-left: 5px; padding-right: 5px;"
+        min="0"
+        max="5"
+        step="1"
+        formControlName="verificationCodeExpireIn"
+        [ngClass]="{'invalid-form': isTouched && formGroup.get('verificationCodeExpireIn')?.errors?.['max']}"
+        (keyup)="onMaxLimitVerificationCodeExpireIn($event)"
+        type="number"
+        class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline rounded-lg border border-solid border-gray-300 bg-white py-2 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+        aria-label="verification code expire in"
+      />
+    </li>
+
+    <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+    <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'settings_dialog_token_settings_title' | translate}}</p>
+    <li class="relative mb-2 flex items-center justify-between gap-3">
+      <div
+        class="text-sm leading-normal dark:text-white dark:opacity-60"
+        [innerHTML]="'settings_dialog_jwt_token_expire_in' | translate">
+      </div>
+      <input
+        (blur)="saveChanges()"
+        style="max-width: 80px; padding-left: 5px; padding-right: 5px;"
+        min="0"
+        max="60"
+        step="1"
+        formControlName="jwtTokenExpireIn"
+        [ngClass]="{'invalid-form': isTouched && formGroup.get('jwtTokenExpireIn')?.errors?.['max']}"
+        (keyup)="onMaxLimitJwtTokenExpireIn($event)"
+        type="number"
+        class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline rounded-lg border border-solid border-gray-300 bg-white py-2 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+        aria-label="jwt token expire in"
+      />
+    </li>
+
+    <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+    <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'settings_dialog_holiday_settings_title' | translate}}</p>
+    <li class="relative mb-2 flex items-center justify-between gap-3">
+      <div
+        class="text-sm leading-normal dark:text-white dark:opacity-60"
+        [innerHTML]="'settings_dialog_holiday_days_per_month' | translate">
+      </div>
+      <input
+        (blur)="saveChanges()"
+        style="max-width: 80px; padding-left: 5px; padding-right: 5px;"
+        min="0"
+        max="20"
+        step="1"
+        formControlName="holidayDaysPerMonth"
+        [ngClass]="{'invalid-form': isTouched && formGroup.get('holidayDaysPerMonth')?.errors?.['max']}"
+        (keyup)="onMaxLimitHolidayDaysPerMonth($event)"
+        type="number"
+        class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline rounded-lg border border-solid border-gray-300 bg-white py-2 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+        aria-label="holiday days per month"
+      />
+    </li>
+
+    <li class="relative mb-2 flex items-center justify-between gap-3">
+      <div
+        class="text-sm leading-normal dark:text-white dark:opacity-60"
+        [innerHTML]="'settings_dialog_sickness_leaver_per_year' | translate">
+      </div>
+      <input
+        (blur)="saveChanges()"
+        style="max-width: 80px; padding-left: 5px; padding-right: 5px;"
+        min="0"
+        max="20"
+        step="1"
+        formControlName="sicknessLeaverDaysPerYear"
+        [ngClass]="{'invalid-form': isTouched && formGroup.get('sicknessLeaverDaysPerYear')?.errors?.['max']}"
+        (keyup)="onMaxLimitSicknessLeaverDaysPerYear($event)"
+        type="number"
+        class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline rounded-lg border border-solid border-gray-300 bg-white py-2 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+        aria-label="verification code length"
+      />
+    </li>
+
+  </form>
+</ng-container>

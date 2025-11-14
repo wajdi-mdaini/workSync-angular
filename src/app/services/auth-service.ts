@@ -31,8 +31,8 @@ export class AuthService {
   getVerificationCode(email: string): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/resetpasswordconfirmation?email=' + email,{})
   }
-  checkVerificationCode(code: string): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(environment.apiBaseUrl+'/auth/resetpasswordcodecheck?code=' + code)
+  checkVerificationCode(code: string,email: string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl+'/auth/resetpasswordcodecheck?code=' + code + '&email=' + email,{ withCredentials: true })
   }
   changePassword(changePasswordRequest: ChangePasswordRequest): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(environment.apiBaseUrl+'/auth/changepassword',changePasswordRequest,{ withCredentials: true })

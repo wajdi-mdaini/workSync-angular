@@ -1,32 +1,33 @@
-import {Component, HostListener , NgZone} from '@angular/core';
+import {Component, HostListener, NgZone} from '@angular/core';
+import {Router} from '@angular/router';
 import {Shared} from '../../services/shared';
-import {TranslatePipe} from '@ngx-translate/core';
-import {ApiResponse, NotificationDTO, Role} from '../../services/models';
-import SockJS from 'sockjs-client';
-import {Client, Message} from '@stomp/stompjs';
-
-import {BehaviorSubject, map} from 'rxjs';
-import {environment} from '../../config/environment';
-import {AsyncPipe, CommonModule, NgFor, NgIf} from '@angular/common';
-import {PublicService} from '../../services/public-service';
-import {TimeAgoPipe} from '../../pipes/time-ago-pipe';
-import {Dialog} from 'primeng/dialog';
-import {NotificationDetails} from '../features/notification-details/notification-details';
+import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {Select} from 'primeng/select';
 import {FormsModule} from '@angular/forms';
-import {SettingsForm} from '../features/settings-form/settings-form';
+import {TranslatePipe} from '@ngx-translate/core';
+import {TimeAgoPipe} from '../../pipes/time-ago-pipe';
+import {Client, Message} from '@stomp/stompjs';
+import {BehaviorSubject, map} from 'rxjs';
+import {ApiResponse, NotificationDTO, Role} from '../../services/models';
+import {PublicService} from '../../services/public-service';
+import SockJS from 'sockjs-client';
+import {environment} from '../../config/environment';
+import {Dialog} from 'primeng/dialog';
+import {NotificationDetails} from '../../dashboard/features/notification-details/notification-details';
+
 @Component({
   selector: 'app-navbar',
   imports: [
-    CommonModule,
-    TranslatePipe,
-    AsyncPipe,
-    TimeAgoPipe,
-    Dialog,
-    NotificationDetails,
+    NgIf,
     Select,
     FormsModule,
-    SettingsForm
+    TranslatePipe,
+    AsyncPipe,
+    NgForOf,
+    TimeAgoPipe,
+    NgClass,
+    Dialog,
+    NotificationDetails
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss'
@@ -37,13 +38,12 @@ export class Navbar {
   notifications$ = this.notificationsSubject.asObservable();
   dropdownMenu?: any ;
   notificationShown: boolean = false ;
-  SettingsShown: boolean = false ;
   showDetails: boolean = false ;
   unreadCount$ = this.notifications$.pipe(
     map(list => (list ?? []).filter(n => !n.read).length)
   );
   notificationDto?: NotificationDTO
-  constructor(public sharedService: Shared,private ngZone: NgZone,private publicService: PublicService) {
+  constructor(public sharedService: Shared,private ngZone: NgZone,private publicService: PublicService,private router: Router) {
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS(environment.apiBaseUrl + '/ws'),
       reconnectDelay: 5000
@@ -52,13 +52,13 @@ export class Navbar {
     this.stompClient.onConnect = () => {
       this.stompClient.subscribe('/topic/notifications', (message: Message) => {
         const notification = JSON.parse(message.body);
-          this.addNotification(notification);
+        this.addNotification(notification);
       });
     };
 
 
-      this.stompClient.activate();
-      this.getAllNotifications();
+    this.stompClient.activate();
+    this.getAllNotifications();
   }
 
   getAllNotifications(){
@@ -89,24 +89,11 @@ export class Navbar {
   }
 
   toggleDropdown(event: Event) {
-    let settingMenu = document.getElementById('dropdownMenuSettings')
-    if(settingMenu) settingMenu.classList.remove('show');
-    this.SettingsShown = false
     this.dropdownMenu = document.getElementById('dropdownMenu')
     event.preventDefault();
     this.dropdownMenu.classList.toggle('show');
     this.notificationShown = !this.notificationShown;
     if(!this.notificationShown) this.setNotifications();
-  }
-
-  toggleSettingsDropdown(event: Event) {
-    let notificationMenu = document.getElementById('dropdownMenu')
-    if(notificationMenu) notificationMenu.classList.remove('show');
-    this.notificationShown = false
-    this.dropdownMenu = document.getElementById('dropdownMenuSettings')
-    event.preventDefault();
-    this.dropdownMenu.classList.toggle('show');
-    this.SettingsShown = !this.SettingsShown;
   }
 
   private setNotificationsReadStatus() {
@@ -117,15 +104,6 @@ export class Navbar {
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     if (this.notificationShown) {
-      const target = event.target as HTMLElement;
-      if (!this.dropdownMenu.contains(target) &&
-        !target.closest('[dropdown-trigger]')) {
-        this.dropdownMenu.classList.remove('show');
-        this.notificationShown = false;
-        this.setNotifications();
-      }
-    }
-    if (this.SettingsShown) {
       const target = event.target as HTMLElement;
       if (!this.dropdownMenu.contains(target) &&
         !target.closest('[dropdown-trigger]')) {
@@ -213,5 +191,8 @@ export class Navbar {
     }
   }
 
-  protected readonly Role = Role;
+  navigate(url: string) {
+    this.router.navigate([url]);
+  }
+
 }

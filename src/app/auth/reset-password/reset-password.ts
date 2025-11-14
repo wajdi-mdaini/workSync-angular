@@ -26,6 +26,7 @@ import {Shared} from '../../services/shared';
 export class ResetPassword {
   @Input() useCurrentPassword: boolean = false;
   @Input() redirectionPath: string = '/auth/login';
+  @Input() passwordLength: number = 8;
   @Output() isChanged = new EventEmitter<boolean>();
   password: string = '';
   confirmPassword: string = '';
@@ -49,7 +50,7 @@ export class ResetPassword {
   validatePassword() {
     const pwd = this.password;
 
-    this.conditions.minLength   = pwd.length >= 8;
+    this.conditions.minLength   = pwd.length >= this.passwordLength;
     this.conditions.upperCase   = /[A-Z]/.test(pwd);
     this.conditions.lowerCase   = /[a-z]/.test(pwd);
     this.conditions.number      = /\d/.test(pwd);

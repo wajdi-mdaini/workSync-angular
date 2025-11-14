@@ -1,0 +1,25 @@
+[dropdown-menu].show {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  margin-top: 0.5rem; /* so it drops down */
+}
+.notification-text{
+  max-width: 87%;
+  white-space: normal;
+  word-wrap: break-word;
+}
+.notification-circle{
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: sans-serif;
+  font-size: 1.2em;
+  background-color: rgb(245 75 74) ;
+}
+.unread-notification{
+  background-color: #3e463e14 !important;
+}

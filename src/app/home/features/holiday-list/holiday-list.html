@@ -1,0 +1,93 @@
+<div class="w-full p-6 mx-auto" xmlns="http://www.w3.org/1999/html">
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <div
+        class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+        <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+          <div class="flex items-center">
+            <p class="mb-0 dark:text-white/80" *ngIf="showSaveButton">{{"book_holiday_add_holiday_list_title" | translate }}</p>
+            <button (click)="doSave()" *ngIf="showSaveButton && ranges.length > 0" type="button" [disabled]="false"
+                    class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85 second-button-background-style">{{ 'button_save_holiday' | translate }}
+            </button>
+
+          </div>
+        </div>
+        <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="ranges.length > 0">
+        <p-table
+          [value]="ranges"
+          class="dark:dark-table"
+          [rowHover]="true"
+          [paginator]="true" [rows]="10"
+          [tableStyle]="{ 'min-width': 'auto' }"
+          [rowsPerPageOptions]="[5, 10, 20]"
+        >
+          <ng-template #header>
+            <tr>
+              <th class="py-2 px-3 text-gray-500 text-xs" *ngIf="isRequests">{{ 'table_holidays_user_details' | translate }}</th>
+              <th class="py-2 px-3 text-gray-500 text-xs" style="width:30%">{{ 'table_holidays_from' | translate }}</th>
+              <th class="py-2 px-3 text-gray-500 text-xs" style="width:30%">{{ 'table_holidays_to' | translate }}</th>
+              <th class="py-2 px-3 text-gray-500 text-xs" style="width:30%" *ngIf="!showSaveButton || isRequests">{{ 'table_holidays_at' | translate }}</th>
+              <th class="py-2 px-3 text-gray-500 text-xs" style="width:30%">{{ 'table_holidays_type' | translate }}</th>
+              <th class="py-2 px-3 text-gray-500 text-xs" style="width:30%" *ngIf="!showSaveButton && !isRequests">{{ 'table_holidays_status' | translate }}</th>
+              <th></th>
+            </tr>
+            <tr>
+            <th *ngIf="isRequests">
+              <p-columnFilter class="text-xs" type="text" field="email" [placeholder]=" 'table_search_input_placeholder' | translate" ariaLabel="Filter Name" filterOn="input"></p-columnFilter>
+            </th>
+          </tr>
+          </ng-template>
+          <ng-template #body let-holiday>
+            <tr class="cursor-pointer">
+              <td class="py-2 px-3 text-gray-500 text-xs" *ngIf="isRequests">
+                <div class="flex items-center gap-2">
+                  <img
+                    [src]=" holiday.profilePictureUrl "
+                    [alt]="holiday.fullName"
+                    style="width: 40px;border-radius: 50%;object-fit: cover;" />
+                  <div>{{ holiday.fullName }}<b style="font-size: 10px;"> {{ holiday.email }}</b></div>
+                </div>
+              </td>
+              <td class="py-2 px-3 text-gray-500 text-xs">{{ holiday.from | date:'short' }}</td>
+              <td class="py-2 px-3 text-gray-500 text-xs">{{ holiday.to | date:'short' }}</td>
+              <td class="py-2 px-3 text-gray-500 text-xs" *ngIf="!showSaveButton || isRequests">{{ holiday.at | date:'short' }}</td>
+              <td class="py-2 px-3 text-gray-500 text-xs">{{ holiday.type?.label }}</td>
+              <td class="py-2 px-3 text-gray-500 text-xs" *ngIf="!showSaveButton && !isRequests">
+                <div *ngIf="holiday.status == HolidayStatus.APPROVED" class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
+                  {{ holiday.status }}
+                </div>
+                <div *ngIf="holiday.status == HolidayStatus.WAITING" class="bg-gradient-to-tl from-slate-600 to-slate-300 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
+                  {{ holiday.status }}
+                </div>
+                <div *ngIf="holiday.status == HolidayStatus.REJECTED" class="bg-gradient-to-tl from-red-600 to-orange-600 to-slate-300 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
+                  {{ holiday.status }}
+                </div>
+              </td>
+              <td style="text-align: right;">
+                <a *ngIf="showSaveButton" (click)="deDelete(holiday)" title="{{ 'delete_trash_title' | translate }}" style="color: #f5563f;font-size: 12px;">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+
+                <a *ngIf="isRequests" (click)="approveRequest(holiday.id)" title="{{ 'validate_check_title' | translate }}" style="color: rgb(45 206 137);font-size: 15px;">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </a>
+
+                <a *ngIf="isRequests" class="pl-6" (click)="rejectRequest(holiday.id)" title="{{ 'cancel_x_title' | translate }}" style="color: #f5563f;font-size: 15px;">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+
+                <a *ngIf="!showSaveButton && !isRequests && holiday.status == HolidayStatus.WAITING" class="pl-6" (click)="cancelRequest(holiday.id)" title="{{ 'cancel_x_title' | translate }}" style="color: #f5563f;font-size: 15px;">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        </div>
+        <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="ranges.length == 0">
+          <div class=" text-center py-2 px-3 text-gray-500 text-xs">{{ 'book_holiday_empty_to_list_message' | translate}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

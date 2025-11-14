@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
-import {Shared} from '../../services/shared';
+import {Router, RouterOutlet} from "@angular/router";
+import {FormsModule} from '@angular/forms';
+import {Footer} from '../../dashboard/footer/footer';
+import {Navbar} from '../navbar/navbar';
 
 @Component({
   selector: 'app-layout',
-  imports: [],
+  imports: [
+    RouterOutlet,
+    FormsModule,
+    Footer,
+    Navbar
+  ],
   templateUrl: './layout.html',
   styleUrl: './layout.scss'
 })
 export class Layout {
-  constructor(private sharedService: Shared) {
-  }
 }

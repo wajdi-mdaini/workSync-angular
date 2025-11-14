@@ -24,10 +24,21 @@
             </div>
           </a>
         </li>
+
+
         <li class="flex items-center px-2">
           <p-select optionLabel="code" [options]="sharedService.translationLanguagesList" [(ngModel)]="sharedService.selectedLanguage" (onChange)="sharedService.switchLang()" class="w-full md:w-56"/>
         </li>
 
+        <li *ngIf="sharedService.principal.role == Role.ADMIN" class="flex items-center px-4">
+          <a  (click)="toggleSettingsDropdown($event)" dropdown-trigger class="p-0 text-sm text-white transition-all ease-nav-brand">
+            <i class="cursor-pointer fa fa-cog"></i>
+          </a>
+          <ul id="dropdownMenuSettings" dropdown-menu
+              class="dark:bg-slate-850 text-sm transform-dropdown duration-250 min-w-44 pointer-events-none absolute right-16 top-6 z-50 origin-top list-none rounded-lg bg-white px-2 py-4 text-left text-slate-500 opacity-0 transition-all">
+            <app-settings-form></app-settings-form>
+          </ul>
+        </li>
         <!-- notifications -->
 
         <li class="relative flex items-center pr-2">

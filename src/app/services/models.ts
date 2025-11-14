@@ -5,6 +5,8 @@ export interface User {
   lastname: string;
   dateOfBirth: any;
   creationDate: number;
+  holidaySold: number;
+  sicknessLeaverSold: number;
   lastPasswordResetDate: number;
   firstLogin: boolean;
   locked: boolean;
@@ -37,6 +39,12 @@ export interface Team{
 export enum Role {
   ADMIN = "ADMIN",MANAGER="MANAGER",EMPLOYEE="EMPLOYEE"
 }
+export enum HolidayType {
+  SICKNESS_LEAVER = "SICKNESS_LEAVER",ANNUAL_LEAVER="ANNUAL_LEAVER",PERMISSION="PERMISSION"
+}
+export enum HolidayStatus {
+  WAITING = "WAITING",APPROVED="APPROVED",REJECTED="REJECTED"
+}
 export interface Company {
   id: number
   name: string;
@@ -46,11 +54,21 @@ export interface Company {
   phone: number;
   website: string;
   logoURL: string;
+  settings: CompanySettings;
   logoPublicId: string;
   companyCreator: User;
   teams: Team[];
   members: User[];
   branding: Branding[];
+}
+export interface CompanySettings {
+  id: number;
+  verificationCodeLength: number;
+  verificationCodeExpireIn: number;
+  jwtTokenExpireIn: number;
+  holidayDaysPerMonth: number;
+  sicknessLeaverDaysPerYear: number;
+  passwordMinLength: number;
 }
 export interface CustomNotification {
   id: number;
@@ -167,4 +185,20 @@ export interface DocumentDTO {
   description: string;
   toUserEmail: string;
   documentId: number;
+}
+export interface Holiday{
+  id: number;
+  from: number;
+  to: number;
+  at: number;
+  user: User;
+  type: HolidayType;
+  status: HolidayStatus;
+}
+export interface BookHolidayDTO{
+  from: number;
+  to: number;
+  countedDays: number;
+  type: HolidayType;
+  status: HolidayStatus;
 }

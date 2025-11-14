@@ -20,7 +20,7 @@ export const authGuard: CanActivateFn = (route, state) => {
         (!sharedService.principal.firstLogin && state.url.endsWith('firstlogin')) ) {
         sharedService.logout();
         return false;
-      }else{
+      }else if(!sharedService.principal.firstLogin){
         if( ((sharedService.principal.role == Role.ADMIN || sharedService.principal.role == Role.MANAGER) && !state.url.includes('dashboard') )||
           ((sharedService.principal.role == Role.ADMIN || sharedService.principal.role == Role.MANAGER) && state.url.includes('home')) ){
           sharedService.logout();

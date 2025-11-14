@@ -35,6 +35,7 @@ export class Forgetpassword {
   wrongCodeError: boolean = false;
   minutesLeft: number = 1;
   secondsLeft: number = 0;
+  passwordMinLength: number = 0;
   private timerSubscription!: Subscription;
   constructor(public sharedStore: Shared,private authService: AuthService) {}
   getVerificationCode(){
@@ -43,7 +44,10 @@ export class Forgetpassword {
         if(apiResponse.success){
           this.isFirstStep = false;
           this.isSecondStep = true;
-          this.fullName = apiResponse.data;
+          this.fullName = apiResponse.data.fullName;
+          this.sharedStore.sharedSettings.verificationCodeLength = apiResponse.data.verificationCodeLength;
+          this.passwordMinLength = apiResponse.data.passwordMinLength;
+          this.sharedStore.sharedSettings.verificationCodeExpireIn = apiResponse.data.verificationCodeExpireIn;
           this.minutesLeft = this.sharedStore.sharedSettings.verificationCodeExpireIn;
           this.secondsLeft = 0;
           this.startTimer(this.minutesLeft * 60)
@@ -69,7 +73,8 @@ export class Forgetpassword {
   checkVerificationCode(){
     if(this.verificationCode.length >= this.sharedStore.sharedSettings.verificationCodeLength){
       this.authService.checkVerificationCode(
-        this.verificationCode.substring(0,this.sharedStore.sharedSettings.verificationCodeLength)
+        this.verificationCode.substring(0,this.sharedStore.sharedSettings.verificationCodeLength),
+        this.email
       ).subscribe({
       next:(apiResponse:ApiResponse) => {
         if (apiResponse.success) {

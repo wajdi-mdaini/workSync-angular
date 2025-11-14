@@ -21,7 +21,12 @@ html:not(.dark) .breadcrumb-text-color li a{
   }
   color: var(--second_button_background-color) !important;
 }
-
+#dropdownMenu{
+  border: 1px solid var(--dashboard_header_background-color) !important;
+}
+#dropdownMenuSettings{
+  border: 1px solid var(--dashboard_header_background-color) !important;
+}
 .to-gold {
   --tw-gradient-to: rgb(218, 165, 32);
 }
@@ -256,6 +261,7 @@ input:disabled {
   max-width: 30% !important;
 }
 
+app-holiday-list,
 app-document-list{
   .p-datatable-tbody > tr > td,
   .p-datatable-thead > tr > th{
@@ -270,7 +276,27 @@ app-document-list{
     width: 12px !important;
   }
 }
+.p-button-outlined {
+  border-color: var(--first_button_background-color) !important;
+  color: var(--first_button_background-color) !important;
+}
+.p-button:not(.p-button-outlined,.p-button-icon-only){
+  background: var(--first_button_background-color) !important;
+  border-color: var(--second_button_background-color) !important;
+}
+.p-button-outlined:hover {
+  background: transparent !important;
+  border-color: var(--second_button_background-color) !important;
+  color: var(--second_button_background-color) !important;
+}
 
+.p-datepicker-day-selected {
+  background: var(--first_button_background-color) !important;
+}
+.p-datepicker-day-selected-range {
+  color: var(--second_button_background-color) !important;
+  background: transparent !important;
+}
 app-notifications-list{
   .p-datatable-tbody > tr > td,
   .p-datatable-thead > tr > th{

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ApiResponse, Branding, Company, CompanyDTO} from './models';
+import {ApiResponse, Branding, Company, CompanyDTO, CompanySettings} from './models';
 import {Observable} from 'rxjs';
 import {environment} from '../config/environment';
 
@@ -17,5 +17,8 @@ export class CompanyService {
   }
   setUpBranding(companyId: number,brandingList: Branding[]): Observable<ApiResponse>{
     return this.http.put<ApiResponse>(environment.apiBaseUrl + '/company/brandingsetup?id=' + companyId, brandingList ,{withCredentials: true});
+  }
+  setCompanySettings(companySettings: CompanySettings): Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(environment.apiBaseUrl + '/company/update-settings', companySettings ,{withCredentials: true});
   }
 }

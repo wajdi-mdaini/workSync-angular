@@ -1,0 +1,98 @@
+<div class="w-full p-6 mx-auto" xmlns="http://www.w3.org/1999/html">
+  <div class="flex flex-wrap -mx-3">
+    <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+      <div
+        class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+        <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+          <div class="flex items-center">
+            <p class="mb-0 dark:text-white/80">{{ "book_holiday_header" | translate }}</p>
+          </div>
+        </div>
+        <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+        <div class="flex-auto p-6">
+        <div class="flex mb-4 gap-2 justify-end">
+          <p-button (onClick)="sharedStore.activeHolidayAccordingPanel = '0'" [label]="'book_holiday_title' | translate" [outlined]="sharedStore.activeHolidayAccordingPanel !== '0'" />
+          <p-button (onClick)="sharedStore.activeHolidayAccordingPanel = '1'" [label]="'book_holiday_holidays_list' | translate" [outlined]="sharedStore.activeHolidayAccordingPanel !== '1'" />
+          <p-button *ngIf="sharedStore.principal.role != Role.EMPLOYEE" (onClick)="sharedStore.activeHolidayAccordingPanel = '2'" [label]=" 'book_holiday_holiday_requests_list' | translate " [outlined]="sharedStore.activeHolidayAccordingPanel !== '2'" />
+        </div>
+
+        <p-accordion [(value)]="sharedStore.activeHolidayAccordingPanel">
+          <p-accordion-panel value="0">
+            <p-accordion-header>{{ 'book_holiday_title' | translate }}</p-accordion-header>
+            <p-accordion-content>
+              <div class="flex flex-wrap -mx-3">
+                <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
+                  <p class="leading-normal dark:text-white dark:opacity-60 text-sm">{{ 'book_holiday_select_holiday_type_message' | translate }}</p>
+                </div>
+                <div class="w-full max-w-full px-3 shrink-0 md:w-4/12 md:flex-0">
+                  <p-select
+                    [options]="holidayTypes"
+                    [(ngModel)]="selectedType"
+                    [placeholder]=" 'book_holiday_select_holiday_type_placeholder' | translate"
+                    [ngClass]="{ 'border-red-500' : selectTypeError }"
+                    optionLabel="label"
+                    optionValue="value"
+                    [showClear]="true"
+                    [filter]="false">
+                    <ng-template let-value pTemplate="selectedItem">
+                      {{ value.label }}
+                    </ng-template>
+                    <ng-template let-value pTemplate="item">
+                      {{ value.label }}
+                    </ng-template>
+                  </p-select>
+                </div>
+              </div>
+              <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+
+              <p class="leading-normal dark:text-white dark:opacity-60 text-sm">{{ 'book_holiday_calendar_title' | translate }}</p>
+              <span *ngIf="wrongDateSelectedError" style="color: rgb(245 75 74)" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "book_holiday_wrong_selected_date_error" | translate}} !</span></span>
+              <span *ngIf="wrongDaysNumberError" style="color: rgb(245 75 74)" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "book_holiday_wrong_selected_days_number_error" | translate}} !</span></span>
+              <span *ngIf="selectTypeError" style="color: rgb(245 75 74)" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "book_holiday_empty_holiday_type_error" | translate}} !</span></span>
+              <div class="flex flex-wrap -mx-3">
+                <div class="w-full max-w-full shrink-0 md:w-4/12 md:flex-0">
+
+                  <p-datePicker *ngIf="calendarReadyToDisplay"
+                    [disabledDates]="disabledDates"
+                    (onSelect)="addRangeToList()"
+                    [(ngModel)]="selectedRange"
+                    selectionMode="range"
+                    [readonlyInput]="true"
+                    [inline]="true"
+                  />
+                </div>
+                <div class="w-full max-w-full shrink-0 md:w-8/12 md:flex-0">
+                  <app-holiday-list (deleteNewHolidayList)="deleteNewHolidayFromList($event)"
+                                    (doSaveNewHoliday)="doSaveNewHoliday()"
+                                    *ngIf="newHolidaysRanges.length > 0"
+                                    [showSaveButton]="true"
+                                    [ranges]="newHolidaysRanges"></app-holiday-list>
+                </div>
+              </div>
+            </p-accordion-content>
+          </p-accordion-panel>
+          <p-accordion-panel value="1">
+            <p-accordion-header>{{ 'book_holiday_holidays_list' | translate}}</p-accordion-header>
+            <p-accordion-content>
+              <app-holiday-list [ranges]="currentUserHolidays" (refreshCurrentHolidays)="refreshCurrentUserHolidaysList($event)"></app-holiday-list>
+            </p-accordion-content>
+          </p-accordion-panel>
+          <p-accordion-panel value="2" *ngIf="sharedStore.principal.role != Role.EMPLOYEE">
+            <p-accordion-header>{{ 'book_holiday_holiday_requests_list' | translate }}</p-accordion-header>
+            <p-accordion-content>
+              <app-holiday-list [ranges]="holidayRequests" (refreshHolidayRequests)="refreshHolidayRequests()" [isRequests]="true"></app-holiday-list>
+            </p-accordion-content>
+          </p-accordion-panel>
+        </p-accordion>
+
+
+
+
+
+          <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

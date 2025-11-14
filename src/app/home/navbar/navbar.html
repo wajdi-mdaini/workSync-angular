@@ -1,0 +1,169 @@
+<nav class="top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
+  <div class="container flex items-center justify-between py-0 flex-wrap-inherit">
+    <div class="overflow-hidden max-w-[84%]">
+
+      <a (click)="navigate('home')" class="flex flex-wrap items-center px-4 py-6 m-0 text-sm text-slate-700 dark:text-white">
+        <!-- Logo -->
+        <img
+          *ngIf="!sharedService.company.logoURL || sharedService.company?.logoURL == ''"
+          src="assets/img/workSync-logo-small.svg"
+          alt="main_logo"
+          style="border-radius: 15%;max-width: 100px;"
+          class="logo-image object-cover flex-shrink-0 dark:hidden max-w-[20px]"
+        />
+        <img
+          *ngIf="!sharedService.company.logoURL || sharedService.company?.logoURL == ''"
+          src="assets/img/workSync-logo-small-dark.svg"
+          alt="main_logo"
+          style="border-radius: 15%;max-width: 100px;"
+          class="logo-image object-cover flex-shrink-0 dark:inline"
+        />
+        <img
+          *ngIf="sharedService.company.logoURL && sharedService.company.logoURL != ''"
+          [src]="sharedService.company.logoURL"
+          style="border-radius: 15%;max-width: 100px;"
+          alt="main_logo"
+          class="logo-image object-cover flex-shrink-0"
+        />
+
+        <!-- Company name -->
+        <span
+          class="ml-2 font-semibold leading-snug text-wrap break-words overflow-hidden text-ellipsis max-w-[75%]"
+        >
+      {{ sharedService.company.name }}
+    </span>
+      </a>
+    </div>
+
+
+    <div class="items-center flex-grow transition-all ease duration-350 lg-max:bg-white lg-max:max-h-0 lg-max:overflow-hidden basis-full rounded-2xl lg:flex lg:basis-auto">
+      <ul class="flex flex-col pl-0 mx-auto mb-0 list-none lg-max:py-2 lg:flex-row xl:ml-auto">
+        <li>
+          <a (click)="navigate('home')" class="flex items-center px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75" aria-current="page">
+            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-home opacity-60"></i>
+            {{ 'home_nav_bar_link' | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="navigate('home/profile')" class="block px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75">
+            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-user opacity-60"></i>
+            {{ 'home_nav_bar_profile_link' | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="navigate('home/events')" class="block px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75">
+            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-calendar opacity-60"></i>
+            {{ 'home_nav_bar_events_link' | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="navigate('home/documents')" class="block px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75">
+            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-file-text opacity-60"></i>
+            {{ 'home_nav_bar_documents_link' | translate }}
+          </a>
+        </li>
+        <li>
+          <a (click)="navigate('home/holidays')" class="block px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75">
+            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-long-arrow-left opacity-60"></i>
+            {{ 'home_nav_bar_holiday_link' | translate }}
+          </a>
+        </li>
+      </ul>
+
+
+
+
+      <li class="relative flex items-center pr-2">
+        <p class="hidden transform-dropdown-show"></p>
+        <a
+          class="block p-0 text-sm text-white transition-all ease-nav-brand"
+          dropdown-trigger
+          aria-expanded="false"
+          (click)="toggleDropdown($event)">
+          <i class="cursor-pointer fa fa-bell"></i>
+
+          <span
+            *ngIf="(unreadCount$ | async) as count"
+            class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+              <div class="notification-circle" *ngIf="count > 0">{{ count }}</div>
+            </span>
+        </a>
+
+        <ul id="dropdownMenu" dropdown-menu
+            class="dark:bg-slate-850 text-sm transform-dropdown duration-250 min-w-44 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg bg-white px-2 py-4 text-left text-slate-500 opacity-0 transition-all">
+          <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;">
+            <li class="relative mb-2 items-center" style="text-align: center;">
+              {{ 'navbar_notification_total_number_title' | translate:{number: (unreadCount$ | async) } }} <hr>
+            </li>
+          </div>
+          <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;" *ngIf="(notifications$ | async)?.length || 0 > 0">
+            <ng-container *ngFor="let notification of notifications$ | async">
+              <li [ngClass]="{'unread-notification' : !notification.read}" class="relative mb-2">
+                <a (click)="showDetailsDialog($event,notification)" class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors" href="javascript:;">
+                  <div class="flex py-1">
+                    <div class="my-auto">
+                      <img [src]="notification.fromProfilePictureUrl" class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
+                    </div>
+                    <div class="flex flex-col justify-center">
+                      <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span class="font-semibold">{{notification.titleLabel | translate}}</span></h6>
+                      <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80 notification-text"
+                         [innerHTML]="notification.messageLabel | translate:{ name: notification.fromName}">
+                      </p>
+                      <p class="pt-2 mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
+                        <i class="mr-1 fa fa-clock"></i>
+                        {{ notification.at | timeAgo }}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ng-container>
+          </div>
+          <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;" *ngIf="(notifications$ | async)?.length == 0">
+            <li class="relative mb-2 items-center" style="text-align: center;">
+              {{ 'navbar_notification_empty_list' | translate }}
+            </li>
+          </div>
+          <a style="text-align: center;"
+             class="block p-0 text-sm transition-all ease-nav-brand"
+             dropdown-trigger
+             aria-expanded="false"
+             (click)="showAllNotifications($event)">
+            {{ 'link_show_all_notifications_history' | translate }}
+          </a>
+        </ul>
+      </li>
+
+
+
+
+
+
+
+      <ul class="hidden pl-0 mb-0 list-none lg:block lg:flex-row">
+        <li>
+          <p-select optionLabel="code" [options]="sharedService.translationLanguagesList" [(ngModel)]="sharedService.selectedLanguage" (onChange)="sharedService.switchLang()" class="w-full md:w-56"/>
+        </li>
+      </ul>
+      <ul class="hidden mb-0 list-none lg:block lg:flex-row" style="padding-left: 0 !important;">
+        <li>
+          <a (click)="sharedService.logout()" title="logout" class="block px-2 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75">
+            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-power-off opacity-60"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<p-dialog *ngIf="showDetails"
+          class="dark:dark-dialog"
+          [dismissableMask]="true"
+          [header]="'notification_details_title' | translate"
+          [modal]="true"
+          [(visible)]="showDetails"
+          [style]="{ width: '75rem' }"
+          [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [maximizable]="true">
+  <app-notification-details [notificationId]="notificationDto?.id"></app-notification-details>
+</p-dialog>

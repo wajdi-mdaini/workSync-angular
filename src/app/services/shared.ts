@@ -10,6 +10,7 @@ import {filter} from 'rxjs';
   providedIn: 'root'
 })
 export class Shared {
+  activeHolidayAccordingPanel: any = '0';
   isMenuShown: boolean = false;
   menu:any;
   isDarkModeActive: boolean = false;

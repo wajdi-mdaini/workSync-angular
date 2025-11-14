@@ -13,7 +13,7 @@ import {Shared} from '../../services/shared';
 })
 export class FirstLogin {
 
-  constructor(private sharedService: Shared) {
+  constructor(public sharedService: Shared) {
   }
   get getRedirectionPath(): string {
     if(this.sharedService.principal?.role == Role.ADMIN || this.sharedService.principal?.role == Role.MANAGER)

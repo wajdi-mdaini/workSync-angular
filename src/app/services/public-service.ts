@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../config/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ApiResponse, CompanyDTO, Document, DocumentDTO, NotificationDTO} from './models';
+import {ApiResponse, BookHolidayDTO, CompanyDTO, Document, DocumentDTO, Holiday, NotificationDTO} from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +60,29 @@ export class PublicService {
 
   editDocument(documentDTO: DocumentDTO): Observable<ApiResponse> {
     return this.http.put<ApiResponse>(environment.apiBaseUrl + '/public/editdocument' , documentDTO,{ withCredentials: true });
+  }
+
+  holidayRequest(holidaysList: BookHolidayDTO[]): Observable<ApiResponse> {
+    return this.http.put<ApiResponse>(environment.apiBaseUrl + '/public/holidayrequest' , holidaysList,{ withCredentials: true });
+  }
+
+  getHolidayList(userEmail: string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/getholidays?id=' + userEmail,{ withCredentials: true });
+  }
+
+  getHolidayRequestsList(userEmail: string): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/getholidaysrequests?id=' + userEmail,{ withCredentials: true });
+  }
+
+  rejectHoliday(holidayId: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/rejectholidaysrequests?id=' + holidayId,{ withCredentials: true });
+  }
+
+  approveHoliday(holidayId: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/approveholidaysrequests?id=' + holidayId,{ withCredentials: true });
+  }
+
+  cancelHoliday(holidayId: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/cancelholidaysrequests?id=' + holidayId,{ withCredentials: true });
   }
 }

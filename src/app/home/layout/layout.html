@@ -1,0 +1,30 @@
+<div class="absolute w-full dark:hidden min-h-75 header-background-style"></div>
+
+<div class="row">
+
+
+  <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
+    <!-- Navbar -->
+    <app-navbar></app-navbar>
+    <!-- end Navbar -->
+    <!-- cards -->
+    <div class="col-lg-12" style="max-width: 98%">
+      <div class="row">
+
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+          <div class="w-full mx-auto app-body">
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+          </div>
+        </div>
+        <div class="col-lg-1"></div>
+      </div>
+    </div>
+    <!-- end cards -->
+  </main>
+
+
+  <script src="assets/js/fixed-plugin.js" async></script>
+
+
