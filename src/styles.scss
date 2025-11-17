@@ -248,6 +248,9 @@ input:disabled {
 .border-red-500 {
   border-color: rgb(245 75 74) !important;
 }
+.border-red-500-datepicker input{
+  border-color: rgb(245 75 74) !important;
+}
 .border-green-500 {
   border-color: rgb(45 206 137) !important;
 }
@@ -275,6 +278,20 @@ app-document-list{
   .p-paginator .p-icon{
     width: 12px !important;
   }
+}
+.p-multiselect-option.p-multiselect-option-selected.p-focus {
+  background: var(--second_button_background-color) !important;
+}
+.p-checkbox-checked .p-checkbox-box{
+  border-color: var(--first_button_background-color) !important;
+  background: var(--first_button_background-color) !important;
+}
+.p-multiselect-option.p-multiselect-option-selected {
+  background: var(--second_button_background-color) !important;
+  color: var(--p-multiselect-option-focus-color) !important;
+}
+.p-multiselect{
+  border: 1px solid var(--second_button_background-color) !important;
 }
 .p-button-outlined {
   border-color: var(--first_button_background-color) !important;

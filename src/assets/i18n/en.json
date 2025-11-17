@@ -169,7 +169,18 @@
   "book_holiday_canceled_toast_message": "Your holiday is canceled successfully",
   "book_holiday_approved_toast_message": "Your holiday is approved successfully",
   "book_holiday_rejected_toast_message": "Your holiday is rejected successfully",
-
+  "manage_event_add_event_users_list_company_group": "Company employees",
+  "manage_event_add_event_users_list_team_group": "Team employees",
+  "manage_event_event_type_list_event_label": "Event",
+  "manage_event_event_type_list_activity_label": "Activity",
+  "manage_event_event_type_list_meeting_label": "Meeting",
+  "manage_event_event_type_list_task_label": "Task",
+  "manage_event_event_type_list_title": "Select the type of event you will create",
+  "manage_event_event_description_text_aria_title": "Event description",
+  "manage_event_event_title_input_placeholder": "Event title",
+  "manage_event_add_event_select_participant_placeholder": "Select event participants",
+  "manage_event_add_event_date_from_placeholder": "Start day",
+  "manage_event_add_event_date_to_placeholder": "End day",
 
   "settings_dialog_title": "Company Settings",
   "settings_dialog_verification_code_length": "Verification code length for password reset(maximum 6 digits)",
@@ -225,6 +236,7 @@
   "button_cancel": "Cancel",
   "button_delete": "Delete",
   "button_save_holiday": "Confirm your selection",
+  "button_save_event": "Create event",
 
 
   "link_sign_in": "Sign in",
@@ -248,6 +260,8 @@
   "link_add_user": "Add new user",
   "link_add_document": "Upload document",
   "link_reset_branding": "Default style",
+  "link_add_event": "Add new event",
+
   "home_nav_bar_link": "Home",
   "home_nav_bar_profile_link": "Profile",
   "home_nav_bar_documents_link": "Documents",
@@ -262,6 +276,7 @@
 
   "edit_profile_picture_dialog": "Edit profile picture",
   "view_order_chart_dialog_title": "Your team order",
+  "add_new_event_dialog_header": "Create an event",
 
 
   "table_teams_teams_name": "Team name",

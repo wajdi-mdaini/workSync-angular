@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {ApiResponse, Company, SharedSettings, User} from './models';
 import {SharedHelper} from './shared-helper';
 import {MessageService} from 'primeng/api';
-import {NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthService} from './auth-service';
 import {filter} from 'rxjs';
+import {isPlatformBrowser} from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,19 +33,44 @@ export class Shared {
   constructor(private router: Router,
               private translate: TranslateService,
               private sharedHelper: SharedHelper,
+              private route: ActivatedRoute,
               private messageService: MessageService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              @Inject(PLATFORM_ID) private platformId: Object) {
     // intercepted error via JWT interceptor
     sharedHelper.httpStatus$.subscribe((httpResponse: ApiResponse) => {
-      if(httpResponse?.status == 0)
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant('error_status_0'), life: 3000});
-      if((httpResponse?.status == 'LOCKED' || httpResponse?.status == 'INTERNAL_SERVER_ERROR') && httpResponse?.showToast)
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: translate.instant(httpResponse?.messageLabel), life: 3000});
-      if((httpResponse?.status == 'CONFLICT' || httpResponse?.status == 'UNAUTHORIZED') && httpResponse?.showToast)
-        this.messageService.add({ severity: 'warn', summary: 'Warning !', detail: translate.instant(httpResponse?.messageLabel), life: 3000});
-      if(httpResponse?.status == 'OK' && httpResponse?.showToast)
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: this.translate.instant(httpResponse?.messageLabel), life: 3000});
-
+      if (isPlatformBrowser(this.platformId)) {
+        if (!window.location.href.includes('event')) {
+        if (httpResponse?.status == 0)
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: translate.instant('error_status_0'),
+            life: 3000
+          });
+        if ((httpResponse?.status == 'LOCKED' || httpResponse?.status == 'INTERNAL_SERVER_ERROR') && httpResponse?.showToast)
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: translate.instant(httpResponse?.messageLabel),
+            life: 3000
+          });
+        if ((httpResponse?.status == 'CONFLICT' || httpResponse?.status == 'UNAUTHORIZED') && httpResponse?.showToast)
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Warning !',
+            detail: translate.instant(httpResponse?.messageLabel),
+            life: 3000
+          });
+        if (httpResponse?.status == 'OK' && httpResponse?.showToast)
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: this.translate.instant(httpResponse?.messageLabel),
+            life: 3000
+          });
+      }
+    }
       if(httpResponse?.doLogout) this.logout()
     })
     this.authService.getSharedSettings().subscribe({

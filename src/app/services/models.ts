@@ -28,7 +28,8 @@ export interface User {
   documents: Document[];
   company: Company;
 }
-export interface Team{
+
+export interface Team {
   id: number
   name: string;
   description: string;
@@ -36,15 +37,19 @@ export interface Team{
   manager: User;
   company: Company;
 }
+
 export enum Role {
-  ADMIN = "ADMIN",MANAGER="MANAGER",EMPLOYEE="EMPLOYEE"
+  ADMIN = "ADMIN", MANAGER = "MANAGER", EMPLOYEE = "EMPLOYEE"
 }
+
 export enum HolidayType {
-  SICKNESS_LEAVER = "SICKNESS_LEAVER",ANNUAL_LEAVER="ANNUAL_LEAVER",PERMISSION="PERMISSION"
+  SICKNESS_LEAVER = "SICKNESS_LEAVER", ANNUAL_LEAVER = "ANNUAL_LEAVER", PERMISSION = "PERMISSION"
 }
+
 export enum HolidayStatus {
-  WAITING = "WAITING",APPROVED="APPROVED",REJECTED="REJECTED"
+  WAITING = "WAITING", APPROVED = "APPROVED", REJECTED = "REJECTED"
 }
+
 export interface Company {
   id: number
   name: string;
@@ -61,6 +66,7 @@ export interface Company {
   members: User[];
   branding: Branding[];
 }
+
 export interface CompanySettings {
   id: number;
   verificationCodeLength: number;
@@ -70,6 +76,7 @@ export interface CompanySettings {
   sicknessLeaverDaysPerYear: number;
   passwordMinLength: number;
 }
+
 export interface CustomNotification {
   id: number;
   titleLabel: string;
@@ -79,32 +86,39 @@ export interface CustomNotification {
   from: User;
   to: User;
 }
+
 export interface Branding {
   id: number;
   label: string;
   value: string;
   company: Company;
 }
+
 export interface SharedSettings {
   verificationCodeLength: number;
   verificationCodeExpireIn: number;
 }
+
 export interface LoginResponse {
   user: User;
   company: Company;
 }
-export interface LoginRequest{
+
+export interface LoginRequest {
   email: string;
   password: string;
 }
+
 export interface SignUpRequest {
   user: User;
   company: Company;
 }
+
 export interface ChangePasswordRequest {
   password: string;
   lastPasswordResetDate: any;
 }
+
 export interface ApiResponse {
   status: any,
   messageLabel: string;
@@ -113,6 +127,7 @@ export interface ApiResponse {
   showToast: boolean;
   doLogout: boolean;
 }
+
 export interface NotificationDTO {
   id: number;
   at: number;
@@ -123,54 +138,62 @@ export interface NotificationDTO {
   fromProfilePictureUrl: string;
   read: boolean;
 }
-export interface TeamDetailsResponse{
+
+export interface TeamDetailsResponse {
   team: Team;
   members: User[];
   manager: User;
 }
-export interface EditTeamRequest{
+
+export interface EditTeamRequest {
   remainingUsers: string[];
   teamMembers: string[];
   managerEmail: string;
   team: Team;
 }
-export interface AddTeamRequest{
+
+export interface AddTeamRequest {
   memberEmails: string[];
   team: Team;
   managerEmail: string;
 }
-export interface GetUsersRequest{
+
+export interface GetUsersRequest {
   userEmail: string;
   companyId: number;
 }
-export interface EditUserRequest{
+
+export interface EditUserRequest {
   editRequest: boolean;
   userDTO: UserDTO;
 }
-export interface Document{
+
+export interface Document {
   id: number;
-  name : string;
-  description : string;
-  size : string;
-  url : string;
-  type : string;
-  to : User;
-  from : User;
+  name: string;
+  description: string;
+  size: string;
+  url: string;
+  type: string;
+  to: User;
+  from: User;
   at: number;
 }
-export interface UserDTO{
-    firstname: string;
-    email: string;
-    lastname: string;
-    dateOfBirth: number;
-    address: string;
-    city: string;
-    country: string;
-    postCode: string;
-    degree: string;
-    title: string;
-    teamId: number;
+
+export interface UserDTO {
+  firstname: string;
+  email: string;
+  lastname: string;
+  dateOfBirth: number;
+  address: string;
+  city: string;
+  country: string;
+  postCode: string;
+  degree: string;
+  title: string;
+  teamId: number;
 }
+
 export interface CompanyDTO {
   companyName: string;
   companyEmail: string;
@@ -180,13 +203,15 @@ export interface CompanyDTO {
   companyAddress: string;
   companyId: number;
 }
+
 export interface DocumentDTO {
   name: string;
   description: string;
   toUserEmail: string;
   documentId: number;
 }
-export interface Holiday{
+
+export interface Holiday {
   id: number;
   from: number;
   to: number;
@@ -195,10 +220,47 @@ export interface Holiday{
   type: HolidayType;
   status: HolidayStatus;
 }
-export interface BookHolidayDTO{
+
+export interface BookHolidayDTO {
   from: number;
   to: number;
   countedDays: number;
   type: HolidayType;
   status: HolidayStatus;
+}
+
+export interface Event {
+  id: number;
+  title: string;
+  description: string;
+  at: number;
+  from: number;
+  to: number;
+  eventType: EventType;
+  participants: User[];
+  organizer: User;
+}
+export interface EventDTO {
+  title: string;
+  description: string;
+  at: number;
+  from: number;
+  to: number;
+  type:EventType;
+  participantEmails: string[];
+  organizerEmail: string;
+}
+export interface EditEventDTO {
+  id: any ;
+  title: string;
+  description: string;
+  at: number;
+  from: number | undefined;
+  to: number | undefined;
+  type:EventType;
+  participantEmails: string[];
+  fullcalendarEvent: boolean;
+}
+export enum EventType {
+  ACTIVITY='ACTIVITY', MEETING = 'MEETING', TASK = 'TASK', EVENT = 'EVENT'
 }
