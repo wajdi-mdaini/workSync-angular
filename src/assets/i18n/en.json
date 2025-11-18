@@ -52,6 +52,7 @@
   "navbar_screen_title_manage_teams": "Manage teams",
   "navbar_screen_title_manage_users": "Manage users",
   "navbar_screen_title_manage_documents": "Manage documents",
+  "navbar_screen_title_events": "Manage events",
   "navbar_screen_title_manage_holidays": "Manage holidays",
   "manage_profile_edit_profile_details_title": "Edit Profile details",
   "manage_profile_edit_user_information_title": "User Information",
@@ -177,10 +178,21 @@
   "manage_event_event_type_list_task_label": "Task",
   "manage_event_event_type_list_title": "Select the type of event you will create",
   "manage_event_event_description_text_aria_title": "Event description",
+  "manage_event_event_participants_list": "Event participants",
   "manage_event_event_title_input_placeholder": "Event title",
+  "manage_event_event_event_type_label": "Event type",
+  "manage_event_time_details_message": "This <strong>{{ type }}</strong> is created by <strong>{{ organizerName }}</strong> at <strong>{{ at }}</strong>, it starts from <strong>{{ from }}</strong> and it ends <strong>{{ to }}</strong>",
   "manage_event_add_event_select_participant_placeholder": "Select event participants",
   "manage_event_add_event_date_from_placeholder": "Start day",
   "manage_event_add_event_date_to_placeholder": "End day",
+  "manage_event_add_event_notification_title": "New event created",
+  "manage_event_add_event_notification_message": "<strong>{{ name }}</strong> added you to a new event. View events section for more details.",
+  "manage_event_edit_event_notification_title": "Event modified",
+  "manage_event_edit_event_notification_message": "<strong>{{ name }}</strong> made changes to an event you're involved in. Check events section to review the updates.",
+  "manage_event_delete_event_dialog_header": "Delete event",
+  "manage_event_delete_event_dialog_message": "Delete this notification? This will also remove all related notifications.",
+  "manage_event_delete_done_notification_title": "Deleted event",
+  "manage_event_delete_done_notification_message": "<strong>{{ name }}</strong> delete an event you're involved in. View events section for more details.",
 
   "settings_dialog_title": "Company Settings",
   "settings_dialog_verification_code_length": "Verification code length for password reset(maximum 6 digits)",
@@ -236,7 +248,7 @@
   "button_cancel": "Cancel",
   "button_delete": "Delete",
   "button_save_holiday": "Confirm your selection",
-  "button_save_event": "Create event",
+  "button_create_event": "Create event",
 
 
   "link_sign_in": "Sign in",
@@ -261,12 +273,13 @@
   "link_add_document": "Upload document",
   "link_reset_branding": "Default style",
   "link_add_event": "Add new event",
+  "link_delete_event": "Delete event",
 
   "home_nav_bar_link": "Home",
   "home_nav_bar_profile_link": "Profile",
   "home_nav_bar_documents_link": "Documents",
   "home_nav_bar_holiday_link": "Holidays",
-  "home_nav_bar_events_link": "Events",
+  "home_nav_bar_events_link": "Events / Tasks",
 
   "notification_new_joiner_title": "New Employee Joined",
   "notification_new_joiner_message": "<strong>{{ name }}</strong> has been added to your WorkSync team and completed their password setup.",
@@ -277,6 +290,7 @@
   "edit_profile_picture_dialog": "Edit profile picture",
   "view_order_chart_dialog_title": "Your team order",
   "add_new_event_dialog_header": "Create an event",
+  "edit_event_dialog_header": "Edit event details",
 
 
   "table_teams_teams_name": "Team name",

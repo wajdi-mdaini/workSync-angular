@@ -25,4 +25,8 @@ export class EventService {
   editEvent(editEventDTO: EditEventDTO): Observable<ApiResponse>{
     return this.http.post<ApiResponse>(environment.apiBaseUrl + '/event/editEvent', editEventDTO ,{withCredentials: true});
   }
+
+  deleteEvent(eventId: string): Observable<ApiResponse>{
+    return this.http.delete<ApiResponse>(environment.apiBaseUrl + '/event/deletevent?id=' + eventId ,{withCredentials: true});
+  }
 }

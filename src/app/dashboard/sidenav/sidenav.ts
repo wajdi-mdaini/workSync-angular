@@ -52,6 +52,9 @@ export class Sidenav implements OnInit,AfterViewInit {
         }else if(currentUrl.endsWith('holidays')) {
           this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_manage_holidays';
           this.doHighlight("holidays-link");
+        }else if(currentUrl.endsWith('events')) {
+          this.sharedService.navBarScreenTitleLabel = 'navbar_screen_title_events';
+          this.doHighlight("navbar_screen_title_events");
         }
   }
   toggleGuide(){
@@ -69,6 +72,7 @@ export class Sidenav implements OnInit,AfterViewInit {
     else if (screenTitle == 'navbar_screen_title_manage_users') this.doHighlight("users-link");
     else if (screenTitle == 'navbar_screen_title_manage_documents') this.doHighlight("document-link");
     else if (screenTitle == 'navbar_screen_title_manage_holidays') this.doHighlight("holidays-link");
+    else if (screenTitle == 'navbar_screen_title_events') this.doHighlight("event-link");
     this.sharedService.customNavigation(path,screenTitle)
   }
   doHighlight(elementId: string){

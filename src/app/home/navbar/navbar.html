@@ -1,8 +1,28 @@
 <nav class="top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
+  <div class="container flex items-center justify-end py-0 flex-wrap-inherit">
+    <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+      <li class="flex items-center px-2">
+        <div class="flex items-center gap-2">
+          <img
+            [src]=" sharedService.principal.profilePictureUrl "
+            [alt]="sharedService.principal.firstname + ' ' + sharedService.principal.lastname"
+            style="width: 35px;border-radius: 50%;object-fit: cover;" />
+          <div class="p-0 text-sm text-white transition-all ease-nav-brand">{{ sharedService.principal.firstname }} {{ sharedService.principal.lastname }} <b style="font-size: 10px;"> {{ sharedService.principal.role }}</b></div>
+        </div>
+      </li>
+    </ul>
+    <ul class="hidden mb-0 list-none lg:block lg:flex-row" style="padding-left: 0 !important;">
+      <li>
+        <a (click)="sharedService.logout()" title="logout" class="block px-2 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75">
+          <i class="mr-1 text-white lg-max:text-slate-700 fa fa-power-off opacity-60"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
   <div class="container flex items-center justify-between py-0 flex-wrap-inherit">
     <div class="overflow-hidden max-w-[84%]">
 
-      <a (click)="navigate('home')" class="flex flex-wrap items-center px-4 py-6 m-0 text-sm text-slate-700 dark:text-white">
+      <a (click)="navigate('home')" class="flex flex-wrap items-center px-0 py-0 m-0 text-sm text-slate-700 dark:text-white">
         <!-- Logo -->
         <img
           *ngIf="!sharedService.company.logoURL || sharedService.company?.logoURL == ''"
@@ -31,7 +51,7 @@
           class="ml-2 font-semibold leading-snug text-wrap break-words overflow-hidden text-ellipsis max-w-[75%]"
         >
       {{ sharedService.company.name }}
-    </span>
+        </span>
       </a>
     </div>
 
@@ -64,7 +84,7 @@
         </li>
         <li>
           <a (click)="navigate('home/holidays')" class="block px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75">
-            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-long-arrow-left opacity-60"></i>
+            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-suitcase opacity-60"></i>
             {{ 'home_nav_bar_holiday_link' | translate }}
           </a>
         </li>
@@ -142,14 +162,7 @@
 
       <ul class="hidden pl-0 mb-0 list-none lg:block lg:flex-row">
         <li>
-          <p-select optionLabel="code" [options]="sharedService.translationLanguagesList" [(ngModel)]="sharedService.selectedLanguage" (onChange)="sharedService.switchLang()" class="w-full md:w-56"/>
-        </li>
-      </ul>
-      <ul class="hidden mb-0 list-none lg:block lg:flex-row" style="padding-left: 0 !important;">
-        <li>
-          <a (click)="sharedService.logout()" title="logout" class="block px-2 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75">
-            <i class="mr-1 text-white lg-max:text-slate-700 fa fa-power-off opacity-60"></i>
-          </a>
+          <p-select optionLabel="code" [options]="sharedService.translationLanguagesList" [(ngModel)]="sharedService.selectedLanguage" (onChange)="sharedService.switchLang()" class="w-full md:w-56 language-p-select"/>
         </li>
       </ul>
     </div>

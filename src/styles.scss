@@ -297,7 +297,7 @@ app-document-list{
   border-color: var(--first_button_background-color) !important;
   color: var(--first_button_background-color) !important;
 }
-.p-button:not(.p-button-outlined,.p-button-icon-only){
+.p-button:not(.p-button-outlined,.p-button-icon-only,.p-button-danger){
   background: var(--first_button_background-color) !important;
   border-color: var(--second_button_background-color) !important;
 }
@@ -305,6 +305,24 @@ app-document-list{
   background: transparent !important;
   border-color: var(--second_button_background-color) !important;
   color: var(--second_button_background-color) !important;
+}
+.fc .fc-button-primary:disabled {
+  background-color: var(--first_button_disabled_background-color) !important;
+  border-color: var(--first_button_disabled_background-color) !important;
+  color: var(--fc-button-text-color);
+}
+.fc .fc-button-primary {
+  background-color: var(--first_button_background-color) !important;
+  border-color: var(--first_button_background-color) !important;
+  color: var(--fc-button-text-color);
+}
+.fc .fc-button:focus,
+.fc .fc-button-primary:focus{
+  box-shadow: inherit !important;
+}
+
+.language-p-select{
+  box-shadow: none !important;
 }
 
 .p-datepicker-day-selected {

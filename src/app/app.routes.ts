@@ -48,6 +48,7 @@ export const routes: Routes = [
       {path: 'users', component: ManageUsers},
       {path: 'documents', component: ManageDocument},
       {path: 'holidays', component: ManageHolidays},
+      {path: 'events', component: Events},
     ]}
 
 

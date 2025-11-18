@@ -14,7 +14,7 @@
       <div class="flex items-center md:ml-auto md:pr-4">
         <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease"></div>
       </div>
-      <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+      <ul class="flex flex-row justify-start pl-0 mb-0 list-none md-max:w-full">
         <li class="flex items-center pl-4 pr-4 xl:hidden">
           <a (click)="sharedService.toggleMenu()" href="javascript:;" id="menu-toggle" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
             <div class="w-4.5 overflow-hidden">
@@ -24,10 +24,20 @@
             </div>
           </a>
         </li>
-
+      </ul>
+      <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+        <li class="flex items-center px-2">
+          <div class="flex items-center gap-2">
+            <img
+              [src]=" sharedService.principal.profilePictureUrl "
+              [alt]="sharedService.principal.firstname + ' ' + sharedService.principal.lastname"
+              style="width: 35px;border-radius: 50%;object-fit: cover;" />
+            <div class="p-0 text-sm text-white transition-all ease-nav-brand">{{ sharedService.principal.firstname }} {{ sharedService.principal.lastname }} <b style="font-size: 10px;"> {{ sharedService.principal.role }}</b></div>
+          </div>
+        </li>
 
         <li class="flex items-center px-2">
-          <p-select optionLabel="code" [options]="sharedService.translationLanguagesList" [(ngModel)]="sharedService.selectedLanguage" (onChange)="sharedService.switchLang()" class="w-full md:w-56"/>
+          <p-select optionLabel="code" [options]="sharedService.translationLanguagesList" [(ngModel)]="sharedService.selectedLanguage" (onChange)="sharedService.switchLang()" class="w-full md:w-56 language-p-select"/>
         </li>
 
         <li *ngIf="sharedService.principal.role == Role.ADMIN" class="flex items-center px-4">

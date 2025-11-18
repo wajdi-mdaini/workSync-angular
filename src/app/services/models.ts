@@ -260,6 +260,7 @@ export interface EditEventDTO {
   type:EventType;
   participantEmails: string[];
   fullcalendarEvent: boolean;
+  organizerEmail: string;
 }
 export enum EventType {
   ACTIVITY='ACTIVITY', MEETING = 'MEETING', TASK = 'TASK', EVENT = 'EVENT'
