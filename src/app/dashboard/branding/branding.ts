@@ -38,7 +38,7 @@ export class Branding implements OnInit {
   }
 
   ngOnInit() {
-    this.uploadLogo = environment.apiBaseUrl + '/company/upload-company-logo?id=5';
+    this.uploadLogo = environment.apiBaseUrl + '/company/upload-company-logo?id='+ this.sharedService?.company?.id;
 
   }
 

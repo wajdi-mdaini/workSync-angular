@@ -6,10 +6,10 @@ import {NgClass, NgIf} from "@angular/common";
 import {OrderChart} from "../../order-chart/order-chart";
 import {Profile} from "../../profile/profile";
 import {ResetPassword} from "../../../../auth/reset-password/reset-password";
-import {TranslatePipe} from "@ngx-translate/core";
+import {TranslatePipe, TranslateService} from "@ngx-translate/core";
 import {UploadFileDialog} from "../../upload-file-dialog/upload-file-dialog";
 import {Shared} from '../../../../services/shared';
-import {ApiResponse, EditUserRequest, Team, User, UserDTO} from '../../../../services/models';
+import {ApiResponse, EditUserRequest, Role, Team, User, UserDTO} from '../../../../services/models';
 import {ManagerService} from '../../../../services/manager-service';
 import {Select} from 'primeng/select';
 
@@ -29,6 +29,7 @@ import {Select} from 'primeng/select';
   styleUrl: './user-form.scss'
 })
 export class UserForm implements OnInit {
+  isAdmin: boolean = true;
   isSaveButtonClicked: boolean = false;
   formGroup: FormGroup = new FormGroup({});
   @Input() userToEdit: User = {} as User;
@@ -40,7 +41,8 @@ export class UserForm implements OnInit {
   teams: Team[] = [];
   constructor(public sharedService: Shared,
               private formBuilder: FormBuilder,
-              private managerService: ManagerService) {
+              private managerService: ManagerService,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -58,6 +60,7 @@ export class UserForm implements OnInit {
     })
   }
   initForms(){
+    this.isAdmin = this.user?.role == Role.ADMIN;
     this.formGroup = this.formBuilder.group({
       email: [{ value: this.userToEdit?.email, disabled: this.user.email != null }, [Validators.required, Validators.email]],
       firstname: [this.user?.firstname, [Validators.required]],
@@ -69,7 +72,7 @@ export class UserForm implements OnInit {
       city: [this.user?.city, [Validators.required]],
       country: [this.user?.country, [Validators.required]],
       postCode: [this.user?.postCode, [Validators.required]],
-      team: [this.user?.team, [Validators.required]],
+      team: [this.user?.team],
     })
   }
 
@@ -84,6 +87,7 @@ export class UserForm implements OnInit {
     this.user.country = this.formGroup.controls['country'].value == '' ? null : this.formGroup.controls['country'].value;
     this.user.postCode = this.formGroup.controls['postCode'].value == '' ? null : this.formGroup.controls['postCode'].value;
     this.user.team = this.formGroup.get('team')?.value;
+    this.user.role = this.isAdmin ? Role.ADMIN : Role.EMPLOYEE;
     this.showSaveButton = !this.isDeeplyEquals();
   }
 
@@ -141,8 +145,10 @@ export class UserForm implements OnInit {
     user.degree = this.formGroup.get('degree')?.value;
     user.title = this.formGroup.get('title')?.value;
     user.teamId = this.formGroup.get('team')?.value?.id;
+    user.role = this.user.role;
 
     return user;
   }
 
+  protected readonly Role = Role;
 }

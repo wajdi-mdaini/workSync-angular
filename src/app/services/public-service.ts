@@ -85,4 +85,8 @@ export class PublicService {
   cancelHoliday(holidayId: number): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/cancelholidaysrequests?id=' + holidayId,{ withCredentials: true });
   }
+
+  getCompanySummary(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(environment.apiBaseUrl + '/public/companysummary',{ withCredentials: true });
+  }
 }

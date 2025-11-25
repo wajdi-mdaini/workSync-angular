@@ -116,6 +116,7 @@
   </div>
 </nav>
 <p-dialog *ngIf="showDetails"
+          appendTo="body"
           class="dark:dark-dialog"
           [dismissableMask]="true"
           [header]="'notification_details_title' | translate"

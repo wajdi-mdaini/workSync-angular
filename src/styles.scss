@@ -10,6 +10,25 @@
   --selected_menu_li_text_color: rgb(52 71 103 / 1);
   --selected_menu_li_background_color: rgb(94 114 228 / 0.13);
 }
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+.app-zoom {
+  transform: scale(0.8);
+  transform-origin: top left;
+  width: 125%;
+  display: block;
+}
+.calendar-container {
+  transform: scale(1.25);
+  transform-origin: top left;
+  width: 80%;
+  height: 165dvh;
+}
+
+
 html:not(.dark) .checked\:checkbox-bg:checked{
   background-color: var(--second_button_background-color);
 }
@@ -293,7 +312,7 @@ app-document-list{
 .p-multiselect{
   border: 1px solid var(--second_button_background-color) !important;
 }
-.p-button-outlined {
+.p-button-outlined:not(.p-confirmdialog-reject-button) {
   border-color: var(--first_button_background-color) !important;
   color: var(--first_button_background-color) !important;
 }

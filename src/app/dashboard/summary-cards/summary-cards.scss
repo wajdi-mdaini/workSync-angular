@@ -1,0 +1,11 @@
+.ellipsis-custom {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.max-width-custom {
+  max-width: 1dvh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

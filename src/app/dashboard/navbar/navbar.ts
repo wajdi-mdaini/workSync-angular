@@ -67,7 +67,7 @@ export class Navbar {
         if(apiResponse.success){
           apiResponse.data.forEach((notification: NotificationDTO) => {
             let current = this.notificationsSubject.value;
-            this.notificationsSubject.next([notification, ...current]);
+            this.notificationsSubject.next([...current, notification]);
           })
         }
       },
@@ -180,24 +180,34 @@ export class Navbar {
       basePath = 'home'
     }
     this.toggleDropdown(event)
-    if(data.titleLabel == "book_holiday_approved_notification_title" || data.titleLabel == "book_holiday_rejected_notification_title") {
+    if(data.titleLabel == "book_holiday_approved_notification_title" ||
+       data.titleLabel == "book_holiday_rejected_notification_title") {
       this.clearHighlight();
       this.sharedService.customNavigation(basePath + '/holidays','navbar_screen_title_manage_holidays')
       this.doHighlight("holidays-link");
       this.sharedService.activeHolidayAccordingPanel = '1';
-    }else if(data.titleLabel == "book_holiday_canceled_notification_title" || data.titleLabel == "book_holiday_notification_title") {
+    }else if(data.titleLabel == "book_holiday_canceled_notification_title" ||
+             data.titleLabel == "book_holiday_notification_title") {
       this.clearHighlight();
       this.sharedService.customNavigation(basePath + '/holidays','navbar_screen_title_manage_holidays')
       this.doHighlight("holidays-link");
       this.sharedService.activeHolidayAccordingPanel = '2';
-    }else if(data.titleLabel == "notification_edit_user_title") {
+    }else if(data.titleLabel == "notification_edit_user_title" ||
+      data.titleLabel == "notification_edit_to_admin_manager_notif_title" ) {
       this.clearHighlight();
       this.sharedService.customNavigation(basePath + '/profile','navbar_screen_title_manage_profile')
       this.doHighlight("profile-link");
-    } else if(data.titleLabel == "manage_document_add_document_notification_title") {
+    } else if(data.titleLabel == "manage_document_add_document_notification_title" ||
+              data.titleLabel == "manage_document_edit_document_notification_title") {
       this.clearHighlight();
       this.sharedService.customNavigation(basePath + '/documents','navbar_screen_title_manage_documents')
       this.doHighlight("document-link");
+    } else if(data.titleLabel == "manage_event_add_event_notification_title" ||
+              data.titleLabel == "manage_event_edit_event_notification_title" ||
+              data.titleLabel == "manage_event_delete_done_notification_title") {
+      this.clearHighlight();
+      this.sharedService.customNavigation(basePath + '/events', 'navbar_screen_title_events')
+      this.doHighlight("event-link");
     }
     this.notificationDto = data;
     this.showDetails = true;

@@ -53,8 +53,8 @@ export class Signin implements OnInit {
       return;
     }
     let loginRequest: LoginRequest = {
-      email: this.formGroup.get('email')!.value,
-      password: this.formGroup.get('password')!.value
+      email: this.formGroup.get('email')!.value?.trim(),
+      password: this.formGroup.get('password')!.value?.trim()
     }
     this.authService.login(loginRequest).subscribe({
       next: (apiResponse: ApiResponse) => {

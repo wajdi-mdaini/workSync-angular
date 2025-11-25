@@ -1,9 +1,10 @@
-<div fixed-plugin>
-  <a fixed-plugin-button id="show-branding-card-link" (click)="slideMenu()" class="fixed px-3 py-2 text-xl bg-white shadow-lg cursor-pointer bottom-8 right-8 z-990 rounded-circle text-slate-700">
+<div fixed-plugin class="fixed-bottom-right">
+  <a fixed-plugin-button id="show-branding-card-link" (click)="slideMenu()" class="px-3 py-2 text-xl bg-white shadow-lg cursor-pointer z-990 rounded-circle text-slate-700">
     <i class="py-2 pointer-events-none fa fa-cog"> </i>
   </a>
   <!-- -right-90 in loc de 0-->
-  <div id="branding-card" fixed-plugin-card [ngClass]="{'-right-90':!isSlided,'right-0':isSlided}" class="z-sticky backdrop-blur-2xl backdrop-saturate-200 dark:bg-slate-850/80 shadow-3xl w-90 ease  fixed top-0 left-auto flex h-full min-w-0 flex-col break-words rounded-none border-0 bg-white/80 bg-clip-border px-2.5 duration-200">
+  <div id="branding-card" style="height: 115dvh;"
+       fixed-plugin-card [ngClass]="{'-right-90':!isSlided,'right-0':isSlided}" class="z-sticky backdrop-blur-2xl backdrop-saturate-200 dark:bg-slate-850/80 shadow-3xl w-90 ease  fixed top-0 left-auto flex h-full min-w-0 flex-col break-words rounded-none border-0 bg-white/80 bg-clip-border px-2.5 duration-200">
     <div class="px-6 pt-4 pb-0 mb-0 border-b-0 rounded-t-2xl">
       <div class="float-left">
         <h5 class="mt-4 mb-0 dark:text-white">{{ 'branding_dialog_header_title' | translate }}</h5>

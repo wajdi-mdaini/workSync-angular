@@ -67,7 +67,7 @@ export class Navbar {
         if(apiResponse.success){
           apiResponse.data.forEach((notification: NotificationDTO) => {
             let current = this.notificationsSubject.value;
-            this.notificationsSubject.next([notification, ...current]);
+            this.notificationsSubject.next([...current, notification]);
           })
         }
       },
@@ -176,6 +176,10 @@ export class Navbar {
       this.clearHighlight();
       this.sharedService.customNavigation(basePath + '/documents','navbar_screen_title_manage_documents')
       this.doHighlight("document-link");
+    } else if(data.titleLabel == "manage_event_add_event_notification_title") {
+      this.clearHighlight();
+      this.sharedService.customNavigation(basePath + '/events','navbar_screen_title_events')
+      this.doHighlight("event-link");
     }
     this.notificationDto = data;
     this.showDetails = true;

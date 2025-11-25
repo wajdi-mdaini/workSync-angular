@@ -38,6 +38,14 @@ export interface Team {
   company: Company;
 }
 
+export interface NewTeamDTO {
+  teamName: string;
+  teamDescription: string;
+  memberEmails: string[];
+  companyId: number;
+  teamManagerEmail: string[]
+}
+
 export enum Role {
   ADMIN = "ADMIN", MANAGER = "MANAGER", EMPLOYEE = "EMPLOYEE"
 }
@@ -52,6 +60,7 @@ export enum HolidayStatus {
 
 export interface Company {
   id: number
+  at: number
   name: string;
   description: string;
   address: string;
@@ -149,13 +158,9 @@ export interface EditTeamRequest {
   remainingUsers: string[];
   teamMembers: string[];
   managerEmail: string;
-  team: Team;
-}
-
-export interface AddTeamRequest {
-  memberEmails: string[];
-  team: Team;
-  managerEmail: string;
+  teamId: number;
+  description: string;
+  name: string;
 }
 
 export interface GetUsersRequest {
@@ -192,6 +197,7 @@ export interface UserDTO {
   degree: string;
   title: string;
   teamId: number;
+  role: Role;
 }
 
 export interface CompanyDTO {
@@ -264,4 +270,15 @@ export interface EditEventDTO {
 }
 export enum EventType {
   ACTIVITY='ACTIVITY', MEETING = 'MEETING', TASK = 'TASK', EVENT = 'EVENT'
+}
+export interface CompanySummary {
+  company: Company ;
+  companyCreator: User;
+  userNumbers: any;
+  eventNumbers: any;
+  teamManager: User;
+  teamMembers: User[];
+  lastDocuments: Document[];
+  lastEvents:Event[];
+  team:Team;
 }

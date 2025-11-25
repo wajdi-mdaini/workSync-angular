@@ -1,4 +1,4 @@
-<aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
+<aside style="height: 112dvh !important;" class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0" aria-expanded="false">
   <div class="overflow-hidden max-w-[84%]">
     <i
       class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden"
@@ -41,7 +41,7 @@
 
   <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
 
-  <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full" style="height: 70%;">
+  <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full" style="height: 75%;">
     <ul class="flex flex-col pl-0 mb-0">
       <li class="mt-0.5 w-full">
         <a id="dashboard-link" class="py-2.7 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 transition-colors" (click)="navigate('dashboard','navbar_screen_title_dashboard')">
@@ -145,7 +145,7 @@
       <div class="p-4 text-center" style="padding-bottom: 33px !important;">
         <img src="assets/img/icon-documentation.svg" alt="guide" class="mx-auto w-1/2" />
         <a
-          href="https://www.creative-tim.com/learning-lab/tailwind/html/quick-start/argon-dashboard/"
+          (click)="sharedService.logout()"
           target="_blank"
           class="inline-block px-8 py-2 mt-4 mb-2 text-xs font-bold text-white bg-slate-700 rounded-lg transition-all ease-in hover:shadow-lg"
         >

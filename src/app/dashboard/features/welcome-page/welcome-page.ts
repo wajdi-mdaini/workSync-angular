@@ -13,13 +13,6 @@ import {SummaryCards} from '../../summary-cards/summary-cards';
   styleUrl: './welcome-page.scss'
 })
 export class WelcomePage {
-  selectedFile: File | null = null;
-  userEmail = 'wajdimd@gmail.com';
-  constructor(private publicService: PublicService, private sharedService: Shared) {}
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-  }
 
 
 }

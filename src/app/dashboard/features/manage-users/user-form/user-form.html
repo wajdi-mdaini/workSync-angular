@@ -3,6 +3,7 @@
   class="dark:dark-dialog"
   [header]="( userToEdit.email != null ? 'manage_users_edit_user_dialog_header' : 'manage_users_add_user_dialog_header' ) | translate"
   [modal]="true"
+  appendTo="body"
   [(visible)]="showDialog"
   [style]="{ width: '45rem' }"
   (onHide)="hideDialog()">
@@ -52,10 +53,19 @@
                   <div class="mb-4">
                     <label for="team" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_team_title' | translate}}</label>
                     <p-select optionLabel="name"
+                              [disabled]="user.role == Role.MANAGER || user.role == Role.ADMIN "
                               [options]="teams"
-                              [ngClass]="{ 'border-red-500': isSaveButtonClicked && (formGroup.get('team')?.errors?.['required']) }"
                               formControlName="team" (onChange)="setUserDetails()" class="w-full md:w-56"/>
                   </div>
+                </div>
+                <div *ngIf="sharedService.principal.role == Role.ADMIN && user?.role != Role.MANAGER" class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                  <div class="mb-4">
+                      <div class="min-h-6 pl-7 mb-0.5 block">
+                        <label for="role" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" style="display: block;padding-top: 7%;"></label>
+                        <label for="role" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">{{ 'manage_profile_edit_role_title' | translate}}</label>
+                        <input id="role" (change)="setUserDetails()" [ngModelOptions]="{standalone: true}" [(ngModel)]="isAdmin" class="w-4.8 h-4.8 ease -ml-7 rounded-1.4 checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:font-awesome after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" value="" />
+                      </div>
+                    </div>
                 </div>
 
 

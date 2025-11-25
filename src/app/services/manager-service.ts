@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AddTeamRequest, ApiResponse, Company, EditTeamRequest, EditUserRequest, GetUsersRequest, Team} from './models';
+import {ApiResponse, Company, EditTeamRequest, EditUserRequest, GetUsersRequest, NewTeamDTO, Team} from './models';
 import {Observable} from 'rxjs';
 import {environment} from '../config/environment';
 
@@ -26,8 +26,8 @@ export class ManagerService {
     return this.http.get<ApiResponse>(environment.apiBaseUrl + '/management/teammembers?id='+idTeam,{withCredentials: true});
   }
 
-  addTeam(addTeamRequest: AddTeamRequest): Observable<ApiResponse>{
-    return this.http.put<ApiResponse>(environment.apiBaseUrl + '/management/addteam',addTeamRequest,{withCredentials: true});
+  addTeam(newTeamDTO: NewTeamDTO): Observable<ApiResponse>{
+    return this.http.put<ApiResponse>(environment.apiBaseUrl + '/management/addteam',newTeamDTO,{withCredentials: true});
   }
 
   getUsers(getUsersRequest: GetUsersRequest): Observable<ApiResponse>{

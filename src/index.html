@@ -39,7 +39,14 @@
 
 </head>
 <body class="dark:bg-slate-900 m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">
-  <app-root></app-root>
+  <div class="spinner-overlay" id="spinner-overlay" style="display: none">
+    <dotlottie-wc src="assets/img/spinner.json"
+                  autoplay
+                  loop
+                  style="position: fixed;height: 115px;z-index: 2;">
+    </dotlottie-wc>
+  </div>
+  <app-root class="app-zoom"></app-root>
 </body>
 <!-- plugin for scrollbar  -->
 <script src="assets/js/plugins/perfect-scrollbar.min.js" async></script>

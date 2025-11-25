@@ -1,7 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
-import {RouterOutlet} from '@angular/router';
-import {AddTeamRequest, ApiResponse, Company, EditTeamRequest, Team, User} from '../../../services/models';
+import {ApiResponse, Company, EditTeamRequest, NewTeamDTO, Team, User} from '../../../services/models';
 import {CompanyService} from '../../../services/company-service';
 import {Shared} from '../../../services/shared';
 import {TeamsList} from './teams-list/teams-list';
@@ -90,14 +89,12 @@ export class ManageTeams {
       return;
     }
     if(this.teamToEdit){
-      let newTeam: Team = this.teamToEdit
-      newTeam.manager = this.teamForm.formGroup.get('manager')?.value
-      newTeam.description = this.teamForm.formGroup.get('description')?.value
-      newTeam.name = this.teamForm.formGroup.get('name')?.value
       let editTeamRequest: EditTeamRequest = {
         remainingUsers: this.getEmailList(this.teamForm.allUsers),
         teamMembers: this.getEmailList(this.teamForm.targetUsers),
-        team: newTeam,
+        teamId: this.teamToEdit.id,
+        description: this.teamForm.formGroup.get('description')?.value,
+        name: this.teamForm.formGroup.get('name')?.value,
         managerEmail: this.teamForm.formGroup.get('manager')?.value?.email
       };
       this.managerService.editTeam(editTeamRequest).subscribe({
@@ -129,18 +126,14 @@ export class ManageTeams {
       return;
     }
     if(this.sharedService.principal){
-      let newTeam: Team = {} as Team;
-      newTeam.manager = this.teamForm.formGroup.get('manager')?.value;
-      newTeam.description = this.teamForm.formGroup.get('description')?.value;
-      newTeam.name = this.teamForm.formGroup.get('name')?.value;
-      newTeam.company = this.sharedService.company;
-      newTeam.members = this.teamForm.targetUsers;
-      let addTeamRequest: AddTeamRequest = {
+      let newTeamDTO: NewTeamDTO = {
+        teamName: this.teamForm.formGroup.get('name')?.value,
+        teamDescription: this.teamForm.formGroup.get('description')?.value,
+        companyId: this.sharedService.company.id,
         memberEmails: this.getEmailList(this.teamForm.targetUsers),
-        team: newTeam,
-        managerEmail: this.teamForm.formGroup.get('manager')?.value?.email
+        teamManagerEmail: this.teamForm.formGroup.get('manager')?.value?.email
       };
-      this.managerService.addTeam(addTeamRequest).subscribe({
+      this.managerService.addTeam(newTeamDTO).subscribe({
         next: (apiResponse: ApiResponse) => {
           if (apiResponse.success) {
             this.teams.push(apiResponse.data);

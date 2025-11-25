@@ -36,7 +36,7 @@
           src="assets/img/workSync-logo-small-dark.svg"
           alt="main_logo"
           style="border-radius: 15%;max-width: 100px;"
-          class="logo-image object-cover flex-shrink-0 dark:inline"
+          class="logo-image object-cover flex-shrink-0 hidden dark:inline"
         />
         <img
           *ngIf="sharedService.company.logoURL && sharedService.company.logoURL != ''"
@@ -171,6 +171,7 @@
 
 
 <p-dialog *ngIf="showDetails"
+          appendTo="body"
           class="dark:dark-dialog"
           [dismissableMask]="true"
           [header]="'notification_details_title' | translate"

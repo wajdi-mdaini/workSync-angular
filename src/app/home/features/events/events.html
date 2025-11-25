@@ -17,32 +17,36 @@
         </div>
         <hr
           class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent ">
+        <div style="flex:1;">
+          <div class="float-right pt-4">
+          <div class="flex gap-6 mb-4">
+            <div class="flex items-center pr-2 gap-2">
+              <span class="w-4 h-4 inline-block rounded" style="background-color:#9C27B0"></span>
+              <span>Activity</span>
+            </div>
+
+            <div class="flex items-center pr-2 gap-2">
+              <span class="w-4 h-4 inline-block rounded" style="background-color:#607D8B"></span>
+              <span>Meeting</span>
+            </div>
+
+            <div class="flex items-center pr-2 gap-2">
+              <span class="w-4 h-4 inline-block rounded" style="background-color:#41a5a3"></span>
+              <span>Event</span>
+            </div>
+
+            <div class="flex items-center pr-2 gap-2">
+              <span class="w-4 h-4 inline-block rounded" style="background-color:#3788d8"></span>
+              <span>Task</span>
+            </div>
+          </div>
+        </div>
+        </div>
         <div class="flex-auto p-6">
           <div class="flex gap-4">
             <div style="flex:1;">
-              <full-calendar #fullcalendar [options]="calendarOptions" ngZone="noop"></full-calendar>
-              <div class="float-right pt-4">
-                <div class="flex gap-6 mb-4">
-                  <div class="flex items-center pr-2 gap-2">
-                    <span class="w-4 h-4 inline-block rounded" style="background-color:#9C27B0"></span>
-                    <span>Activity</span>
-                  </div>
-
-                  <div class="flex items-center pr-2 gap-2">
-                    <span class="w-4 h-4 inline-block rounded" style="background-color:#607D8B"></span>
-                    <span>Meeting</span>
-                  </div>
-
-                  <div class="flex items-center pr-2 gap-2">
-                    <span class="w-4 h-4 inline-block rounded" style="background-color:#41a5a3"></span>
-                    <span>Event</span>
-                  </div>
-
-                  <div class="flex items-center pr-2 gap-2">
-                    <span class="w-4 h-4 inline-block rounded" style="background-color:#3788d8"></span>
-                    <span>Task</span>
-                  </div>
-                </div>
+              <div class="calendar-container">
+                <full-calendar #fullcalendar [options]="calendarOptions" ngZone="noop"></full-calendar>
               </div>
             </div>
           </div>
@@ -54,6 +58,7 @@
 
 <p-dialog
   *ngIf="showAddDialog"
+  appendTo="body"
   [dismissableMask]="true"
   class="dark:dark-dialog"
   [header]="'add_new_event_dialog_header' | translate"
@@ -157,13 +162,14 @@
 
 <p-dialog
   *ngIf="showEditDialog"
+  appendTo="body"
   [dismissableMask]="true"
   class="dark:dark-dialog"
   [header]="'edit_event_dialog_header' | translate"
   [modal]="true"
   [(visible)]="showEditDialog"
   [style]="{ width: '45rem' }"
-  (onHide)="showAddDialog = false">
+  (onHide)="showEditDialog = false">
   <div class="card flex justify-center">
     <form [formGroup]="formGroupEdit">
       <div class="flex flex-wrap">
@@ -263,14 +269,15 @@
 </p-dialog>
 
 <p-dialog
+  appendTo="body"
   *ngIf="showEventDetailsDialog"
   [dismissableMask]="true"
   class="dark:dark-dialog"
-  [header]="'edit_event_dialog_header' | translate"
+  [header]="'view_event_dialog_header' | translate"
   [modal]="true"
   [(visible)]="showEventDetailsDialog"
   [style]="{ width: '45rem' }"
-  (onHide)="showAddDialog = false">
+  (onHide)="showEventDetailsDialog = false">
   <div class="card flex justify-center">
 
 
