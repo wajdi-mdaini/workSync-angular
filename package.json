@@ -1,5 +1,5 @@
 {
-  "name": "angular-demo",
+  "name": "worksync-frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:angular-demo": "node dist/angular-demo/server/server.mjs"
+    "serve:ssr:worksync-frontend": "node dist/worksync-frontend/server/server.mjs"
   },
   "prettier": {
     "overrides": [

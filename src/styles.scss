@@ -279,8 +279,8 @@ input:disabled {
 .p-iftalabel:has(input:focus) label, .p-iftalabel:has(input:-webkit-autofill) label, .p-iftalabel:has(textarea:focus) label, .p-iftalabel:has(.p-inputwrapper-focus) label {
   color: inherit !important;
 }
-.p-confirmdialog{
-  max-width: 30% !important;
+.fc-media-screen{
+  font-size: 10px !important;
 }
 
 app-holiday-list,

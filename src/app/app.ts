@@ -15,7 +15,7 @@ import {ApiResponse} from './services/models';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class App {
-  protected readonly title = signal('angular-demo');
+  protected readonly title = signal('worksync-frontend');
   constructor(private sharedService: Shared,
     private cdr: ChangeDetectorRef, public sharedHelper: SharedHelper,private authService: AuthService) {
     sharedService.applyTranslation();

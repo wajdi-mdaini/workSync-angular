@@ -38,6 +38,8 @@ export class Navbar {
   notifications$ = this.notificationsSubject.asObservable();
   dropdownMenu?: any ;
   notificationShown: boolean = false ;
+  isMenuOpen: boolean = false ;
+  dropdownOpen: boolean = false ;
   showDetails: boolean = false ;
   unreadCount$ = this.notifications$.pipe(
     map(list => (list ?? []).filter(n => !n.read).length)
@@ -96,6 +98,14 @@ export class Navbar {
     if(!this.notificationShown) this.setNotifications();
   }
 
+  toggleDropdown2(event: Event) {
+    this.dropdownMenu = document.getElementById('dropdownMenu2')
+    event.preventDefault();
+    this.dropdownMenu.classList.toggle('show');
+    this.notificationShown = !this.notificationShown;
+    if(!this.notificationShown) this.setNotifications();
+  }
+
   private setNotificationsReadStatus() {
     this.unreadCount$ = this.notifications$.pipe(
       map(list => (list ?? []).filter(n => !n.read).length)
@@ -118,6 +128,14 @@ export class Navbar {
       if ((!this.sharedService.menu.contains(target) && !link?.contains(target)) &&
         !target.closest('[dropdown-trigger]')) {
         this.sharedService.toggleMenu();
+      }
+    }
+    if(this.isMenuOpen){
+      const target = event.target as HTMLElement;
+      const menuContainer = document.getElementById('sm-menu-container')
+      const menuButton = document.getElementById('sm-menu-toggle-button')
+      if (menuContainer && !menuContainer?.contains(target) && !menuButton?.contains(target) ){
+        this.isMenuOpen = !this.isMenuOpen
       }
     }
   }
@@ -197,6 +215,7 @@ export class Navbar {
 
   navigate(url: string) {
     this.router.navigate([url]);
+    this.isMenuOpen = false;
   }
 
 }

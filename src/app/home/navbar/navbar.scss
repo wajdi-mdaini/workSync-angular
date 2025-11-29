@@ -23,3 +23,18 @@
 .unread-notification{
   background-color: #3e463e14 !important;
 }
+/* small helper to make the mobile panel animation smoother */
+nav .backdrop-blur-sm {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* notification list max width */
+#dropdownMenu {
+  min-width: 18rem;
+}
+
+/* keep a clear visible hover for desktop white links */
+nav a:hover {
+  text-decoration: none;
+}

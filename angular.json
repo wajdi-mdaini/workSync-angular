@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-demo": {
+    "worksync-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,17 +17,18 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/assets/responsive"
-              ]
-            },
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "server": "src/main.server.ts",
+            "ssr": {
+              "entry": "src/server.ts"
+            },
+            "outputMode": "server",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "polyfills": ["zone.js"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/assets/responsive"]
+            },
             "assets": [
               "src/assets",
               {
@@ -38,12 +39,7 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -53,20 +49,12 @@
                   "with": "src/app/config/environment.production.ts"
                 }
               ],
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "3mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2mb",
-                  "maximumError": "4mb"
-                }
-              ],
-              "outputHashing": "all"
+              "budgets": [],
+              "outputHashing": "all",
+
+              "optimization": false
             },
+
             "development": {
               "fileReplacements": [
                 {
@@ -74,37 +62,37 @@
                   "with": "src/app/config/environment.development.ts"
                 }
               ],
+              "sourceMap": true,
               "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
+              "extractLicenses": false
             }
           },
           "defaultConfiguration": "production"
         },
+
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-demo:build:production"
+              "buildTarget": "worksync-frontend:build:production"
             },
             "development": {
-              "buildTarget": "angular-demo:build:development"
+              "buildTarget": "worksync-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
+
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },
+
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
+            "polyfills": ["zone.js", "zone.js/testing"],
             "assets": [
               {
                 "glob": "**/*",

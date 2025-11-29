@@ -9,3 +9,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.text-light{
+  text-shadow: 0 0 5px var(--first_button_background-color),
+                0 0 10px var(--second_button_background-color),
+                0 0 20px var(--second_button_background-color),
+                0 0 30px var(--second_button_background-color);
+}

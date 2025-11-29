@@ -1,5 +1,5 @@
-<nav class="top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
-  <div class="container flex items-center justify-end py-0 flex-wrap-inherit">
+<nav class="hidden lg:flex top-0 z-30 flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
+<div class="container flex items-center justify-end py-0 flex-wrap-inherit">
     <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
       <li class="flex items-center px-2">
         <div class="flex items-center gap-2">
@@ -169,6 +169,192 @@
   </div>
 </nav>
 
+<nav class="top-0 z-30 w-full px-4 py-2 mt-6 mb-4 block lg:hidden">
+  <!-- OUTER WRAPPER: use flex-row on desktop, stacked on mobile -->
+  <div class="flex items-center justify-between w-full">
+
+    <!-- LEFT BLOCK: Company logo + name -->
+    <div class="flex items-center gap-3 overflow-hidden max-w-[84%]">
+      <a (click)="navigate('home')" class="flex items-center gap-3">
+        <!-- logo images (unchanged) -->
+        <img *ngIf="!sharedService.company.logoURL || sharedService.company?.logoURL == ''"
+             src="assets/img/workSync-logo-small.svg"
+             alt="main_logo"
+             class="h-8 w-auto object-cover rounded-md dark:hidden" />
+        <img *ngIf="!sharedService.company.logoURL || sharedService.company?.logoURL == ''"
+             src="assets/img/workSync-logo-small-dark.svg"
+             alt="main_logo"
+             class="h-8 w-auto object-cover rounded-md hidden dark:inline" />
+        <img *ngIf="sharedService.company.logoURL && sharedService.company.logoURL != ''"
+             [src]="sharedService.company.logoURL"
+             alt="main_logo"
+             class="h-8 w-auto object-cover rounded-md" />
+
+        <span class="ml-2 font-semibold truncate max-w-[14rem] text-slate-700 dark:text-white">
+          {{ sharedService.company.name }}
+        </span>
+      </a>
+    </div>
+  </div><br>
+  <div class="flex justify-content-end w-full">
+    <!-- RIGHT BLOCK: avatar, name, icons (same-line on all sizes) -->
+    <div class="flex items-center gap-4">
+
+      <!-- avatar + name (keeps same visual) -->
+      <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+        <li class="flex items-center px-2">
+          <div class="flex items-center gap-2">
+            <img
+              [src]=" sharedService.principal.profilePictureUrl "
+              [alt]="sharedService.principal.firstname + ' ' + sharedService.principal.lastname"
+              style="width: 35px;border-radius: 50%;object-fit: cover;" />
+            <div class="p-0 text-sm text-white transition-all ease-nav-brand">{{ sharedService.principal.firstname }} {{ sharedService.principal.lastname }} <b style="font-size: 10px;"> {{ sharedService.principal.role }}</b></div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- bell notification (kept logic) -->
+      <li class="relative flex items-center pr-2">
+        <p class="hidden transform-dropdown-show"></p>
+        <a
+          class="block p-0 text-sm text-white transition-all ease-nav-brand"
+          dropdown-trigger
+          aria-expanded="false"
+          (click)="toggleDropdown2($event)">
+          <i class="cursor-pointer fa fa-bell"></i>
+
+          <span
+            *ngIf="(unreadCount$ | async) as count"
+            class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+              <div class="notification-circle" *ngIf="count > 0">{{ count }}</div>
+            </span>
+        </a>
+
+        <ul id="dropdownMenu2" dropdown-menu
+            class="dark:bg-slate-850 text-sm transform-dropdown duration-250 min-w-44 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg bg-white px-2 py-4 text-left text-slate-500 opacity-0 transition-all">
+          <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;">
+            <li class="relative mb-2 items-center" style="text-align: center;">
+              {{ 'navbar_notification_total_number_title' | translate:{number: (unreadCount$ | async) } }} <hr>
+            </li>
+          </div>
+          <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;" *ngIf="(notifications$ | async)?.length || 0 > 0">
+            <ng-container *ngFor="let notification of notifications$ | async">
+              <li [ngClass]="{'unread-notification' : !notification.read}" class="relative mb-2">
+                <a (click)="showDetailsDialog($event,notification)" class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors" href="javascript:;">
+                  <div class="flex py-1">
+                    <div class="my-auto">
+                      <img [src]="notification.fromProfilePictureUrl" class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
+                    </div>
+                    <div class="flex flex-col justify-center">
+                      <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span class="font-semibold">{{notification.titleLabel | translate}}</span></h6>
+                      <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80 notification-text"
+                         [innerHTML]="notification.messageLabel | translate:{ name: notification.fromName}">
+                      </p>
+                      <p class="pt-2 mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
+                        <i class="mr-1 fa fa-clock"></i>
+                        {{ notification.at | timeAgo }}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ng-container>
+          </div>
+          <div  style="overflow-y: auto;;overflow-x: hidden;max-height: 350px;" *ngIf="(notifications$ | async)?.length == 0">
+            <li class="relative mb-2 items-center" style="text-align: center;">
+              {{ 'navbar_notification_empty_list' | translate }}
+            </li>
+          </div>
+          <a style="text-align: center;"
+             class="block p-0 text-sm transition-all ease-nav-brand"
+             dropdown-trigger
+             aria-expanded="false"
+             (click)="showAllNotifications($event)">
+            {{ 'link_show_all_notifications_history' | translate }}
+          </a>
+        </ul>
+      </li>
+
+
+      <!-- MOBILE: burger toggle (visible on small screens only) -->
+      <button id="sm-menu-toggle-button" class="lg:hidden p-2 text-white" (click)="isMenuOpen = !isMenuOpen" aria-label="Toggle menu">
+        <i class="fa" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- SLIDE-DOWN MENU PANEL (mobile) -->
+  <!-- Desktop: lg:flex-row will show items inline so this panel only applies visually on small screens -->
+  <div
+    [ngClass]="{
+      'max-h-[80vh] opacity-100 translate-y-0 pointer-events-auto': isMenuOpen,
+      'max-h-0 opacity-0 -translate-y-2 pointer-events-none': !isMenuOpen
+    }"
+    class="lg:hidden overflow-hidden transition-all duration-300 ease-in-out"
+  >
+    <!-- PANEL: contrasting background so white links are readable -->
+    <div id="sm-menu-container" class="bg-white/95 backdrop-blur-sm shadow-lg rounded-b-2xl p-4 mt-3 mx-2" style="position: absolute;z-index: 2000;right: 0px;">
+      <ul class="flex flex-col gap-2">
+        <li>
+          <a (click)="navigate('home')"
+             class="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-100 text-slate-800">
+            <i class="fa fa-home w-4"></i>
+            {{ 'home_nav_bar_link' | translate }}
+          </a>
+        </li>
+
+        <li>
+          <a (click)="navigate('home/profile')"
+             class="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-100 text-slate-800">
+            <i class="fa fa-user w-4"></i>
+            {{ 'home_nav_bar_profile_link' | translate }}
+          </a>
+        </li>
+
+        <li>
+          <a (click)="navigate('home/events')"
+             class="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-100 text-slate-800">
+            <i class="fa fa-calendar w-4"></i>
+            {{ 'home_nav_bar_events_link' | translate }}
+          </a>
+        </li>
+
+        <li>
+          <a (click)="navigate('home/documents')"
+             class="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-100 text-slate-800">
+            <i class="fa fa-file-text w-4"></i>
+            {{ 'home_nav_bar_documents_link' | translate }}
+          </a>
+        </li>
+
+        <li>
+          <a (click)="navigate('home/holidays')"
+             class="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-100 text-slate-800">
+            <i class="fa fa-suitcase w-4"></i>
+            {{ 'home_nav_bar_holiday_link' | translate }}
+          </a>
+        </li>
+
+        <!-- language select visible in mobile panel -->
+        <li class="pt-2">
+          <p-select optionLabel="code"
+                    [options]="sharedService.translationLanguagesList"
+                    [(ngModel)]="sharedService.selectedLanguage"
+                    (onChange)="sharedService.switchLang()"
+                    class="w-full"></p-select>
+        </li>
+
+        <!-- quick actions row inside panel -->
+        <li class="pt-2 flex items-center gap-4">
+          <button (click)="sharedService.logout()" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-slate-100">
+            <i class="fa fa-power-off"></i>
+            <span class="text-sm font-medium">{{ 'logout' | translate }}</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
 <p-dialog *ngIf="showDetails"
           appendTo="body"
