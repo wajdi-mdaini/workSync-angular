@@ -125,7 +125,7 @@
           [modal]="true"
           [(visible)]="doChangePassword"
           [style]="{ width: '25rem' }">
-  <app-reset-password  [passwordLength]="sharedService.company.settings.passwordMinLength" (isChanged)="doChangePassword = false" [redirectionPath]="'/dashboard/profile'" [useCurrentPassword]="true"></app-reset-password>
+  <app-reset-password  [passwordLength]="sharedService.company.settings.passwordMinLength" (isChanged)="doChangePassword = false;window.location.reload(); " [redirectionPath]="'/dashboard/profile'" [useCurrentPassword]="true"></app-reset-password>
 </p-dialog>
 
 <app-upload-file-dialog (newUser)="setPrincipal($event)" [(doChangeProfilePicture)]="doChangeProfilePicture"></app-upload-file-dialog>

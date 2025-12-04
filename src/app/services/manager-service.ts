@@ -49,4 +49,8 @@ export class ManagerService {
   deleteUser(userEmail: string): Observable<ApiResponse>{
     return this.http.delete<ApiResponse>(environment.apiBaseUrl + '/management/deleteuser?id=' + userEmail,{withCredentials: true});
   }
+
+  unlockUser(userEmail: string): Observable<ApiResponse>{
+    return this.http.post<ApiResponse>(environment.apiBaseUrl + '/management/unlockuser?id=' + userEmail,{},{withCredentials: true});
+  }
 }

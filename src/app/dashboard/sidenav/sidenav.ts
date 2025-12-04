@@ -15,6 +15,9 @@ import {NgIf} from '@angular/common';
   styleUrl: './sidenav.scss'
 })
 export class Sidenav implements OnInit,AfterViewInit {
+  openGuide() {
+    window.open('assets/docs/Worksync%20User%20Guide.pdf', '_blank')
+  }
   showGuide: boolean = false;
   constructor(public sharedService: Shared,private router: Router) {
   }

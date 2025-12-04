@@ -112,6 +112,15 @@ html:not(.dark) .second-button-background-style:disabled{
   }
 }
 
+.dark .dark\:dark-accortion {
+  p-accordion-header,p-accordion-content div,p-select,p-datepicker *:not(.p-datepicker-today,.p-datepicker-day-selected,.p-datepicker-day-selected-range){
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 28 68 / var(--tw-bg-opacity)) !important;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+
+}
+
 .dark .dark\:dark-calendar-bg {
   input {
     --tw-bg-opacity: 1;

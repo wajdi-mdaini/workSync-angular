@@ -7,6 +7,7 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
 import {ManagerService} from '../../../../services/manager-service';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-users-list',
@@ -16,7 +17,8 @@ import {ManagerService} from '../../../../services/manager-service';
     ConfirmDialog,
     ButtonModule,
     ConfirmDialog,
-    ToastModule
+    ToastModule,
+    NgIf
   ],
   templateUrl: './users-list.html',
   styleUrl: './users-list.scss',
@@ -63,6 +65,38 @@ export class UsersList {
           next: (apiResponse: ApiResponse) => {
             if(apiResponse.success) {
               this.users = this.users.filter(u => u.email !== apiResponse.data);
+              this.usersChange.emit(this.users);
+            }
+          },
+          error: (err) => {console.log(err);},
+        })
+      }
+    });
+  }
+
+  unlockUser(event: Event,user: User) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: this.translate.instant('manage_users_unlock_user_confirm_dialog_message'),
+      header: this.translate.instant('manage_users_unlock_user_confirm_dialog_header'),
+      icon: 'fa fa-info-circle',
+      rejectLabel: this.translate.instant('button_cancel'),
+      rejectButtonProps: {
+        label: this.translate.instant('button_cancel'),
+        severity: 'secondary',
+        outlined: true,
+      },
+      acceptButtonProps: {
+        label: this.translate.instant('button_unlock'),
+        severity: 'success',
+      },
+
+      accept: () => {
+        this.managerService.unlockUser(user.email).subscribe({
+          next: (apiResponse: ApiResponse) => {
+            if(apiResponse.success) {
+              let index  = this.users.indexOf(user)
+              this.users[index] = apiResponse.data;
               this.usersChange.emit(this.users);
             }
           },

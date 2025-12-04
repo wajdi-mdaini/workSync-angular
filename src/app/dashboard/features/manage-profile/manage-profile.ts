@@ -114,4 +114,6 @@ export class ManageProfile implements OnInit {
     })
 
   }
+
+  protected readonly window = window;
 }

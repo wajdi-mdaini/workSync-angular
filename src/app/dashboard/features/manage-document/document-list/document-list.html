@@ -67,6 +67,7 @@
       <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">{{ 'manage_document_from_list_title' | translate}}</p>
       <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-slate-850 rounded-2xl bg-clip-border" *ngIf="documentsFrom.length > 0">
         <p-table
+          class="dark:dark-table"
           [value]="documentsFrom"
           [rowHover]="true"
           [paginator]="true" [rows]="5"

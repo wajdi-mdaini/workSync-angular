@@ -16,7 +16,7 @@
           <p-button *ngIf="sharedStore.principal.role != Role.EMPLOYEE" (onClick)="sharedStore.activeHolidayAccordingPanel = '2'" [label]=" 'book_holiday_holiday_requests_list' | translate " [outlined]="sharedStore.activeHolidayAccordingPanel !== '2'" />
         </div>
 
-        <p-accordion [(value)]="sharedStore.activeHolidayAccordingPanel">
+        <p-accordion [(value)]="sharedStore.activeHolidayAccordingPanel" class="dark:dark-accortion">
           <p-accordion-panel value="0">
             <p-accordion-header>{{ 'book_holiday_title' | translate }}</p-accordion-header>
             <p-accordion-content>

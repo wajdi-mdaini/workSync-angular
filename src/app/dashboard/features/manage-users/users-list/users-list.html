@@ -40,6 +40,9 @@
               </td>
               <td style="--cell-width: 30%;">{{ user.email }}</td>
               <td style="text-align: right;">
+                <a *ngIf="user.locked" (click)="unlockUser($event,user)" title="{{ 'unlock_title' | translate }}" style="color: #f5563f; padding-right: 10px;font-size: 12px;">
+                  <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                </a>
                 <a (click)="doView(user)"  title="{{ 'preview_eye_title' | translate }}" style="color:#2dcebd ;padding-right: 10px;font-size: 12px;">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 </a>
