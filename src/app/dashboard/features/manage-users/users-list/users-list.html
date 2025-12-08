@@ -46,10 +46,10 @@
                 <a (click)="doView(user)"  title="{{ 'preview_eye_title' | translate }}" style="color:#2dcebd ;padding-right: 10px;font-size: 12px;">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 </a>
-                <a (click)="doEdit(user)" title="{{ 'edit_pencil_title' | translate }}" style="color:#fb9940; padding-right: 10px;font-size: 12px;">
+                <a class="edit-user-action-link" (click)="doEdit(user)" title="{{ 'edit_pencil_title' | translate }}" style="color:#fb9940; padding-right: 10px;font-size: 12px;">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a (click)="doConfirmDelete($event,user)" title="{{ 'delete_trash_title' | translate }}" style="color: #f5563f;font-size: 12px;">
+                <a class="delete-user-action-link" (click)="doConfirmDelete($event,user)" title="{{ 'delete_trash_title' | translate }}" style="color: #f5563f;font-size: 12px;">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </a>
 

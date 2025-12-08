@@ -6,6 +6,7 @@
           <h5>{{ "auth_signin_title" | translate}}</h5>
         </div>
         <div class="flex-auto p-6">
+          <span class="text-xs leading-tight" id="type-cridentienls-text" style="display: none;color: #00b400"></span>
           <span *ngIf="!wrongCritical && !blockedUser" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "auth_signin_message" | translate}} :</span></span>
           <span *ngIf="wrongCritical && !blockedUser" style="color: rgb(245 75 74)" class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ "auth_signin_wrong_credentials_message" | translate}} !</span></span>
           <form [formGroup]="formGroup" role="form text-left">
