@@ -64,7 +64,7 @@
                   [src]=" companySummary?.companyCreator?.profilePictureUrl "
                   [alt]="companySummary?.companyCreator?.firstname + ' ' + companySummary?.companyCreator?.lastname"
                   [title]="companySummary?.companyCreator?.firstname + ' ' + companySummary?.companyCreator?.lastname + '(' + companySummary?.companyCreator?.email + ')'"
-                  style="width: 50px;border-radius: 50%;object-fit: cover;" />
+                  style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover;" />
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
                   [src]=" companySummary?.teamManager?.profilePictureUrl "
                   [alt]="companySummary?.teamManager?.firstname + ' ' + companySummary?.teamManager?.lastname"
                   [title]="companySummary?.teamManager?.firstname + ' ' + companySummary?.teamManager?.lastname + '(' + companySummary?.teamManager?.email + ')'"
-                  style="width: 50px;border-radius: 50%;object-fit: cover;" />
+                  style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover;" />
               </div>
             </div>
           </div>
@@ -150,7 +150,7 @@
                   <img
                     [src]="teamMember.profilePictureUrl"
                     [alt]="teamMember.firstname + ' ' + teamMember.lastname"
-                    style="width: 60px; border-radius: 50%; object-fit: cover;" />
+                    style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
 
                   <div class="text-center text-slate-700 dark:text-white/80">
                     {{ teamMember.firstname }} {{ teamMember.lastname }}
@@ -239,7 +239,7 @@
                     [src]=" document.from.profilePictureUrl "
                     [alt]="document.from.firstname + ' ' + document.from.lastname"
                     [title]="document.from.firstname + ' ' + document.from.lastname + '(' + document.from.email + ')'"
-                    style="width: 40px;border-radius: 50%;object-fit: cover;" />
+                    style="width: 40px;height: 40px;border-radius: 50%;object-fit: cover;" />
 
                 </div>
               </td>
@@ -404,7 +404,7 @@
                         <img
                           [src]="eventParticipant.profilePictureUrl"
                           [alt]="eventParticipant.firstname + ' ' + eventParticipant.lastname"
-                          style="width: 50px; border-radius: 50%; object-fit: cover;" />
+                          style="width: 50px;height: 50px; border-radius: 50%; object-fit: cover;" />
 
                         <div class="text-center text-xs text-slate-700 dark:text-white/80">
                           {{ eventParticipant.firstname }} {{ eventParticipant.lastname }}

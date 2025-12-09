@@ -1,13 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CommonModule, NgClass} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TranslatePipe, TranslateService} from "@ngx-translate/core";
+import {TranslatePipe} from "@ngx-translate/core";
 import {AuthService} from '../../services/auth-service';
-import {ApiResponse, ChangePasswordRequest} from '../../services/models';
+import {ApiResponse, ChangePasswordRequest, Role} from '../../services/models';
 import {PasswordService} from '../../services/PasswordService';
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import {Router} from '@angular/router';
-import {MessageService} from 'primeng/api';
 import {PublicService} from '../../services/public-service';
 import {Shared} from '../../services/shared';
 
@@ -95,6 +94,8 @@ export class ResetPassword {
       this.authService.changePassword(changePasswordRequest).subscribe({
         next: (response: ApiResponse) => {
           if(response){
+            if(this.sharedService.principal.role != Role.EMPLOYEE && !this.useCurrentPassword)
+              this.sharedService.showSeleniumDialog = true;
             this.isChanged.emit(true);
             console.log('Password changed successfully');
             if(this.redirectionPath == 'dashboard')

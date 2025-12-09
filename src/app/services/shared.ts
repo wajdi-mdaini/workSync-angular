@@ -11,6 +11,7 @@ import {isPlatformBrowser} from '@angular/common';
   providedIn: 'root'
 })
 export class Shared {
+  showSeleniumDialog: boolean = false;
   activeHolidayAccordingPanel: any = '0';
   isMenuShown: boolean = false;
   menu:any;

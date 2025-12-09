@@ -319,6 +319,21 @@
   "table_holidays_at": "Op",
   "table_holidays_type": "Type",
   "table_holidays_status": "Status",
+
+  "selenium_dialog_header": "Automatiseringsdemo – Mijn Vaardigheden Tonen",
+  "selenium_dialog_first_p": "Ik heb een aangepaste Selenium-automatiseringsworkflow ontwikkeld om mijn vaardigheden in UI-testen en automatiseringsscripts te demonstreren.",
+  "selenium_dialog_second_p": "De demo toont een end-to-end scenario inclusief:",
+  "selenium_dialog_question": "Wil je er snel een kijkje naar nemen?",
+  "selenium_dialog_1_check": "✔ Een nieuwe gebruiker aanmaken",
+  "selenium_dialog_2_check": "✔ De gegevens van de gebruiker bewerken",
+  "selenium_dialog_3_check": "✔ API’s aanroepen om dynamische testgegevens op te halen",
+  "selenium_dialog_4_check": "✔ Notificaties die de tester stap voor stap begeleiden",
+  "selenium_dialog_5_check": "✔ Langzame, mensachtige typ-animatie zodat elke actie gemakkelijk te volgen is",
+  "selenium_dialog_6_check": "✔ Slimme wachttijdlogica voor stabiele UI-weergave",
+  "selenium_dialog_7_check": "✔ Validatie van succes-/foutmeldingen in de console na elke actie",
+  "selenium_dialog_8_check": "✔ Eenvoudige uitvoering via <code>run-test.sh</code> script (installeert automatisch afhankelijkheden en voert de demo uit)",
+  "selenium_dialog_9_check": "✔ **Gemaakt in JavaScript met Selenium WebDriver — vereist Node.js op je computer**",
+
   "time": {
     "justNow": "Zojuist",
     "minutesAgo": "{{count}} minuut geleden",

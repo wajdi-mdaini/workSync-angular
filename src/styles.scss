@@ -374,3 +374,16 @@ app-notifications-list{
     width: 12px !important;
   }
 }
+
+.profile-image-wrapper {
+  width: var(--size, 60px) !important;
+  height: var(--size, 60px) !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+}
+
+@media (max-width: 1199px) {
+  .small-screen-hide{
+    display: none;
+  }
+}

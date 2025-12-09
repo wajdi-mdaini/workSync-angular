@@ -338,6 +338,20 @@
   "table_holidays_type": "Type",
   "table_holidays_status": "Statut",
 
+  "selenium_dialog_header": "Démo d’automatisation – Montrer mes compétences",
+  "selenium_dialog_first_p": "J'ai développé un workflow d'automatisation Selenium personnalisé pour démontrer mes compétences en tests UI et scripting d'automatisation.",
+  "selenium_dialog_second_p": "La démo montrera un scénario de bout en bout incluant :",
+  "selenium_dialog_question": "Voulez-vous y jeter un coup d'œil rapidement ?",
+  "selenium_dialog_1_check": "✔ Création d’un nouvel utilisateur",
+  "selenium_dialog_2_check": "✔ Modification des données de l’utilisateur",
+  "selenium_dialog_3_check": "✔ Appels API pour récupérer des données de test dynamiques",
+  "selenium_dialog_4_check": "✔ Messages de notification guidant le testeur étape par étape",
+  "selenium_dialog_5_check": "✔ Animation de saisie lente et humaine pour suivre facilement chaque action",
+  "selenium_dialog_6_check": "✔ Logique d’attente intelligente pour un rendu UI stable",
+  "selenium_dialog_7_check": "✔ Validation des messages de succès/erreur dans la console après chaque opération",
+  "selenium_dialog_8_check": "✔ Exécution facile via le script <code>run-test.sh</code> (installe automatiquement les dépendances et lance la démo)",
+  "selenium_dialog_9_check": "✔ **Développé en JavaScript avec Selenium WebDriver — nécessite Node.js sur votre machine**",
+
 
 
   "time": {

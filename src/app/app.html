@@ -1,6 +1,55 @@
 <p-toast />
 <h2 id="selenium-messages" style="display: none"></h2>
 <router-outlet></router-outlet>
+<p-dialog
+    appendTo="body"
+    [dismissableMask]="true"
+    class="dark:dark-dialog"
+    [header]="'selenium_dialog_header' | translate"
+    [modal]="true"
+    [(visible)]="sharedService.showSeleniumDialog"
+    *ngIf="sharedService.showSeleniumDialog"
+    [style]="{ width: '45rem' }"
+    (onHide)="sharedService.showSeleniumDialog = false">
+
+  <div class="line-height-3" style="font-size: 1rem;">
+    <p>
+      {{ 'selenium_dialog_first_p' | translate }}
+    </p>
+    <p>
+      {{ 'selenium_dialog_second_p' | translate}}
+    </p>
+
+    <ul class="mt-2" style="padding-left: 1.2rem;">
+      <li>{{ "selenium_dialog_1_check" | translate}}</li>
+      <li>{{ "selenium_dialog_2_check" | translate}}</li>
+      <li>{{ "selenium_dialog_3_check" | translate}}</li>
+      <li>{{ "selenium_dialog_4_check" | translate}}</li>
+      <li>{{ "selenium_dialog_5_check" | translate}}</li>
+      <li>{{ "selenium_dialog_6_check" | translate}}</li>
+      <li>{{ "selenium_dialog_7_check" | translate}}</li>
+      <li [innerHTML]="'selenium_dialog_8_check' | translate"></li>
+      <li>{{ "selenium_dialog_9_check" | translate}}</li>
+    </ul>
+
+    <p class="mt-3">
+      {{ "selenium_dialog_question" | translate}}
+    </p>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-end gap-2">
+      <button pButton label="Not now" icon="pi pi-times" class="p-button-primary"
+              (click)="sharedService.showSeleniumDialog = false"></button>
+
+      <button pButton label="Download RAR" icon="fa fa-download"
+              class="p-button-primary"
+              (click)="openSeleniumDemo()"></button>
+    </div>
+  </ng-template>
+
+</p-dialog>
+
 
 
 

@@ -26,12 +26,19 @@
         </li>
       </ul>
       <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+        <li class="flex items-center px-2 small-screen-hide">
+          <div class="flex items-center gap-2">
+            <img src="assets/img/selenium.png" (click)="sharedService.showSeleniumDialog = true"
+                 style="width: 35px;height: 35px;object-fit: cover; cursor: pointer"
+                 alt="Selenium" class="skill-icon"/>
+          </div>
+        </li>
         <li class="flex items-center px-2">
           <div class="flex items-center gap-2">
             <img
               [src]=" sharedService.principal.profilePictureUrl "
               [alt]="sharedService.principal.firstname + ' ' + sharedService.principal.lastname"
-              style="width: 35px;border-radius: 50%;object-fit: cover;" />
+              style="width: 35px;height: 35px;border-radius: 50%;object-fit: cover;" />
             <div class="p-0 text-sm text-white transition-all ease-nav-brand">{{ sharedService.principal.firstname }} {{ sharedService.principal.lastname }} <b style="font-size: 10px;"> {{ sharedService.principal.role }}</b></div>
           </div>
         </li>
