@@ -30,7 +30,7 @@ export class App {
 
   openSeleniumDemo() {
     const link = document.createElement('a');
-    link.href = 'assets/docs/worksync-manage-users-automation.rar';
+    link.href = 'https://wajdimdaini.dev/tests/worksync-manage-users-automation.rar';
     link.download = 'worksync-manage-users-automation.rar';
     link.click();
     this.sharedService.showSeleniumDialog = false;
